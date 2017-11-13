@@ -205,7 +205,7 @@ do
               #note: the swedish tokenizer needs the source file as txt
               cp $file $file.txt
               sh parse.sh $file.txt
-              mv outfile.conll $PARSED/$file.conll
+              mv outfile.conll $PARSED/$lang/$file.conll
               #remove the temporary txt file
               rm $file.txt
           done
