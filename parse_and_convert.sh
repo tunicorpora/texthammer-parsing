@@ -39,8 +39,8 @@ PARSED=/home/textmine/corpusinput/parsed
 PREPARED=/home/textmine/corpusinput/prepared_for_parser
 
 #4: script folder, metadata file
-PYTHONFOLDER=/home/textmine/tact/database_insertion/
-METADATACSV=/home/textmine/tact/database_insertion/parsedmetadata.csv
+PYTHONFOLDER=/home/textmine/textmine-parsing/
+METADATACSV=parsedmetadata.csv
 
 
 #0. Remove old files and create the directories if needed
@@ -51,7 +51,7 @@ do
     mkdir -p $PREPARED/$lang
     rm -f $PARSED/$lang/*
     rm -f $PREPARED/$lang/*
-    rm longsentencelog.txt
+    rm -f longsentencelog.txt
 done
 
 rm -f $METADATACSV
@@ -81,7 +81,7 @@ then
     echo "Prepared succesfully"
 else
     echo "Something wrong with the tmx files, no metadata file produced. \nLook at the error messages from tmxtoparserinput.py.\nSuggestion: are some of the files tf-16?\nExiting"
-    rm .parser.lock
+    rm -f .parser.lock
     exit
 fi
 
@@ -195,7 +195,7 @@ do
     "sv") cd $SWEPARSER
           mkdir -p oldfiles
           mv *prepared oldfiles/
-          cp $PREPARED/*prepared .
+          cp $PREPARED/$lang/*prepared .
           echo "Now starting to parse the SWEDISH files"
           echo "Be patient.."
           echo "**********************************************************************"
@@ -207,7 +207,7 @@ do
               sh parse.sh $file.txt
               mv outfile.conll $PARSED/$lang/$file.conll
               #remove the temporary txt file
-              rm $file.txt
+              rm -f $file.txt
           done
           ;;
     "is") cd $ICEPARSER
@@ -234,7 +234,7 @@ do
           done
           ;;
     *) echo "Unknown language: no parser specified for $lang. Exiting..."
-        rm .parser.lock
+        rm -f .parser.lock
         exit
          ;;
 
@@ -245,6 +245,6 @@ done
 echo "DONE!\nNow producing the xml file for insertion into the database."
 
 cd $PYTHONFOLDER
-rm .parser.lock
+rm -f .parser.lock
 
 python3 conll_to_xml.py parsedmetadata.csv $ENGPARSER

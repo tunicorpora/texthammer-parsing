@@ -252,6 +252,14 @@ class ParsedText():
                             'feat'        : columns[7],
                             'head'        : columns[9],
                             'deprel'      : columns[11]}
+                elif self.language == 'sv':
+                    return  {'tokenid'     : columns[0],
+                            'token'       : columns[1],
+                            'lemma'       : columns[2],
+                            'pos'         : columns[3],
+                            'feat'        : columns[5],
+                            'head'        : columns[6],
+                            'deprel'      : columns[7]}
                 elif self.language == 'fr':
                     return  {'tokenid'     : columns[0],
                             'token'       : columns[1],
