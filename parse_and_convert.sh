@@ -42,6 +42,9 @@ PREPARED=/home/textmine/corpusinput/prepared_for_parser
 PYTHONFOLDER=/home/textmine/textmine-parsing/
 METADATACSV=parsedmetadata.csv
 
+#5: where to move the xml files when ready
+XMLFOLDER=/home/textmine/tact/database_insertion/xmloutput/
+
 
 #0. Remove old files and create the directories if needed
 
@@ -248,3 +251,7 @@ cd $PYTHONFOLDER
 rm -f .parser.lock
 
 python3 conll_to_xml.py parsedmetadata.csv $ENGPARSER
+
+cp xmloutput/*.xml $XMLFOLDER
+
+echo "COPIED the xml files (if there were any) to $XMLFOLDER."
