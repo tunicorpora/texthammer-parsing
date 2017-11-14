@@ -1,3 +1,4 @@
 parsedmetadata.csv
 .parser.lock
 __pycache__
+conll_to_xml.log
