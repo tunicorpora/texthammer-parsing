@@ -31,8 +31,10 @@ MATEPARSER=/home/textmine/parserit/mate-tools/
 PARSED=/home/textmine/corpusinput/parsed/$1
 PREPARED=/home/textmine/corpusinput/prepared_for_parser/$1
 
-PYTHONFOLDER=/home/textmine/tact/database_insertion/
-METADATACSV=/home/textmine/tact/database_insertion/parsedmetadata.csv
+PYTHONFOLDER=/home/textmine/textmine-parsing/
+METADATACSV=parsedmetadata.csv
+
+XMLFOLDER=/home/textmine/tact/database_insertion/xmloutput/
 
 
 mkdir -p $INPUTFOLDER
@@ -203,3 +205,9 @@ if [ "$1" = "en" ]; then
 else
     python3 conll_to_xml.py parsedmetadata.csv
 fi
+
+
+cp xmloutput/*.xml $XMLFOLDER
+
+echo "COPIED the xml files (if there were any) to $XMLFOLDER."
+
