@@ -19,9 +19,9 @@ def ReadXml(sourcefile):
             sys.exit()
     print("Processing " + sourcefile)
     xmlstring = unescape(xmlstring.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
-    with open ("text.tmx","w") as f:
-        f.write(xmlstring)
-    print(xmlstring)
+   # with open ("text.tmx","w") as f:
+   #     f.write(xmlstring)
+   # print(xmlstring)
     xmlstring = Prettify(xmlstring.replace('encoding = "utf-8"','').strip())
     xmlstring = FilterLongSentences.FilterByCharCount(xmlstring, sourcefile)
     root = etree.fromstring(xmlstring.strip())
