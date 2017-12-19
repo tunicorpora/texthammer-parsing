@@ -8,6 +8,7 @@ from lxml import etree
 from xml.sax.saxutils import unescape
 import re
 import FilterLongSentences
+from conll_to_xml import Logger, logging
 
 
 def ReadXml(sourcefile):
@@ -17,7 +18,6 @@ def ReadXml(sourcefile):
         except UnicodeDecodeError:
             print("Tiedostossa {} koodausongelma. luultavasti utf-16 pitäisi muuttaa utf-8:aan.".format(sourcefile))
             sys.exit()
-    print("Processing " + sourcefile)
     xmlstring = unescape(xmlstring.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
    # with open ("text.tmx","w") as f:
    #     f.write(xmlstring)
@@ -124,6 +124,8 @@ def ReadTmxData(sourcefile, attrs):
             input('Warning! The preparing script returned an empty string for text {} in the file {} (language:{}). Press Ctr-c to cancel.'.format(text["code"], sourcefile,text["lang"]))
         else:
             #if all went well, loop through each align segment
+            #if text["lang"] == "sv" and "eight_hours" in sourcefile:
+            #    import ipdb; ipdb.set_trace()
             for tuv in tuvs:
                 preparedinput += "\n" + "!"*15 + "\n"
                 #then, each segment inside
@@ -145,13 +147,15 @@ def ReadTmxData(sourcefile, attrs):
     #Check that all the texts have the same number of segents
     lengths = list()
     halt = False
+    segnumbers = ""
     for lang, thislength in seglength.items():
+        segnumbers += "{}: {} / ".format(lang, thislength)
         for l in seglengths:
             if l != thislength:
                 halt = True
                 break
     if halt:
-        sys.exit("ABORTING the procecss!  Different number of segments in some of the texts. (According to the xml parser, at least.)")
+        raise ValueError("Different number of segments in this file:\n\n {}".format(segnumbers))
 
     return metadata
 
@@ -176,6 +180,7 @@ def main():
         sys.exit(0)
 
     attrnames = list()
+    thislogger = Logger("tmxtoparserinput.log")
 
     if os.path.isdir(sourcefile):
         metadata = list()
@@ -185,16 +190,28 @@ def main():
             slash = "/"
 
         #Get all the attributes in the metadata
+        shall_i_proceed = {}
         for filename in glob.glob(sourcefile + slash + '*tmx'):
-            root = ReadXml(filename)
-            attrnames = CountMetaAttributes(root, attrnames)
+            logging.info("Starting to analyze the following tmx file: {}.".format(filename))
+            try:
+                root = ReadXml(filename)
+                attrnames = CountMetaAttributes(root, attrnames)
+                shall_i_proceed[filename] = True
+            except Exception as e:
+                logging.warning("Cannot read the XML in {}. This file won't be processed. The exact error message is: {}".format(filename, e))
+                shall_i_proceed[filename] = False
 
         #Process the tmxs
         for filename in glob.glob(sourcefile + slash + '*tmx'):
-            if not metadata:
-                metadata = ReadTmxData(filename, attrnames)
-            else:
-                metadata.extend(ReadTmxData(filename, attrnames))
+            if shall_i_proceed[filename]:
+                try:
+                    if not metadata:
+                        metadata = ReadTmxData(filename, attrnames)
+                    else:
+                        metadata.extend(ReadTmxData(filename, attrnames))
+                except ValueError as e:
+                    logging.error("Error with {}: \n{}. This file won't be processed.".format(filename, e))
+
     else:
         #No folder, a single file given
         root = ReadXml(filename)

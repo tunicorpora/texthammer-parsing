@@ -255,3 +255,5 @@ python3 conll_to_xml.py parsedmetadata.csv $ENGPARSER
 cp xmloutput/*.xml $XMLFOLDER
 
 echo "COPIED the xml files (if there were any) to $XMLFOLDER."
+
+echo "REMEMBER to check the log files (tmxtoparserinput.log and conll_to_xml.log) to see if some files did not pass."
