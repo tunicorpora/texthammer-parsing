@@ -3,3 +3,4 @@ parsedmetadata.csv
 __pycache__
 conll_to_xml.log
 xmloutput/*
+longsentencelog.txt

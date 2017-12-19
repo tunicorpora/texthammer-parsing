@@ -5,6 +5,7 @@ import glob
 import os
 import uuid
 from lxml import etree
+from xml.sax.saxutils import unescape
 import re
 import FilterLongSentences
 
@@ -17,7 +18,10 @@ def ReadXml(sourcefile):
             print("Tiedostossa {} koodausongelma. luultavasti utf-16 pitäisi muuttaa utf-8:aan.".format(sourcefile))
             sys.exit()
     print("Processing " + sourcefile)
-    xmlstring = xmlstring.replace('encoding="utf-8"','')
+    xmlstring = unescape(xmlstring.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
+    with open ("text.tmx","w") as f:
+        f.write(xmlstring)
+    print(xmlstring)
     xmlstring = Prettify(xmlstring.replace('encoding = "utf-8"','').strip())
     xmlstring = FilterLongSentences.FilterByCharCount(xmlstring, sourcefile)
     root = etree.fromstring(xmlstring.strip())
