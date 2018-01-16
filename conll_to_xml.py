@@ -9,6 +9,7 @@ from python_tools import AlignMismatch, TrimList, MissingTextError, ArgumentErro
 from collections import OrderedDict
 import os.path
 import logging
+import json
 
 class ParserInfo():
     """The parsers' conll output format may vary.
@@ -27,6 +28,10 @@ class TextPair():
         self.root = etree.Element("text")
         self.sl_text = ParsedText(line['filename'], 'source', line['lang'], line['code'])
         self.tl_texts = list()
+        #Read segmentwise metadata from a separate json file identified by the id of the text pair
+        metafile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", line['pair_id'])
+        with open(metafile, "r") as f:
+            self.segment_meta = json.load(f)
 
     def FormatMetaData(self, metaline):
         """Write the metadata for this language as a 'textdef' tag"""
@@ -57,6 +62,10 @@ class TextPair():
             self.current_align = etree.SubElement(self.root, "align")
             #Process the source text
             self.current_seg = etree.SubElement(self.current_align, "seg", lang = self.sl_text.language, code = self.sl_text.code)
+            #Add metadata about the segment for the source language
+            self.AddMetaToSegment(idx, self.sl_text.language)
+            for meta_attr, meta_val in self.segment_meta[self.sl_text.language][idx].items():
+                self.current_seg.attrib[meta_attr] = meta_val
             #start a new sentence in the beginning of the segment
             self.current_s = etree.SubElement(self.current_seg, "s")
             processed = self.ProcessWordsOfSegment(segment.splitlines(),self.sl_text)
@@ -70,6 +79,9 @@ class TextPair():
                     logging.info("Something wrong! The segments don't match!\n\nId of the text: {}\n\n Last segment to be processed: {}".format(self.sl_text.code,tl_text.alignsegments[-1]))
                     return False
                 self.current_seg = etree.SubElement(self.current_align, "seg", lang = tl_text.language, code = tl_text.code)
+                #Add metadata about the segment for the current target language
+                self.AddMetaToSegment(idx, tl_text.language)
+                # Add a new sentence 
                 self.current_s = etree.SubElement(self.current_seg, "s")
                 processed = self.ProcessWordsOfSegment(segment.splitlines(), tl_text)
                 if not processed:
@@ -164,6 +176,15 @@ class TextPair():
         else:
             #gen = general punctuation mark
             return 'gen'
+
+    def AddMetaToSegment(self, idx, lang):
+        """Adds metadata (e.g. the current speaker) to segment 
+        - idx : the id of the current segment
+        - lang : language code for the language being processed
+        TODO: what about retranslations?
+        """
+        for meta_attr, meta_val in self.segment_meta[lang][idx].items():
+            self.current_seg.attrib[meta_attr] = meta_val
 
 class ParsedText():
     """A conll formatted text file that is seperated into align segments by bangs"""
@@ -360,6 +381,7 @@ class Logger():
         root.addHandler(fh)
         root.addHandler(ch)
         logging.info('Writing LOG to {}'.format(fname))
+
 
 
 #==================================================

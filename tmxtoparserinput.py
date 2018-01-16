@@ -164,7 +164,7 @@ def ReadTmxData(sourcefile, attrs):
         raise ValueError("Different number of segments in this file:\n\n {}".format(segnumbers))
 
     # Finally, save the collected metadata about segments to a separate json dump
-    metafile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", mere_file)
+    metafile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", metadata[-1]["pair_id"])
     with open(metafile,"w") as f:
         json.dump(segment_meta, f, ensure_ascii=False)
 
