@@ -7,3 +7,4 @@ longsentencelog.txt
 tmxtoparserinput.log
 tex.tmx
 text.tmx
+auxiliary_files/*json

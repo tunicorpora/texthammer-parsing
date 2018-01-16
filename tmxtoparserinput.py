@@ -9,6 +9,7 @@ from xml.sax.saxutils import unescape
 import re
 import FilterLongSentences
 from conll_to_xml import Logger, logging
+import json
 
 
 def ReadXml(sourcefile):
@@ -102,6 +103,8 @@ def ReadTmxData(sourcefile, attrs):
     root = ReadXml(sourcefile)
     #find out what languages involved and what are the metadata
     metadata = ReadMetaData(root, attrs)
+    #Create a dictionary for saving additional information about the segments (such as speakers)
+    segment_meta = dict()
     #check if there are multiple translations to one language
     textsperlanguage = TestIfRetrans(metadata)
     #Loop through each language in the tmx
@@ -116,6 +119,9 @@ def ReadTmxData(sourcefile, attrs):
             xpathq = "//tuv[(@xml:lang='{}' or @xml:lang='{}') and @code='{}']".format(text["lang"],text["lang"].upper(), text["code"])
         tuvs = root.xpath(xpathq)
         print("{}:{} segments".format(text["lang"],len(tuvs)))
+        #Initialize a list for saving the possible metadata about each segment
+        segment_meta[text["lang"]] = list()
+        #--
         seglength[text["lang"]] = len(tuvs)
         seglengths.append(len(tuvs))
         preparedinput = ""
@@ -124,10 +130,10 @@ def ReadTmxData(sourcefile, attrs):
             input('Warning! The preparing script returned an empty string for text {} in the file {} (language:{}). Press Ctr-c to cancel.'.format(text["code"], sourcefile,text["lang"]))
         else:
             #if all went well, loop through each align segment
-            #if text["lang"] == "sv" and "eight_hours" in sourcefile:
-            #    import ipdb; ipdb.set_trace()
             for tuv in tuvs:
                 preparedinput += "\n" + "!"*15 + "\n"
+                #Check for additional metadata such as information about the current speaker
+                segment_meta[text["lang"]].append({"speaker":tuv.get("speaker")})
                 #then, each segment inside
                 if not tuv.getchildren():
                     preparedinput += FixQuotes(tuv.text)
@@ -156,6 +162,11 @@ def ReadTmxData(sourcefile, attrs):
                 break
     if halt:
         raise ValueError("Different number of segments in this file:\n\n {}".format(segnumbers))
+
+    # Finally, save the collected metadata about segments to a separate json dump
+    metafile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", mere_file)
+    with open(metafile,"w") as f:
+        json.dump(segment_meta, f, ensure_ascii=False)
 
     return metadata
 
@@ -214,7 +225,7 @@ def main():
 
     else:
         #No folder, a single file given
-        root = ReadXml(filename)
+        root = ReadXml(sourcefile)
         attrnames = CountMetaAttributes(root, attrnames)
         metadata = ReadTmxData(sourcefile, attrnames)
     WriteMetaData(metadata)
