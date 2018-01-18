@@ -9,7 +9,7 @@ def LogLongParagraph(par, newpar):
         f.write("\n\n{}:\n{}\n{}\n\n>>>>>>\n\n{}\n\n".format(Paragraph.filename,"="*40,par, newpar))
 
 class Paragraph():
-    """A paragraph delimited by to newlines"""
+    """A paragraph delimited by two newlines"""
 
     long_paragraph_treshold = 300
     toomuch_characters_per_sentence = 1000
@@ -25,6 +25,7 @@ class Paragraph():
     def IsThisParagraphLong(self):
         """Measure the length of the paragraph by words (it's okay to have only a rough estimate with whitespaces)"""
         if len(self.text.split()) > Paragraph.long_paragraph_treshold:
+            print("Warning: an exceptionally long paragraph found. ({} words). This might be difficult for the parser to parse.".format(len(self.text.split())))
             return True
         return False
 
@@ -53,13 +54,12 @@ class Paragraph():
             newtext += char
         if newtext != self.text:
             LogLongParagraph(self.text, newtext)
+            print("Inserted some full stops because the sentences were too long to parse. Check out longsentencelog.txt!")
+        else:
+            print("Checked the text. Probably no reason to worry: it is split into sentences with reasonable lengths.")
         self.text = newtext
 
 def FilterByCharCount(rawtext, filename):
-
-    #Clear the log file
-    #with open(loggerfile,"w") as f:
-    #    f.write("")
 
     Paragraph.filename = filename
 

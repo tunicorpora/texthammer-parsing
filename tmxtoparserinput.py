@@ -20,11 +20,7 @@ def ReadXml(sourcefile):
             print("Tiedostossa {} koodausongelma. luultavasti utf-16 pitäisi muuttaa utf-8:aan.".format(sourcefile))
             sys.exit()
     xmlstring = unescape(xmlstring.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
-   # with open ("text.tmx","w") as f:
-   #     f.write(xmlstring)
-   # print(xmlstring)
     xmlstring = Prettify(xmlstring.replace('encoding = "utf-8"','').strip())
-    xmlstring = FilterLongSentences.FilterByCharCount(xmlstring, sourcefile)
     root = etree.fromstring(xmlstring.strip())
     return root
 
@@ -111,6 +107,8 @@ def ReadTmxData(sourcefile, attrs):
     seglength = dict()
     seglengths = list()
     for idx, text in enumerate(metadata):
+        #if text["lang"]=="sv":
+        #    import ipdb;ipdb.set_trace()
         if textsperlanguage[text["lang"]]==1:
             #if no retranslations
             xpathq = "//tuv[@xml:lang='{}' or  @xml:lang='{}']".format(text["lang"], text["lang"].upper())
@@ -141,7 +139,10 @@ def ReadTmxData(sourcefile, attrs):
                     for seg in tuv.getchildren():
                         preparedinput += " "
                         if seg.text:
-                            preparedinput += FixQuotes(seg.text)
+                            #Note: the sentences are filtered in case of two long sentences to parse
+                            #see longsentencelog.txt and FilterLongSentences.py
+                            filtered_text = FilterLongSentences.FilterByCharCount(seg.text, text["code"])
+                            preparedinput += FixQuotes(filtered_text)
             filename = '{}_{}_{}.prepared'.format(sourcefile,text["code"],text["lang"])
             #Write the prepared file
             with open(filename, 'w') as f:
