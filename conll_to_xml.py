@@ -65,7 +65,8 @@ class TextPair():
             #Add metadata about the segment for the source language
             self.AddMetaToSegment(idx, self.sl_text.language)
             for meta_attr, meta_val in self.segment_meta[self.sl_text.language][idx].items():
-                self.current_seg.attrib[meta_attr] = meta_val
+                if  not meta_val:
+                    self.current_seg.attrib[meta_attr] = "unspecified"
             #start a new sentence in the beginning of the segment
             self.current_s = etree.SubElement(self.current_seg, "s")
             processed = self.ProcessWordsOfSegment(segment.splitlines(),self.sl_text)
@@ -184,7 +185,8 @@ class TextPair():
         TODO: what about retranslations?
         """
         for meta_attr, meta_val in self.segment_meta[lang][idx].items():
-            self.current_seg.attrib[meta_attr] = meta_val
+            if not meta_val:
+                self.current_seg.attrib[meta_attr] = "unspecified"
 
 class ParsedText():
     """A conll formatted text file that is seperated into align segments by bangs"""
