@@ -49,7 +49,7 @@ class TextPair():
             #start a new paragraph and a new sentencce
             linesofparagraph = paragraph.splitlines()
             processed = True
-            if linesofparagraph:
+            if any(linesofparagraph):
                 #If not an empty paragraph
                 self.current_p = etree.SubElement(self.root, "p")
                 self.current_s = etree.SubElement(self.current_p, "s")
@@ -241,7 +241,7 @@ class ParsedText():
             #segments are recognized by sequences of 15 exclamation marks
             self.segmentsplitpattern = re.compile(r"\d+\t!!!!!!!!!!!!!!!\t!!!!!!!!!!!!!!!.*")
             #paragrapghs are recognized by sequences of 10 question marks
-            self.paragraphsplitpattern = re.compile(r"\d\t\?{10}\t\?{10}[^\n]+\n\n")
+            self.paragraphsplitpattern = re.compile(r"\d\t\?{10}\t\?{10}.*")
         else:
             #segments are recognized by sequences of 15 exclamation marks
             self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*14 + r"\d+\t![^\n]+\n\n")
@@ -393,6 +393,7 @@ class Logger():
 
 
 #==================================================
+
 
 def main(csvdata):
     """The actual script for making the xml"""

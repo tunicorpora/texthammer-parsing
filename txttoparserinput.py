@@ -33,7 +33,9 @@ def ReadXml(sourcefile):
     except TypeError:
         raise MissingMetaError("No metadata (textdef-tag) given in the input file {}, exiting..".format(sourcefile))
 
-    txtoutput = "{0}{1}{0}".format("\n","?"*10).join(lines)
+    #NOTE: completely removing empty lines from the input (see the list comprehension inside join)
+    #This is because paragraphs are defined by a SINGLE line break. Always.
+    txtoutput = "{0}{1}{0}".format("\n","?"*10).join([thisline for thisline in lines if thisline])
     txtoutput = FixQuotes(txtoutput)
 
     return [root, txtoutput]
