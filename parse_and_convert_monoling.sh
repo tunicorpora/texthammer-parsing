@@ -52,7 +52,7 @@ rm longsentencelog.txt
 #1. Save metadata to csv
 
 #remove possible old files from an uncontrolled script finish
-rm $INPUTFOLDER*.prepared
+rm -f $INPUTFOLDER*.prepared
 
 python3 txttoparserinput.py $INPUTFOLDER $PARSED
 

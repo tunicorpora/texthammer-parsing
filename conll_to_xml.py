@@ -129,6 +129,9 @@ class TextPair():
                 columns = word.split('\t')
                 if len(columns)==1:
                     columns = word.split(' ')
+                    if len(columns)==1:
+                        #If only a number on a line, skip this word
+                        continue
                 #Collect properties from the conll formatted row
                 tokenproperties = text.CollectTokenProperties(columns)
                 #Set the words properties as xml elements according to the texthammer xml schema
@@ -241,7 +244,9 @@ class ParsedText():
             #segments are recognized by sequences of 15 exclamation marks
             self.segmentsplitpattern = re.compile(r"\d+\t!!!!!!!!!!!!!!!\t!!!!!!!!!!!!!!!.*")
             #paragrapghs are recognized by sequences of 10 question marks
-            self.paragraphsplitpattern = re.compile(r"\d\t\?{10}\t\?{10}.*")
+            #NOTE: for swedish paragraphs: appending a question mark in the end to account for the
+            #fact that sometimes the parser has interpreted the q-marks as the first word of the sentence
+            self.paragraphsplitpattern = re.compile(r"\d\t\?{10}\t\?{10}[^\n]+\n\n?")
         else:
             #segments are recognized by sequences of 15 exclamation marks
             self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*14 + r"\d+\t![^\n]+\n\n")
