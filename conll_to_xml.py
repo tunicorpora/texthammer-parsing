@@ -29,9 +29,14 @@ class TextPair():
         self.sl_text = ParsedText(line['filename'], 'source', line['lang'], line['code'])
         self.tl_texts = list()
         #Read segmentwise metadata from a separate json file identified by the id of the text pair
+        #(only if there is such a file, i.e. if this is a tmx we are parsing)
         metafile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", line['pair_id'])
-        with open(metafile, "r") as f:
-            self.segment_meta = json.load(f)
+        if os.path.isfile(metafile):
+            with open(metafile, "r") as f:
+                self.segment_meta = json.load(f)
+            self.has_segment_meta = True
+        else:
+            self.has_segment_meta = False
 
     def FormatMetaData(self, metaline):
         """Write the metadata for this language as a 'textdef' tag"""
@@ -63,10 +68,11 @@ class TextPair():
             #Process the source text
             self.current_seg = etree.SubElement(self.current_align, "seg", lang = self.sl_text.language, code = self.sl_text.code)
             #Add metadata about the segment for the source language
-            self.AddMetaToSegment(idx, self.sl_text.language)
-            for meta_attr, meta_val in self.segment_meta[self.sl_text.language][idx].items():
-                if  not meta_val:
-                    self.current_seg.attrib[meta_attr] = "unspecified"
+            if self.has_segment_meta:
+                self.AddMetaToSegment(idx, self.sl_text.language)
+                for meta_attr, meta_val in self.segment_meta[self.sl_text.language][idx].items():
+                    if  not meta_val:
+                        self.current_seg.attrib[meta_attr] = "unspecified"
             #start a new sentence in the beginning of the segment
             self.current_s = etree.SubElement(self.current_seg, "s")
             processed = self.ProcessWordsOfSegment(segment.splitlines(),self.sl_text)
@@ -81,7 +87,8 @@ class TextPair():
                     return False
                 self.current_seg = etree.SubElement(self.current_align, "seg", lang = tl_text.language, code = tl_text.code)
                 #Add metadata about the segment for the current target language
-                self.AddMetaToSegment(idx, tl_text.language)
+                if self.has_segment_meta:
+                    self.AddMetaToSegment(idx, tl_text.language)
                 # Add a new sentence 
                 self.current_s = etree.SubElement(self.current_seg, "s")
                 processed = self.ProcessWordsOfSegment(segment.splitlines(), tl_text)
