@@ -241,8 +241,7 @@ class ParsedText():
             #segments are recognized by sequences of 15 exclamation marks
             self.segmentsplitpattern = re.compile(r"\d+\t!!!!!!!!!!!!!!!\t!!!!!!!!!!!!!!!.*")
             #paragrapghs are recognized by sequences of 10 question marks
-            #TODO: swedish pragraphs
-            self.paragraphsplitpattern = re.compile(r"\d+\t\?[^\n]+\n\n?"*9 + r"\d+\t\?[^\n]+\n\n")
+            self.paragraphsplitpattern = re.compile(r"\d\t\?{10}\t\?{10}[^\n]+\n\n")
         else:
             #segments are recognized by sequences of 15 exclamation marks
             self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*14 + r"\d+\t![^\n]+\n\n")
