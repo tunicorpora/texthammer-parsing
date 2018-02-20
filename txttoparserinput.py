@@ -91,7 +91,7 @@ def CheckIfHardWrap(lines, fname):
             This script is now going to automatically convert the file into
             a soft-wrapped version.
             """.format(fname))
-        return lines
+        return unwrapped_lines
     return lines
 
 
