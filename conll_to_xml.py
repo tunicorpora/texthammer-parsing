@@ -52,8 +52,9 @@ class TextPair():
             if any(linesofparagraph):
                 #If not an empty paragraph
                 self.current_p = etree.SubElement(self.root, "p")
+                #import ipdb;ipdb.set_trace()
                 self.current_s = etree.SubElement(self.current_p, "s")
-                processed = self.ProcessWordsOfSegment(paragraph.splitlines(),self.sl_text)
+                processed = self.ProcessWordsOfSegment([line for line in paragraph.splitlines() if line],self.sl_text)
             if not processed:
                 return False
         return True
@@ -235,6 +236,11 @@ class ParsedText():
                 self.segmentsplitpattern = re.compile(r"!!!!!!!!!!!!!!!.*\n")
                 #TODO!
                 self.paragraphsplitpattern = re.compile(r"\d+\t\?{10}[^\n]+\n\n")
+        elif self.language == 'es':
+            #segments are recognized by sequences of 15 exclamation marks
+            self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*13 + r"\d+\t![^\n]+\n\n")
+            #paragrapghs are recognized by sequences of 10 question marks
+            self.paragraphsplitpattern = re.compile(r"\d+\t\?{10}[^\n]+")
         elif self.language == 'fr':
             #segments are recognized by sequences of 15 exclamation marks
             self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*13 + r"\d+\t![^\n]+\n\n")
@@ -284,7 +290,7 @@ class ParsedText():
                             'feat'        : columns[5],
                             'head'        : columns[6],
                             'deprel'      : columns[7]}
-                elif self.language == 'de':
+                elif self.language in ['es','de','fr']:
                     return  {'tokenid'     : columns[0],
                             'token'       : columns[1],
                             'lemma'       : columns[3],
@@ -300,14 +306,6 @@ class ParsedText():
                             'feat'        : columns[5],
                             'head'        : columns[6],
                             'deprel'      : columns[7]}
-                elif self.language == 'fr':
-                    return  {'tokenid'     : columns[0],
-                            'token'       : columns[1],
-                            'lemma'       : columns[3],
-                            'pos'         : columns[5],
-                            'feat'        : columns[7],
-                            'head'        : columns[9],
-                            'deprel'      : columns[11]}
                 elif self.language == 'is' or self.language == 'isl':
                     return  {'tokenid'     : "0",
                             'token'       : columns[0],

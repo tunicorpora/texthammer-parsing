@@ -185,6 +185,21 @@ case "$1" in
           rm $file.txt
       done
       ;;
+"es") cd $MATEPARSER
+      mkdir -p oldfiles
+      mv *prepared oldfiles/
+      cp $PREPARED/*prepared .
+      echo "Now starting to parse the SPANISH files"
+      echo "Be patient.."
+      echo "**********************************************************************"
+      #3.1 Parse:
+      for file in *prepared
+      do 
+          echo "Parsing $file"
+          sh parse_sp.sh $file
+          mv parsed_es.conll $PARSED/$file.conll
+      done
+      ;;
 *) echo "Unknown language: no parser specified for $1. Exiting..."
     rm .parser.lock
     exit
