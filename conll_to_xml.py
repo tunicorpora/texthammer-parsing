@@ -201,6 +201,8 @@ class TextPair():
         for meta_attr, meta_val in self.segment_meta[lang][idx].items():
             if not meta_val:
                 self.current_seg.attrib[meta_attr] = "unspecified"
+            else:
+                self.current_seg.attrib[meta_attr] = meta_val
 
 class ParsedText():
     """A conll formatted text file that is seperated into align segments by bangs"""
