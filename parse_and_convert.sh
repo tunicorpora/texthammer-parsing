@@ -16,7 +16,8 @@ if [ -f .parser.lock ]; then
     exit
 fi
 
-echo "locked" > .parser.lock
+
+#echo "locked" > .parser.lock
 
 
 
@@ -44,6 +45,20 @@ METADATACSV=parsedmetadata.csv
 
 #5: where to move the xml files when ready
 XMLFOLDER=/home/textmine/tact/database_insertion/xmloutput/
+
+
+cleanprepared (){
+  mkdir -p oldfiles
+  if [ -f *prepared ]; then
+     mv *prepared oldfiles
+  fi
+  if [ -f $PREPARED/$lang/*prepared ]; then
+      cp $PREPARED/$lang/*prepared .
+  else
+      echo "ATTENTION! The preparing failed for $1. Aborting the script!"
+      exit
+  fi
+}
 
 
 #0. Remove old files and create the directories if needed
@@ -102,14 +117,13 @@ echo "============================================================"
 
 for lang in "$@"
 do
+
     case "$lang" in
 
     "fi")  echo "Now starting to parse the FINNISH files.... THIS consumes most of the CPU power"
            #4. CD to TDT parsers directory and start parsing
            cd $TDTPARSER
-           mkdir -p oldfiles
-           mv *prepared oldfiles/
-           cp $PREPARED/$lang/*prepared .
+           cleanprepared
            #4.1 parse
            for file in *prepared
            do 
@@ -118,10 +132,7 @@ do
            done
            ;;
     "ru")  cd $SNPARSER
-           # Cd to the SNparser directory and start parsing:
-           mkdir -p oldfiles
-           mv *prepared oldfiles/
-           cp $PREPARED/$lang/*prepared .
+           cleanprepared
            echo "Now starting to parse the Russian files, this probably takes long and consumes all available MEMORY!"
            echo "Be patient.."
            echo "**********************************************************************"
@@ -136,9 +147,7 @@ do
         if [ "$ENGPARSER" = "stanford" ]; then
            # Cd to the parser directory and start parsing:
            cd $STANFORDPARSER
-           mkdir -p oldfiles
-           mv *prepared oldfiles/
-           cp $PREPARED/$lang/*prepared .
+           cleanprepared
            echo "Now starting to parse the English files with $ENGPARSER"
            echo "Be patient.."
            echo "**********************************************************************"
@@ -151,9 +160,7 @@ do
        elif [ "$ENGPARSER" = "mate" ];then
            # Cd to the parser directory and start parsing:
            cd $MATEPARSER
-           mkdir -p oldfiles
-           mv *prepared oldfiles/
-           cp $PREPARED/$lang/*prepared .
+           cleanprepared
            echo "Now starting to parse the English files with $ENGPARSER"
            echo "Be patient.."
            echo "**********************************************************************"
@@ -166,9 +173,7 @@ do
         fi
            ;;
     "de") cd $MATEPARSER
-          mkdir -p oldfiles
-          mv *prepared oldfiles/
-          cp $PREPARED/$lang/*prepared .
+          cleanprepared
           echo "Now starting to parse the GERMAN files"
           echo "Be patient.."
           echo "**********************************************************************"
@@ -181,9 +186,7 @@ do
           done
           ;;
     "fr") cd $MATEPARSER
-          mkdir -p oldfiles
-          mv *prepared oldfiles/
-          cp $PREPARED/$lang/*prepared .
+          cleanprepared
           echo "Now starting to parse the FRENCH files"
           echo "Be patient.."
           echo "**********************************************************************"
@@ -196,9 +199,7 @@ do
           done
           ;;
     "sv") cd $SWEPARSER
-          mkdir -p oldfiles
-          mv *prepared oldfiles/
-          cp $PREPARED/$lang/*prepared .
+          cleanprepared
           echo "Now starting to parse the SWEDISH files"
           echo "Be patient.."
           echo "**********************************************************************"
@@ -214,10 +215,7 @@ do
           done
           ;;
     "is") cd $ICEPARSER
-        #ICELANDIC: TODO, just faking and using the German parser
-          mkdir -p oldfiles
-          mv *prepared oldfiles/
-          cp $PREPARED/$lang/*prepared .
+          cleanprepared
           echo "Now starting to parse the ICELANDIC files (NO SYNTAX)"
           echo "Be patient.."
           echo "**********************************************************************"
@@ -234,6 +232,19 @@ do
           do 
               echo "Fixing $file"
               python3 fix_is_tokens.py $file
+          done
+          ;;
+    "es") cd $MATEPARSER
+          cleanprepared
+          echo "Now starting to parse the SPANISH files"
+          echo "Be patient.."
+          echo "**********************************************************************"
+          #3.1 Parse:
+          for file in *prepared
+          do 
+              echo "Parsing $file"
+              sh parse_sp.sh $file
+              mv parsed_es.conll $PARSED/$lang/$file.conll
           done
           ;;
     *) echo "Unknown language: no parser specified for $lang. Exiting..."

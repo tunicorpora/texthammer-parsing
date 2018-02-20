@@ -117,7 +117,10 @@ class TextPair():
         self.dquotetype='begin'
         if singlesentence:
             self.current_s = etree.SubElement(self.root, "s")
-        for word in tokenlines:
+        for idx, word in enumerate(tokenlines):
+            if idx ==0 and not word:
+                #If the first line is empty, skip it
+                continue
             #read all the information about the word
             if word == '':
                 #empty lines are sentence breaks
@@ -238,7 +241,7 @@ class ParsedText():
                 self.paragraphsplitpattern = re.compile(r"\d+\t\?{10}[^\n]+\n\n")
         elif self.language == 'es':
             #segments are recognized by sequences of 15 exclamation marks
-            self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*13 + r"\d+\t![^\n]+\n\n")
+            self.segmentsplitpattern = re.compile(r"\d+\t!{14}[^\n]+")
             #paragrapghs are recognized by sequences of 10 question marks
             self.paragraphsplitpattern = re.compile(r"\d+\t\?{10}[^\n]+")
         elif self.language == 'fr':
