@@ -22,15 +22,19 @@ class ParserInfo():
 class TextPair():
     """A collection of the source text and its translations.
     Pair is actually somewhat misleading: these objects consist of a source
-    text and as many translations as specified"""
+    text and as many translations as specified
+    
+    - line: a list of dicts or a dict containing all metadata
+    - pair_id a unique id identifying the source tmx / txt file 
+    """
 
-    def __init__(self, line):
+    def __init__(self, line, pair_id):
         self.root = etree.Element("text")
         self.sl_text = ParsedText(line['filename'], 'source', line['lang'], line['code'])
         self.tl_texts = list()
         #Read segmentwise metadata from a separate json file identified by the id of the text pair
         #(only if there is such a file, i.e. if this is a tmx we are parsing)
-        metafile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", line['pair_id'])
+        metafile = "{}/{}/{}_segment_meta.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", pair_id)
         if os.path.isfile(metafile):
             with open(metafile, "r") as f:
                 self.segment_meta = json.load(f)
@@ -41,7 +45,8 @@ class TextPair():
     def FormatMetaData(self, metaline):
         """Write the metadata for this language as a 'textdef' tag"""
         del(metaline['filename'])
-        del(metaline['pair_id'])
+        if 'pair_id' in metaline:
+            del(metaline['pair_id'])
         metatag = etree.SubElement(self.root, "textdef", metaline)
 
     def LoopThroughSentences(self):
@@ -54,13 +59,10 @@ class TextPair():
                 self.current_p = etree.SubElement(self.root, "p")
                 #import ipdb;ipdb.set_trace()
                 self.current_s = etree.SubElement(self.current_p, "s")
-                processed = self.ProcessWordsOfSegment([line for line in paragraph.splitlines() if line],self.sl_text)
+                processed = self.ProcessWordsOfSegment(paragraph.splitlines(), self.sl_text)
             if not processed:
                 return False
         return True
-#        for idx, sentence in enumerate(self.sl_text.sentences):
-#            #Process the lines (words) in each sentence
-#            self.ProcessWordsOfSegment(sentence.strip().splitlines(), self.sl_text, True)
 
     def LoopThroughSegments(self):
         for idx, segment in enumerate(self.sl_text.alignsegments):
@@ -353,25 +355,26 @@ def ReadFiledata(csvpath):
     Create File pair objects based on the information provided by the csv file."""
     pair_ids = list()
     textpairs = list()
-    with open(csvpath,'r') as inputdata:
-        reader = DictReader(inputdata)
+    with open(csvpath, "r") as f:
+        texts = json.load(f)
+    for pair_id, text in texts.items():
         failedpairs = list()
-        for line in reader:
-            if line['pair_id'] not in failedpairs:
+        for version in text:
+            if pair_id not in failedpairs:
                 #Separate text pairs by user-defined ids
                 #Assume that the first text with a given ID is the source text
-                if line['pair_id'] not in pair_ids:
-                    pair_ids.append(line['pair_id'])
-                    textpairs.append(TextPair(line))
+                if pair_id not in pair_ids:
+                    pair_ids.append(pair_id)
+                    textpairs.append(TextPair(version, pair_id))
                 else:
                     #For the target language files
-                    textpairs[-1].tl_texts.append(ParsedText(line['filename'], 'target', line['lang'], line['code']))
+                    textpairs[-1].tl_texts.append(ParsedText(version['filename'], 'target', version['lang'], version['code']))
                     if textpairs[-1].sl_text.haserrors or textpairs[-1].tl_texts[-1].haserrors:
                         #check if errors in reading the data to sl and tl text objects
-                        failedpairs.append(line['pair_id'])
+                        failedpairs.append(pair_id)
                         del textpairs[-1]
                 #Add a tag for the metadata
-                textpairs[-1].FormatMetaData(line)
+                textpairs[-1].FormatMetaData(version)
     return textpairs
 
 class Logger():
@@ -384,7 +387,7 @@ class Logger():
             f.write("")
         root = logging.getLogger()
         root.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s: %(message)s')
+        formatter = logging.Formatter('%(levelname)s ---> %(asctime)s: %(message)s')
 
         ch = logging.StreamHandler(sys.stdout)
         ch.setLevel(logging.DEBUG)
@@ -425,14 +428,6 @@ def main(csvdata):
 
     if Logger.loggederrors:
         print("The following ERRORS occured: \n" + "\n".join(Logger.loggederrors))
-
-def tester():
-    """Testing the actual script for making the xml"""
-    sl_text  = ParsedText('test_files/sfinksi_fi.conll', 'source', 'fi')
-    tl_texts = list()
-    tl_texts.append(ParsedText('test_files/sfinksi_ru.conll', 'target', 'ru'))
-    textpair = TextPair(sl_text, tl_texts)
-    textpair.LoopThroughSegments()
 
 
 if __name__ == "__main__":

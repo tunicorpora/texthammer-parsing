@@ -20,8 +20,8 @@ fi
 #echo "locked" > .parser.lock
 
 
-
 # Set these paths appropriately!
+PARSERLOG=/tmp/parserlog.txt
 #1: input
 TMXFOLDER=/home/textmine/corpusinput/tmx/
 
@@ -41,7 +41,7 @@ PREPARED=/home/textmine/corpusinput/prepared_for_parser
 
 #4: script folder, metadata file
 PYTHONFOLDER=/home/textmine/textmine-parsing/
-METADATACSV=parsedmetadata.csv
+METADATACSV=parsedmetadata.json
 
 #5: where to move the xml files when ready
 XMLFOLDER=/home/textmine/tact/database_insertion/xmloutput/
@@ -49,10 +49,10 @@ XMLFOLDER=/home/textmine/tact/database_insertion/xmloutput/
 
 cleanprepared (){
   mkdir -p oldfiles
-  if [ -f *prepared ]; then
+  if ls *prepared 1> /dev/null 2>&1; then
      mv *prepared oldfiles
   fi
-  if [ -f $PREPARED/$lang/*prepared ]; then
+  if ls $PREPARED/$lang/*prepared 1> /dev/null 2>&1; then
       cp $PREPARED/$lang/*prepared .
   else
       echo "ATTENTION! The preparing failed for $1. Aborting the script!"
@@ -72,7 +72,10 @@ do
     rm -f longsentencelog.txt
 done
 
+rm -f xmloutput/*.xml 
+rm -f skippedfiles.txt
 rm -f $METADATACSV
+rm -f $TMXFOLDER*.prepared
 rm -f $TMXFOLDER*.prepared
 
 
@@ -96,9 +99,11 @@ python3 tmxtoparserinput.py $TMXFOLDER $PARSED
 
 if [ -e "$METADATACSV" ]
 then
-    echo "Prepared succesfully"
+    echo "Produced $METADATACSV with the following information: "
+    cat $METADATACSV
+    echo "\n"
 else
-    echo "Something wrong with the tmx files, no metadata file produced. \nLook at the error messages from tmxtoparserinput.py.\nSuggestion: are some of the files tf-16?\nExiting"
+    echo "ATTENTION! Preparing  the tmx files failed. Aborting the script! Please look at **tmxtoparserinput.log** "
     rm -f .parser.lock
     exit
 fi
@@ -112,103 +117,79 @@ do
     echo "Moved the prepared files to $PREPARED/$lang/"
 done
 
-echo "============================================================"
 
+echo "****************************************************************"
+echo "*\n*\n* Now starting the actual parsing. This WILL take time. \n* To make tracking errors easier, the output of the parsers will not be shown here, but rather redirected to $PARSERLOG \n* To see the progress of the parsers in real time, launch another terminal and type this command: tail -f $PARSERLOG\n*\n*"
+echo "****************************************************************"
 
 for lang in "$@"
 do
+    date
+    echo "Parsing the files in the following language: $lang"
 
     case "$lang" in
 
-    "fi")  echo "Now starting to parse the FINNISH files.... THIS consumes most of the CPU power"
-           #4. CD to TDT parsers directory and start parsing
-           cd $TDTPARSER
+    "fi")  cd $TDTPARSER
            cleanprepared
            #4.1 parse
            for file in *prepared
            do 
-               cat $file | ./parser_wrapper.sh > $file.conll
+               cat $file | ./parser_wrapper.sh > $file.conll 2> $PARSERLOG
                mv  $file.conll  $PARSED/$lang/
            done
            ;;
     "ru")  cd $SNPARSER
            cleanprepared
-           echo "Now starting to parse the Russian files, this probably takes long and consumes all available MEMORY!"
-           echo "Be patient.."
-           echo "**********************************************************************"
-           #3.1 Parse:
            for file in *prepared
            do 
-               sh russian-malt.sh $file
+               sh russian-malt.sh $file 2> $PARSERLOG
                cp $RUPARSEDNAME $PARSED/$lang/$file.conll
            done
            ;;
     "en")  
         if [ "$ENGPARSER" = "stanford" ]; then
-           # Cd to the parser directory and start parsing:
            cd $STANFORDPARSER
            cleanprepared
-           echo "Now starting to parse the English files with $ENGPARSER"
-           echo "Be patient.."
-           echo "**********************************************************************"
-           #3.1 Parse:
            for file in *prepared
            do 
-               ./corenlp.sh -annotators tokenize,ssplit,pos,lemma,ner,parse,dcoref -file $file -outputFormat conll
+               ./corenlp.sh -annotators tokenize,ssplit,pos,lemma,ner,parse,dcoref -file $file -outputFormat conll  2> $PARSERLOG
                mv $file.conll $PARSED/$lang/
            done
        elif [ "$ENGPARSER" = "mate" ];then
-           # Cd to the parser directory and start parsing:
            cd $MATEPARSER
            cleanprepared
-           echo "Now starting to parse the English files with $ENGPARSER"
-           echo "Be patient.."
-           echo "**********************************************************************"
-           #3.1 Parse:
            for file in *prepared
            do 
-               sh parse_en.sh $file
+               sh parse_en.sh $file > $PARSERLOG 2>&1
                mv prs-eng-out $PARSED/$lang/$file.conll
            done
         fi
            ;;
     "de") cd $MATEPARSER
           cleanprepared
-          echo "Now starting to parse the GERMAN files"
-          echo "Be patient.."
-          echo "**********************************************************************"
-          #3.1 Parse:
           for file in *prepared
           do 
               echo "Parsing $file"
-              sh parse_ge.sh $file
+              sh parse_ge.sh $file 2> $PARSERLOG
               mv parsed_ge.conll $PARSED/$lang/$file.conll
           done
           ;;
     "fr") cd $MATEPARSER
           cleanprepared
-          echo "Now starting to parse the FRENCH files"
-          echo "Be patient.."
-          echo "**********************************************************************"
-          #3.1 Parse:
           for file in *prepared
           do 
               echo "Parsing $file"
-              sh parse_fr.sh $file
+              sh parse_fr.sh $file   2> $PARSERLOG
               mv parsed_fr.conll $PARSED/$lang/$file.conll
           done
           ;;
     "sv") cd $SWEPARSER
           cleanprepared
-          echo "Now starting to parse the SWEDISH files"
-          echo "Be patient.."
-          echo "**********************************************************************"
-          #3.1 Parse:
           for file in *prepared
           do 
               #note: the swedish tokenizer needs the source file as txt
               cp $file $file.txt
-              sh parse.sh $file.txt
+              sh parse.sh $file.txt  2> $PARSERLOG
               mv outfile.conll $PARSED/$lang/$file.conll
               #remove the temporary txt file
               rm -f $file.txt
@@ -216,14 +197,10 @@ do
           ;;
     "is") cd $ICEPARSER
           cleanprepared
-          echo "Now starting to parse the ICELANDIC files (NO SYNTAX)"
-          echo "Be patient.."
-          echo "**********************************************************************"
-          #3.1 Parse:
           for file in *prepared
           do 
               echo "Parsing $file"
-              sh icetagger.sh -i $file -o out.txt -lem
+              sh icetagger.sh -i $file -o out.txt -lem  2> $PARSERLOG
               mv out.txt $PARSED/$lang/$file.conll
           done
           #FIX tokenization:
@@ -236,14 +213,10 @@ do
           ;;
     "es") cd $MATEPARSER
           cleanprepared
-          echo "Now starting to parse the SPANISH files"
-          echo "Be patient.."
-          echo "**********************************************************************"
-          #3.1 Parse:
           for file in *prepared
           do 
               echo "Parsing $file"
-              sh parse_sp.sh $file
+              sh parse_sp.sh $file  2> $PARSERLOG
               mv parsed_es.conll $PARSED/$lang/$file.conll
           done
           ;;
@@ -261,10 +234,21 @@ echo "DONE!\nNow producing the xml file for insertion into the database."
 cd $PYTHONFOLDER
 rm -f .parser.lock
 
-python3 conll_to_xml.py parsedmetadata.csv $ENGPARSER
+python3 conll_to_xml.py parsedmetadata.json $ENGPARSER
 
-cp xmloutput/*.xml $XMLFOLDER
-
-echo "COPIED the xml files (if there were any) to $XMLFOLDER."
+XMLFILES="$(ls xmloutput/*xml | wc -l)"
+if [ "$XMLFILES" -gt "0" ]; then
+  cp xmloutput/*.xml $XMLFOLDER
+  echo "COPIED the xml files to $XMLFOLDER."
+else
+  echo "WARNING! No xml files produced!"
+fi
 
 echo "REMEMBER to check the log files (tmxtoparserinput.log and conll_to_xml.log) to see if some files did not pass."
+
+if [ -f skippedfiles.txt ]; then
+    echo "Skipped the following files:"
+    cat skippedfiles.txt
+    cat "\n"
+fi
+

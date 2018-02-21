@@ -10,226 +10,281 @@ import re
 import FilterLongSentences
 from conll_to_xml import Logger, logging
 import json
+from python_tools import Prettify, FixQuotes
 
+class Document:
+    """
+    Represents a single file that is going to be prepared for parsing. This can be
+    a tmx containing multiple 'versions' of the same text or just a text file
+    containing a text to be parsed. Notice that these files have to 
+    contain <textdef>-tags with some crucial metadata, minimally  the language of the document
+    """
+    def __init__(self, sourcefile):
+        """
+        Initializes the object by reading the content. 
+        Also launches the metadata reader.
 
-def ReadXml(sourcefile):
-    with open(sourcefile, "r") as f:
+        - sourcefile: the full path  of the tmx file
+        """
+        self.pair_id = str(uuid.uuid4())
+        self.dumpfile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", self.pair_id)
+        self.errors = []
+        self.warnings = []
+        self.filename = sourcefile
+        k = sourcefile.rfind("/")
+        self.mere_file = sourcefile[k+1:]
+        with open(sourcefile, "r") as f:
+            try:
+                self.content = f.read()
+            except UnicodeDecodeError:
+                problem = "Tiedostossa {} koodausongelma. Luultavasti utf-16 pitäisi muuttaa utf-8:aan.".format(sourcefile)
+                self.errors.append(problem)
+                return False
+
+    def CollectMetaDataAttributes(self):
+        """
+        Counts the number of different metadata attributes provided in the textdef tags
+        In addition, checks if some of the versions are retranslations
+        """
+
         try:
-            xmlstring = f.read()
-        except UnicodeDecodeError:
-            print("Tiedostossa {} koodausongelma. luultavasti utf-16 pitäisi muuttaa utf-8:aan.".format(sourcefile))
-            sys.exit()
-    xmlstring = unescape(xmlstring.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
-    xmlstring = Prettify(xmlstring.replace('encoding = "utf-8"','').strip())
-    root = etree.fromstring(xmlstring.strip())
-    return root
+            self.translations_per_language = dict()
+            #First, we have to collect all the available attributes
+            self.all_meta_attributes = []
+            self.metadata_for_versions = []
+            for textdef in self.textdefs:
+                self.metadata_for_versions.append(dict())
+                for attrname, attr in textdef.items():
+                    if attrname in ['language','lang']:
+                        #Count the number of versions per language
+                        #Note: Always use the lang tag instead of language
+                        attrname = 'lang'
+                        try:
+                            self.translations_per_language[attr] += 1
+                        except KeyError:
+                            self.translations_per_language[attr] = 1
+                    if attrname not in self.all_meta_attributes:
+                        self.all_meta_attributes.append(attrname)
+                    self.metadata_for_versions[-1][attrname] = attr
+        except Exception as e:
+            self.errors.append("Problem in collecting the metadata attributes from the textdef tags: {}".format(e))
 
-def Prettify(s):
-    """Add newlines around some of the xml tags in order to make sure that all
-    segments will be processed. """
-    lines = s.splitlines()
-    output = ""
-    for line in lines:
-        if "<tu>" in line:
-            output +=  "\n"
-        output +=  line + "\n"
-        if r"</tu>" in line:
-            output +=  "\n"
-    return output
-
-def FixQuotes(fixedstring):
-    """Force spaces around any type of quotation marks"""
-    fixedstring =  re.sub(r"[^a-za-öа-я](\')"," \\1 ",fixedstring, flags=re.I)
-    return re.sub(r"([\"]|&quot;)"," \\1 ",fixedstring)
-
-def CountMetaAttributes(root, attrs):
-    """Count all the possible different metadata 
-    attributes included in the tmx files provided"""
-
-    texts = root.xpath("//textdef")
-    for text in texts:
-        for attrname, attr in text.items():
-            #Always use the lang tag instead of language
-            if attrname == 'language':
-                attrname = 'lang'
-            if attrname not in attrs:
-                attrs.append(attrname)
-    return attrs
-
-def ReadMetaData(root, attrs):
-    """Read metadata from textdef tags included in the tmx"""
-    texts = root.xpath("//textdef")
-    #Save metadata from textdef tags to a dict
-    languagetexts = list()
-    #separete texts with uinique ids
-    pair_id = uuid.uuid4()
-    for text in texts:
-        languagetexts.append(dict())
-        for attrname, attr in text.items():
-            if attrname == 'language':
-                attrname = 'lang'
-            if attrname == 'code':
-                #Make sure the code tag does not contain spaces (because it will be used as a part of a filename)
-                attr = attr.replace(' ','')
-            if attrname == 'lang':
-                #Force lower case language codes to make sure file names will be correct
-                attr = attr.lower()
-            languagetexts[-1][attrname] = attr
-            languagetexts[-1]["pair_id"] = pair_id
-
-
-    #For source texts lacking the translator attribute or other attributes found in only some textdef tags or files
-    for languagetext in languagetexts:
-        for attr in attrs:
-            if not attr in languagetext:
-                languagetext[attr]= ""
-
-    return languagetexts
-
-def WriteMetaData(metadata):
-    """Write the information about the parsed files to a csv file"""
-    with open('parsedmetadata.csv', 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=metadata[0].keys())
-        writer.writeheader()
-        for text in metadata:
-            writer.writerow(text)
-
-def ReadTmxData(sourcefile, attrs):
-    """Read the contents of a tmx file"""
-    root = ReadXml(sourcefile)
-    #find out what languages involved and what are the metadata
-    metadata = ReadMetaData(root, attrs)
-    #Create a dictionary for saving additional information about the segments (such as speakers)
-    segment_meta = dict()
-    #check if there are multiple translations to one language
-    textsperlanguage = TestIfRetrans(metadata)
-    #Loop through each language in the tmx
-    seglength = dict()
-    seglengths = list()
-    for idx, text in enumerate(metadata):
-        #if text["lang"]=="sv":
-        #    import ipdb;ipdb.set_trace()
-        if textsperlanguage[text["lang"]]==1:
-            #if no retranslations
-            xpathq = "//tuv[@xml:lang='{}' or  @xml:lang='{}']".format(text["lang"], text["lang"].upper())
+    def ReportProblems(self):
+        """
+        Print all the error or messages related to this file.
+        - returns true or false depending on whether serious problems were found
+        """
+        if not self.errors:
+            logging.info("Great! No critical problems found with the file {}".format(self.filename))
         else:
-            #if retranslations present
-            xpathq = "//tuv[(@xml:lang='{}' or @xml:lang='{}') and @code='{}']".format(text["lang"],text["lang"].upper(), text["code"])
-        tuvs = root.xpath(xpathq)
-        print("{}:{} segments".format(text["lang"],len(tuvs)))
-        #Initialize a list for saving the possible metadata about each segment
-        segment_meta[text["lang"]] = list()
-        #--
-        seglength[text["lang"]] = len(tuvs)
-        seglengths.append(len(tuvs))
-        preparedinput = ""
-        if not tuvs:
-            #If nothing found, inform the user
-            input('Warning! The preparing script returned an empty string for text {} in the file {} (language:{}). Press Ctr-c to cancel.'.format(text["code"], sourcefile,text["lang"]))
-        else:
-            #if all went well, loop through each align segment
-            for tuv in tuvs:
-                preparedinput += "\n" + "!"*15 + "\n"
-                #Check for additional metadata such as information about the current speaker
-                segment_meta[text["lang"]].append({"speaker":tuv.get("speaker")})
-                #then, each segment inside
-                if not tuv.getchildren():
-                    preparedinput += FixQuotes(tuv.text)
+            for error in self.errors:
+                logging.error(error)
+            with open("skippedfiles.txt","a") as f:
+                f.write("\n" + self.filename)
+            return True
+        for warning in self.warnings:
+            logging.warning(warning)
+        return False
+
+class Tmxfile(Document):
+    """
+    Represents the text as a whole: all the versions, including retranslations.
+    """
+    def __init__(self, sourcefile):
+        self.filetype = "tmx"
+        super().__init__(sourcefile)
+        #Metadata for each text
+        self.metafile = "{}/{}/{}_segment_meta.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", self.pair_id)
+        self.versions = []
+
+    def GetXml(self):
+        """
+        Reads the xml contents to an lxml etree object
+        """
+        try:
+            self.content = unescape(self.content.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
+            self.content = Prettify(self.content.replace('encoding = "utf-8"','').strip())
+            self.root = etree.fromstring(self.content.strip())
+        except Exception as e:
+            self.errors.append("Problem in reading the xml of the file: {}".format(e))
+
+    def ReadTextdefs(self):
+        """
+        Reads the metadata attributes included in the textdef tags
+        """
+        self.textdefs = self.root.xpath("//textdef")
+        if not self.textdefs:
+            self.errors.append("""You have not provided metadata for
+                the texts. The metadata should be provided as <textdef> tags
+                including, minimally, the attributes code and lang""")
+
+    def InitializeVersions(self):
+        """
+        Initializes each text as a separate 'Version' object, which can be either 
+        a regular text or a retranslation.
+        """
+        for thisversion in self.metadata_for_versions:
+            if self.translations_per_language[thisversion["lang"]] == 1:
+                self.versions.append(Translation(thisversion["lang"],thisversion["code"],self.filename, self.pair_id))
+            else:
+                self.versions.append(Retranslation(thisversion["lang"],thisversion["code"],self.filename, self.pair_id))
+            #Add metadata for this version
+            for attr in self.all_meta_attributes:
+                try:
+                    self.versions[-1].metadata[attr] = thisversion[attr]
+                except KeyError:
+                    #Add even the values not specified (as empty)
+                    self.versions[-1].metadata[attr] = ""
+
+
+    def GetVersionContents(self):
+        """
+        Reads the contents of a tmx file and extracts each version of the text.
+        """
+        tu_tags = self.root.xpath("//tu")
+        #Iterate over every single tu tag in the tmx
+        #the tu tags represent segments
+        for tu_idx, tu in enumerate(tu_tags):
+            for version in self.versions:
+                tuvs = tu.xpath(version.tuvpattern)
+                segment_text = None
+                if tuvs:
+                    tuv = tuvs[0]
+                    #Check for additional metadata such as information about the current speaker
+                    version.segment_meta.append({"speaker":tuv.get("speaker")})
+                    if not tuv.getchildren():
+                        segment_text = tuv.text
+                    else:
+                        for seg in tuv.getchildren():
+                            preparedinput += FixQuotes(tuv.text)
+                            if seg.text:
+                                if segment_text:
+                                    segment_text += " "
+                                segment_text += seg.text
+                    if segment_text:
+                        segment_text = FixQuotes(segment_text)
+                        #Note: the sentences are filtered in case of two long sentences to parse
+                        #see longsentencelog.txt and FilterLongSentences.py
+                        segment_text = FilterLongSentences.FilterByCharCount(segment_text, version.code)
                 else:
-                    for seg in tuv.getchildren():
-                        preparedinput += " "
-                        if seg.text:
-                            #Note: the sentences are filtered in case of two long sentences to parse
-                            #see longsentencelog.txt and FilterLongSentences.py
-                            filtered_text = FilterLongSentences.FilterByCharCount(seg.text, text["code"])
-                            preparedinput += FixQuotes(filtered_text)
-            filename = '{}_{}_{}.prepared'.format(sourcefile,text["code"],text["lang"])
-            #Write the prepared file
-            with open(filename, 'w') as f:
-                f.write(preparedinput.strip())
-            #Save the filename of the file after parsing in the dict for future use
-            k = sourcefile.rfind("/")
-            mere_file = sourcefile[k+1:]
-            text["filename"] = '{}/{}/{}_{}_{}.prepared.conll'.format(sys.argv[2],text["lang"],mere_file,text["code"],text["lang"])
-    #Check that all the texts have the same number of segents
-    lengths = list()
-    halt = False
-    segnumbers = ""
-    for lang, thislength in seglength.items():
-        segnumbers += "{}: {} / ".format(lang, thislength)
-        for l in seglengths:
-            if l != thislength:
-                halt = True
-                break
-    if halt:
-        raise ValueError("Different number of segments in this file:\n\n {}".format(segnumbers))
+                    #If this version (language or retranslation) doesn't have this particular segment at all
+                    segment_text = "-"
+                    version.segment_meta.append({"speaker":""})
+                    logging.warning("Segment number {} DOESN'T EXIST for {} (language {})".format(tu_idx +1, version.code,version.lang))
+                version.segments.append(segment_text.strip())
 
-    # Finally, save the collected metadata about segments to a separate json dump
-    metafile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", metadata[-1]["pair_id"])
-    with open(metafile,"w") as f:
-        json.dump(segment_meta, f, ensure_ascii=False)
 
-    return metadata
+    def WritePreparedFiles(self):
+        """
+        Write all the prepared files to the specified destinations.
+        Also, write an auxiliary file containing segment-specific metadata.
+        """
+        segment_meta = {}
+        for version in self.versions:
+            logging.info("Writing {}".format(version.prepared_filename))
+            with open(version.prepared_filename,"w") as f:
+                f.write(version.segmentsplitpattern.join(version.segments))
+            segment_meta[version.lang] = version.segment_meta
 
-def TestIfRetrans(metadata):
-    """test if the specified language is used in multiple textdef tags"""
-    translations_per_language = dict()
-    for text in metadata:
-        try:
-            translations_per_language[text["lang"]] += 1
-        except KeyError:
-            translations_per_language[text["lang"]] = 1
-    return translations_per_language
+        #Save the collected metadata about segments to a separate json dump
+        with open(self.metafile,"w") as f:
+            json.dump(segment_meta, f, ensure_ascii=False)
 
-def main():
+class Version:
+    """
+    Represents a single version of the text, which is itself represented as one single tmx file.
+    Most often the tmx file consists of 2 or more versions, one of which is the source text
+    while the others are target texts. It should be noted, that some versions are actually
+    retranslations, so that one language may contain several versions
+    """
+
+    def __init__(self, lang, code, sourcefile, pair_id):
+        self.segmentsplitpattern = "\n" + "!"*15 + "\n"
+        self.lang = lang
+        self.pair_id = pair_id
+        self.code = code
+        self.segments = []
+        self.metadata = {}
+        #This is for saving segment specific meta information such as speakers in a dialogue context
+        self.segment_meta = []
+        self.prepared_filename = '{}_{}_{}.prepared'.format(sourcefile, self.code, self.lang)
+        k = sourcefile.rfind("/")
+        self.mere_file = sourcefile[k+1:]
+        self.parsed_filename  = '{}/{}/{}_{}_{}.prepared.conll'.format(sys.argv[2], self.lang, self.mere_file, self.code, self.lang)
+        self.metadata["filename"] = self.parsed_filename
+
+class Translation(Version):
+    """
+    If the version we are dealing with is a regular translation, it is represented by this class
+    OR if this is the source text, the Translation class will be used anyway.
+    """
+    def __init__(self, lang, code, sourcefile, pair_id):
+        super().__init__(lang, code, sourcefile, pair_id)
+        self.tuvpattern = "tuv[@xml:lang='{}' or  @xml:lang='{}']".format(self.lang, self.lang.upper())
+        self.versiontype = "regular"
+                
+class Retranslation(Version):
+    """
+    If the version we are dealing with is actually a retranslation, it is represented by this class
+    """
+    def __init__(self, lang, code, sourcefile, pair_id):
+        super().__init__(lang, code, sourcefile, pair_id)
+        self.tuvpattern = "tuv[(@xml:lang='{}' or @xml:lang='{}') and @code='{}']".format(self.lang, self.lang.upper(), self.code)
+        self.versiontype = "retranslation"
+
+def FireScript(msg, loggerfilenamename, filetype):
+    """
+    Only fire the script off if the user has supplied correct parameters
+
+    - msg: The message to show if the parameters haven't been right
+    - loggerfilenamename: Where to save the logging messages
+    - filetype: what kind of files do you expect as input (tmx, txt)
+    - returns a list of the files that will be processed
+    """
     try:
         sourcefile = sys.argv[1]
         parsedfolder = sys.argv[2]
         if sys.argv[2][-1] == "/":
             sys.argv[2] = sys.argv[2][:-1]
     except:
-        print('Usage: {} <path to source tmx or folder containing multiple tmxs> <folder to save the parsed files>'.format(sys.argv[0]))
+        print(msg)
         sys.exit(0)
 
-    attrnames = list()
-    thislogger = Logger("tmxtoparserinput.log")
+    thislogger = Logger(loggerfilenamename)
 
     if os.path.isdir(sourcefile):
-        metadata = list()
-        if sourcefile[-1] == "/":
-            slash = ""
-        else:
-            slash = "/"
+        #Processing a whole folder 
+        slash = "" if sourcefile[-1] == "/" else "/"
+        files = glob.glob(sourcefile + slash + '*' + filetype)
+    else: 
+        files = [sourcefile]
 
-        #Get all the attributes in the metadata
-        shall_i_proceed = {}
-        for filename in glob.glob(sourcefile + slash + '*tmx'):
-            logging.info("Starting to analyze the following tmx file: {}.".format(filename))
-            try:
-                root = ReadXml(filename)
-                attrnames = CountMetaAttributes(root, attrnames)
-                shall_i_proceed[filename] = True
-            except Exception as e:
-                logging.warning("Cannot read the XML in {}. This file won't be processed. The exact error message is: {}".format(filename, e))
-                shall_i_proceed[filename] = False
+    return files
 
-        #Process the tmxs
-        for filename in glob.glob(sourcefile + slash + '*tmx'):
-            if shall_i_proceed[filename]:
-                try:
-                    if not metadata:
-                        metadata = ReadTmxData(filename, attrnames)
-                    else:
-                        metadata.extend(ReadTmxData(filename, attrnames))
-                except ValueError as e:
-                    logging.error("Error with {}: \n{}. This file won't be processed.".format(filename, e))
-
+def main():
+    msg = "Usage: {} <path to source tmx or folder containing multiple tmxs> <folder to save the parsed files>'".format(sys.argv[0])
+    files = FireScript(msg, "tmxtoparserinput.log","tmx")
+    #Output = Information about the prepared files will be stored in this dict, which will be dumped as a json file
+    output = {}
+    for filename in files:
+        logging.info("Starting to analyze the following tmx file: {}.".format(filename))
+        thisfile = Tmxfile(filename)
+        try:
+            thisfile.GetXml()
+            thisfile.ReadTextdefs()
+            thisfile.CollectMetaDataAttributes()
+            thisfile.InitializeVersions()
+            thisfile.GetVersionContents()
+            if not thisfile.ReportProblems():
+                thisfile.WritePreparedFiles()
+                output[thisfile.pair_id] = [version.metadata for version in thisfile.versions]
+        except:
+            thisfile.ReportProblems()
+    if output:
+        with open("parsedmetadata.json","w") as f:
+            json.dump(output, f, ensure_ascii=False, indent=4)
     else:
-        #No folder, a single file given
-        root = ReadXml(sourcefile)
-        attrnames = CountMetaAttributes(root, attrnames)
-        metadata = ReadTmxData(sourcefile, attrnames)
-    WriteMetaData(metadata)
+        logging.error("No output produced.")
 
 
 if __name__ == "__main__":
