@@ -1,0 +1,2 @@
+<textdef code="wi_test" author="Wikipedia" title="Wikipedia article" yearorig="2018" publisher="Wikimedia commons" lang="fi"/>
+Hans-Renner-Schanze (vuoteen 1998 asti "Rennsteig-Schanze") oli suurin hyppyrimäki Itä-Saksassa, K-piste sijaitsi 90 metrissä. Sitä rakennettiin vuosina 1959-1961. Alkuperäiset hyppyritorni ja 7 kerrosta korkea tuomareiden torni ovat edelleenkin käytössä. Mäki avattiin 9. tammikuuta 1962, avajaishypyn suoritti Alfred Brettschneider.

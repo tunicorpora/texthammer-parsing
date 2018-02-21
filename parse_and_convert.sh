@@ -171,7 +171,7 @@ do
           for file in *prepared
           do 
               echo "Parsing $file"
-              sh parse_ge.sh $file 2> $PARSERLOG
+              sh parse_ge.sh $file > $PARSERLOG 2>&1
               mv parsed_ge.conll $PARSED/$lang/$file.conll
           done
           ;;
@@ -180,7 +180,7 @@ do
           for file in *prepared
           do 
               echo "Parsing $file"
-              sh parse_fr.sh $file   2> $PARSERLOG
+              sh parse_fr.sh $file  > $PARSERLOG 2>&1
               mv parsed_fr.conll $PARSED/$lang/$file.conll
           done
           ;;
