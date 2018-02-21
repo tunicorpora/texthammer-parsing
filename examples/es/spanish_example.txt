@@ -1,0 +1,4 @@
+<textdef code="wi_test" author="Wikipedia" title="Wikipedia article" yearorig="2018" publisher="Wikimedia commons" lang="es"/>
+La sierra de brazo radial es una máquina de corte que consiste en una sierra circular montada en un brazo deslizante horizontal. Inventada en 1923, la sierra de brazo radial fue la principal herramienta usada para cortar largas piezas de existencias a longitud hasta la llegada de la sierra de inglete en la década de 1970.
+
+Además de hacer cortes a medida, la sierra de brazo radial puede ser configurada como una sierra especial para cortar ranuras, juntas de rebaje y juntas a media madera. Además, algunas sierras de brazo radial se pueden girar paralelamente a la defensa principal para obtener un corte longitudinal (según la veta de la madera).
