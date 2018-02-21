@@ -69,13 +69,15 @@ class Document:
         except Exception as e:
             self.errors.append("Problem in collecting the metadata attributes from the textdef tags: {}".format(e))
 
-    def ReportProblems(self):
+    def ReportProblems(self, thiserror=None):
         """
         Print all the error or messages related to this file.
         - returns true or false depending on whether serious problems were found
         """
         if not self.errors:
-            logging.info("Great! No critical problems found with the file {}".format(self.filename))
+            if thiserror:
+                logging.error(thiserror)
+            #logging.info("Great! No critical problems found with the file {}".format(self.filename))
         else:
             for error in self.errors:
                 logging.error(error)
@@ -147,7 +149,7 @@ class Tmxfile(Document):
         for tu_idx, tu in enumerate(tu_tags):
             for version in self.versions:
                 tuvs = tu.xpath(version.tuvpattern)
-                segment_text = None
+                segment_text = ""
                 if tuvs:
                     tuv = tuvs[0]
                     #Check for additional metadata such as information about the current speaker
@@ -156,7 +158,6 @@ class Tmxfile(Document):
                         segment_text = tuv.text
                     else:
                         for seg in tuv.getchildren():
-                            preparedinput += FixQuotes(tuv.text)
                             if seg.text:
                                 if segment_text:
                                     segment_text += " "
@@ -275,11 +276,12 @@ def main():
             thisfile.CollectMetaDataAttributes()
             thisfile.InitializeVersions()
             thisfile.GetVersionContents()
+            print(thisfile.versions)
             if not thisfile.ReportProblems():
                 thisfile.WritePreparedFiles()
                 output[thisfile.pair_id] = [version.metadata for version in thisfile.versions]
-        except:
-            thisfile.ReportProblems()
+        except Exception as e:
+            thisfile.ReportProblems(e)
     if output:
         with open("parsedmetadata.json","w") as f:
             json.dump(output, f, ensure_ascii=False, indent=4)

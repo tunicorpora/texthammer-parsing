@@ -99,8 +99,9 @@ python3 tmxtoparserinput.py $TMXFOLDER $PARSED
 
 if [ -e "$METADATACSV" ]
 then
-    echo "Produced $METADATACSV with the following information: "
-    cat $METADATACSV
+    #echo "Produced $METADATACSV with the following information: "
+    echo "Produced $METADATACSV. Here's a sample:"
+    head($METADATACSV)
     echo "\n"
 else
     echo "ATTENTION! Preparing  the tmx files failed. Aborting the script! Please look at **tmxtoparserinput.log** "

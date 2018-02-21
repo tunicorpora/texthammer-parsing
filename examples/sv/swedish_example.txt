@@ -1,2 +1,0 @@
-<textdef code="wi_test" author="Wikipedia" title="Wikipedia article" yearorig="2018" publisher="Wikimedia commons" lang="sv"/>
-Stockholm var ett fartyg levererat 1850 från Motala varv till Ångbåts Bolaget Stockholm-Göteborg. Skrovet var av järn. Fartyget var utrustat med en tvåcylindrig vinkelångmaskin, maskin nr 71, om 60 hästkrafter tillverkad vid Motala Verkstad i Motala. Fartyget hade plats för 25 passagerare i hytter och 24 i salongen.

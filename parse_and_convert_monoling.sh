@@ -42,7 +42,7 @@ cleanprepared (){
   if ls $PREPARED/*prepared 1> /dev/null 2>&1; then
       cp $PREPARED/*prepared .
   else
-      echo "ATTENTION! The preparing failed for $1. Aborting the script!"
+      echo "ATTENTION! The preparing failed. Aborting the script!"
       exit
   fi
 }
@@ -84,7 +84,7 @@ fi
 
 #2.  Move  the prepared files:
 
-if [ -f $INPUTFOLDER/*prepared ]; then
+if ls $INPUTFOLDER/*prepared 1> /dev/null 2>&1; then
   mv $INPUTFOLDER/*.prepared $PREPARED/
 else
   echo "ATTENTION! Preparing  the txt files failed. Aborting the script! Please look at **txttoparserinput.log** "
