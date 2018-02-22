@@ -138,7 +138,6 @@ class Tmxfile(Document):
                     #Add even the values not specified (as empty)
                     self.versions[-1].metadata[attr] = ""
 
-
     def GetVersionContents(self):
         """
         Reads the contents of a tmx file and extracts each version of the text.
@@ -151,6 +150,8 @@ class Tmxfile(Document):
                 tuvs = tu.xpath(version.tuvpattern)
                 segment_text = ""
                 if tuvs:
+                    #Just for debugging
+                    version.number_of_segments += 1
                     tuv = tuvs[0]
                     #Check for additional metadata such as information about the current speaker
                     version.segment_meta.append({"speaker":tuv.get("speaker")})
@@ -174,7 +175,6 @@ class Tmxfile(Document):
                     logging.warning("Segment number {} DOESN'T EXIST for {} (language {})".format(tu_idx +1, version.code,version.lang))
                 version.segments.append(segment_text.strip())
 
-
     def WritePreparedFiles(self):
         """
         Write all the prepared files to the specified destinations.
@@ -182,7 +182,7 @@ class Tmxfile(Document):
         """
         segment_meta = {}
         for version in self.versions:
-            logging.info("Writing {}".format(version.prepared_filename))
+            logging.info("Writing {}. Number of segments: {}".format(version.prepared_filename, version.number_of_segments))
             with open(version.prepared_filename,"w") as f:
                 f.write(version.segmentsplitpattern.join(version.segments))
             segment_meta[version.lang] = version.segment_meta
@@ -213,6 +213,8 @@ class Version:
         self.mere_file = sourcefile[k+1:]
         self.parsed_filename  = '{}/{}/{}_{}_{}.prepared.conll'.format(sys.argv[2], self.lang, self.mere_file, self.code, self.lang)
         self.metadata["filename"] = self.parsed_filename
+        #Just as a useful information: collect the number of segments in each version
+        self.number_of_segments = 0
 
 class Translation(Version):
     """
@@ -276,7 +278,6 @@ def main():
             thisfile.CollectMetaDataAttributes()
             thisfile.InitializeVersions()
             thisfile.GetVersionContents()
-            print(thisfile.versions)
             if not thisfile.ReportProblems():
                 thisfile.WritePreparedFiles()
                 output[thisfile.pair_id] = [version.metadata for version in thisfile.versions]
