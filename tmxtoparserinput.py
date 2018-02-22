@@ -11,6 +11,8 @@ import FilterLongSentences
 from conll_to_xml import Logger, logging
 import json
 from python_tools import Prettify, FixQuotes
+import traceback
+
 
 class Document:
     """
@@ -77,6 +79,9 @@ class Document:
         if not self.errors:
             if thiserror:
                 logging.error(thiserror)
+                logging.error("Check the file detailed_error_log.txt for more details on why and where the python script failed.")
+                with open("detailed_error_log.txt","w") as f:
+                    f.write(traceback.format_exc())
             #logging.info("Great! No critical problems found with the file {}".format(self.filename))
         else:
             for error in self.errors:
@@ -151,29 +156,22 @@ class Tmxfile(Document):
                 segment_text = ""
                 if tuvs:
                     #Just for debugging
-                    version.number_of_segments += 1
                     tuv = tuvs[0]
                     #Check for additional metadata such as information about the current speaker
                     version.segment_meta.append({"speaker":tuv.get("speaker")})
                     if not tuv.getchildren():
                         segment_text = tuv.text
                     else:
+                        #If this text uses seg tags
                         for seg in tuv.getchildren():
                             if seg.text:
                                 if segment_text:
                                     segment_text += " "
                                 segment_text += seg.text
-                    if segment_text:
-                        segment_text = FixQuotes(segment_text)
-                        #Note: the sentences are filtered in case of two long sentences to parse
-                        #see longsentencelog.txt and FilterLongSentences.py
-                        segment_text = FilterLongSentences.FilterByCharCount(segment_text, version.code)
+                if segment_text:
+                    version.AddRealSegment(segment_text)
                 else:
-                    #If this version (language or retranslation) doesn't have this particular segment at all
-                    segment_text = "-"
-                    version.segment_meta.append({"speaker":""})
-                    logging.warning("Segment number {} DOESN'T EXIST for {} (language {})".format(tu_idx +1, version.code,version.lang))
-                version.segments.append(segment_text.strip())
+                    version.AddEmptySegment(tu_idx +1)
 
     def WritePreparedFiles(self):
         """
@@ -215,6 +213,30 @@ class Version:
         self.metadata["filename"] = self.parsed_filename
         #Just as a useful information: collect the number of segments in each version
         self.number_of_segments = 0
+
+    def AddRealSegment(self, segment_text):
+        """
+        Adds the segment to the list of segments for this version.
+        versioi
+        """
+        segment_text = FixQuotes(segment_text.strip())
+        self.segments.append(segment_text)
+        #Note: the sentences are filtered in case of two long sentences to parse
+        #see longsentencelog.txt and FilterLongSentences.py
+        segment_text = FilterLongSentences.FilterByCharCount(segment_text, self.code)
+        self.number_of_segments += 1
+
+    def AddEmptySegment(self, seg_no):
+        """
+        Adds an empty segment in case there really was nothing present in a segment.
+        (wither nothin inside seg-tags or nothing inside tuv-tags)
+        An empty segment is marked by emptysegmentmarker
+        - seg_no: number of the segment where the error occured
+        """
+        emptysegmentmarker = "-"
+        self.segment_meta.append({"speaker":""})
+        self.segments.append(emptysegmentmarker)
+        logging.warning("Segment number {} DOESN'T EXIST for {} (language {})".format(seg_no, self.code, self.lang))
 
 class Translation(Version):
     """

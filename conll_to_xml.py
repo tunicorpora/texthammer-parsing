@@ -18,7 +18,6 @@ class ParserInfo():
     """
     parsername = "unspecified"
 
-
 class TextPair():
     """A collection of the source text and its translations.
     Pair is actually somewhat misleading: these objects consist of a source
@@ -82,10 +81,13 @@ class TextPair():
             #Process the target texts
             for tl_text in self.tl_texts:
                 #Get the correct align segment by number
+                segs = tl_text.alignsegments
+                seg1 = tl_text.alignsegments[0]
+                seg2 = tl_text.alignsegments[-1]
                 try:
                     segment = tl_text.alignsegments[idx]
                 except IndexError:
-                    #import ipdb;ipdb.set_trace()
+                    import ipdb;ipdb.set_trace()
                     logging.info("Something wrong! The segments don't match!\n\nId of the text: {}\n\n Last segment to be processed: {}".format(self.sl_text.code,tl_text.alignsegments[-1]))
                     return False
                 self.current_seg = etree.SubElement(self.current_align, "seg", lang = tl_text.language, code = tl_text.code)

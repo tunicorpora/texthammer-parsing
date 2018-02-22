@@ -56,6 +56,7 @@ mkdir -p $PREPARED
 #0. Remove old files
 
 rm -f $PARSED/*
+rm -f auxiliary_files/*
 rm -f $PREPARED/*
 rm -f $METADATACSV
 rm -f longsentencelog.txt
@@ -72,7 +73,7 @@ python3 txttoparserinput.py $INPUTFOLDER $PARSED
 
 if [ -e "$METADATACSV" ]
 then
-    echo "Produced $METADATACSV with the following information: "
+    echo "Produced $METADATACSV." # with the following information: "
     cat $METADATACSV
     echo "\n"
 else
@@ -92,11 +93,15 @@ else
   exit
 fi
 
-echo "Moved the prepared files to $PREPARED"
+#echo "Moved the prepared files to $PREPARED"
 
-echo "****************************************************************"
-echo "*\n*\n* Now starting the actual parsing. This WILL take time. \n* To make tracking errors easier, the output of the parsers will not be shown here, but rather redirected to $PARSERLOG \n* To see the progress of the parsers in real time, launch another terminal and type this command: tail -f $PARSERLOG\n*\n*"
-echo "****************************************************************"
+echo "************************************************************************"
+echo "* Now starting the actual parsing. This WILL take time.                *"
+echo "* To make tracking errors easier, the output of the parsers            *"
+echo "* will not be shown here, but rather redirected to $PARSERLOG  *"
+echo "* To see the progress of the parsers in real time, launch another      *"
+echo "* terminal and type this command: tail -f $PARSERLOG           *"
+echo "************************************************************************"
 
 date
 
@@ -215,3 +220,7 @@ if [ -f skippedfiles.txt ]; then
     cat skippedfiles.txt
     cat "\n"
 fi
+
+
+#Clean up:
+rm -f $INPUTFOLDER*.prepared

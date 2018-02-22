@@ -8,3 +8,8 @@ tmxtoparserinput.log
 tex.tmx
 text.tmx
 auxiliary_files/*json
+detailed_error_log.txt
+txttoparserinput.log
+paredmetadata.json
+parsedmetadata.json
+test

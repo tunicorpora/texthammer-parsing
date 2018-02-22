@@ -72,10 +72,10 @@ do
     rm -f longsentencelog.txt
 done
 
+rm -f auxiliary_files/*
 rm -f xmloutput/*.xml 
 rm -f skippedfiles.txt
 rm -f $METADATACSV
-rm -f $TMXFOLDER*.prepared
 rm -f $TMXFOLDER*.prepared
 
 
@@ -100,8 +100,8 @@ python3 tmxtoparserinput.py $TMXFOLDER $PARSED
 if [ -e "$METADATACSV" ]
 then
     #echo "Produced $METADATACSV with the following information: "
-    echo "Produced $METADATACSV. Here's a sample:"
-    head($METADATACSV)
+    echo "Produced $METADATACSV." # Here's a sample:"
+    #head $METADATACSV
     echo "\n"
 else
     echo "ATTENTION! Preparing  the tmx files failed. Aborting the script! Please look at **tmxtoparserinput.log** "
@@ -115,13 +115,17 @@ fi
 for lang in "$@"
 do
     mv $TMXFOLDER/*_$lang.prepared $PREPARED/$lang/
-    echo "Moved the prepared files to $PREPARED/$lang/"
+    #echo "Moved the prepared files to $PREPARED/$lang/"
 done
 
 
-echo "****************************************************************"
-echo "*\n*\n* Now starting the actual parsing. This WILL take time. \n* To make tracking errors easier, the output of the parsers will not be shown here, but rather redirected to $PARSERLOG \n* To see the progress of the parsers in real time, launch another terminal and type this command: tail -f $PARSERLOG\n*\n*"
-echo "****************************************************************"
+echo "************************************************************************"
+echo "* Now starting the actual parsing. This WILL take time.                *"
+echo "* To make tracking errors easier, the output of the parsers            *"
+echo "* will not be shown here, but rather redirected to $PARSERLOG  *"
+echo "* To see the progress of the parsers in real time, launch another      *"
+echo "* terminal and type this command: tail -f $PARSERLOG           *"
+echo "************************************************************************"
 
 for lang in "$@"
 do
@@ -252,4 +256,9 @@ if [ -f skippedfiles.txt ]; then
     cat skippedfiles.txt
     cat "\n"
 fi
+
+
+#Clean up:
+
+rm -f $TMXFOLDER*.prepared
 
