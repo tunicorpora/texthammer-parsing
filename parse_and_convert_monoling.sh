@@ -74,7 +74,7 @@ python3 txttoparserinput.py $INPUTFOLDER $PARSED
 if [ -e "$METADATACSV" ]
 then
     echo "Produced $METADATACSV." # with the following information: "
-    cat $METADATACSV
+    #cat $METADATACSV
     echo "\n"
 else
     echo "ATTENTION! Preparing  the txt files failed. Aborting the script! Please look at **tmxtoparserinput.log** "

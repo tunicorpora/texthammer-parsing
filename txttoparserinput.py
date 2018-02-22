@@ -81,7 +81,7 @@ class Txtfile(Document):
         empty_lines = 0
         unwrapped_lines = [""]
         for line in self.lines:
-            if line:
+            if line.strip():
                 if line.strip()[-1] not in terminating_punctuation_marks:
                     #Check if this is potentially a header:
                     words = re.split(r"\s+", line)
@@ -106,16 +106,19 @@ class Txtfile(Document):
                 """
                 A NOTE ABOUT PARAGRAPHS in this file:
                 
-                It seems like this text ({}) 
-                is hard-wrapped i.e.  paragraph breaks are marked by empty lines.
-                The parsing script, however, always assumes that a paragraph is
-                *soft-wrapped* i.e. all the sentences are on the same line and the
-                paragraphs are separated from each other by a single line break.
-                To ensure correct parsing, you should probably check the file.
+                It seems like this text ({}) is hard-wrapped i.e.  paragraph
+                breaks are marked by empty lines or not marked at all.  This
+                conclusion is based on the fact that  **the text has suspiciously
+                many ({} %)** lines that are not terminated by punctuation marks.
+                The parsing script always assumes that a paragraph is
+                *soft-wrapped* i.e. all the sentences are on the same line and
+                the paragraphs are separated from each other by a single line
+                break.  To ensure correct parsing, you should probably check
+                the file.
 
                 This script is now going to automatically convert the file into
                 a soft-wrapped version.
-                """.format(self.filename))
+                """.format(self.filename,round(noterm_percentage,2)))
             self.lines = unwrapped_lines
 
 def main():
@@ -136,7 +139,7 @@ def main():
                 #Note: making this a list in order to be compatible with tmxs
                 output[thisfile.pair_id] = [thisfile.metadata]
         except Exception as e:
-            thisfile.ReportProblems()
+            thisfile.ReportProblems(e)
 
     if output:
         with open("parsedmetadata.json","w") as f:
