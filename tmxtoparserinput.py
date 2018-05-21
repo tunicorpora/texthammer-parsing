@@ -221,7 +221,7 @@ class Version:
         """
         segment_text = FixQuotes(segment_text.strip())
         self.segments.append(segment_text)
-        #Note: the sentences are filtered in case of two long sentences to parse
+        #Note: the sentences are filtered in order to detect sentences too long to parse
         #see longsentencelog.txt and FilterLongSentences.py
         segment_text = FilterLongSentences.FilterByCharCount(segment_text, self.code)
         self.number_of_segments += 1

@@ -59,16 +59,25 @@ class Paragraph():
             print("Checked the text. Probably no reason to worry: it is split into sentences with reasonable lengths.")
         self.text = newtext
 
-def FilterByCharCount(rawtext, filename):
+def FilterByCharCount(rawtext, filename, predefined_paragraphs=False, split_pattern="\n\n"):
+    """
+
+    - predefined_paragraphs: if paragraphs already defined
+    - the pattern by which the p's have been marked
+
+    """
 
     Paragraph.filename = filename
 
-    # Split the text into paragraphs
-    paragraphs = re.split(r"\n{2,}", rawtext)
+    if predefined_paragraphs:
+        paragraphs = rawtext.split(split_pattern)
+    else:
+        # Split the text into paragraphs
+        paragraphs = re.split(r"\n{2,}", rawtext)
 
     processed = ""
     for p in paragraphs:
         p_object = Paragraph(p)
-        processed += "\n\n" + p_object.text
+        processed += split_pattern + p_object.text
 
     return processed

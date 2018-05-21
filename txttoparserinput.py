@@ -121,6 +121,14 @@ class Txtfile(Document):
                 """.format(self.filename,round(noterm_percentage,2)))
             self.lines = unwrapped_lines
 
+    def FilterSentencesAndParagraphs(self):
+        """
+        Run filters in order to strip or sentences that are too long to parse
+        """ 
+        #Note: the sentences are filtered in order to detect sentences too long to parse
+        #see longsentencelog.txt and FilterLongSentences.py
+        self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True, Txtfile.paragraphsplitpattern)
+
 def main():
     msg = 'Usage: {} <path to source txt or folder containing multiple txts> <folder to save the parsed files>'.format(sys.argv[0])
     files = FireScript(msg, "txttoparserinput.log","txt")
@@ -134,6 +142,7 @@ def main():
             thisfile.CheckIfHardWrap()
             thisfile.CollectMetaDataAttributes()
             thisfile.MarkParagraphs()
+            thisfile.FilterSentencesAndParagraphs()
             if not thisfile.ReportProblems():
                 thisfile.WritePreparedFiles()
                 #Note: making this a list in order to be compatible with tmxs
