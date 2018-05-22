@@ -101,9 +101,12 @@ echo "* To make tracking errors easier, the output of the parsers            *"
 echo "* will not be shown here, but rather redirected to $PARSERLOG  *"
 echo "* To see the progress of the parsers in real time, launch another      *"
 echo "* terminal and type this command: tail -f $PARSERLOG           *"
+echo "* Also, check the file /tmp/parsed_files.log                           *"
 echo "************************************************************************"
 
 date
+
+date > /tmp/parsed_files.log
 
 case "$1" in
 
@@ -111,6 +114,7 @@ case "$1" in
        cleanprepared
        for file in *prepared
        do 
+           echo $file >> /tmp/parsed_files.log
            cat $file | ./parser_wrapper.sh > $file.conll 2> $PARSERLOG
            mv  $file.conll  $PARSED/
        done
@@ -120,6 +124,7 @@ case "$1" in
        cleanprepared
        for file in *prepared
        do 
+           echo $file >> /tmp/parsed_files.log
            sh russian-malt.sh $file 2> $PARSERLOG
            cp $RUPARSEDNAME $PARSED/$file.conll
        done
@@ -138,6 +143,7 @@ case "$1" in
        cleanprepared
        for file in *prepared
        do 
+           echo $file >> /tmp/parsed_files.log
            sh parse_en.sh $file  > $PARSERLOG 2>&1
            mv prs-eng-out $PARSED/$file.conll
        done
@@ -147,6 +153,7 @@ case "$1" in
       cleanprepared
       for file in *prepared
       do 
+          echo $file >> /tmp/parsed_files.log
           sh parse_ge.sh $file  > $PARSERLOG 2>&1
           mv parsed_ge.conll $PARSED/$file.conll
       done
@@ -155,6 +162,7 @@ case "$1" in
       cleanprepared
       for file in *prepared
       do 
+          echo $file >> /tmp/parsed_files.log
           sh parse_fr.sh $file  > $PARSERLOG 2>&1
           mv parsed_fr.conll $PARSED/$file.conll
       done
@@ -163,6 +171,7 @@ case "$1" in
       cleanprepared
       for file in *prepared
       do 
+          echo $file >> /tmp/parsed_files.log
           #note: the swedish tokenizer needs the source file as txt
           cp $file $file.txt
           sh parse.sh $file.txt 2> $PARSERLOG
@@ -178,6 +187,7 @@ case "$1" in
       echo "Now starting to parse the SPANISH files"
       for file in *prepared
       do 
+          echo $file >> /tmp/parsed_files.log
           echo "Parsing $file"
           sh parse_sp.sh $file > $PARSERLOG 2>&1
           mv parsed_es.conll $PARSED/$file.conll
