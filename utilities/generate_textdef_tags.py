@@ -11,6 +11,7 @@ Usage (if execution permission given) : ./generate_textdef_tags.py <path_to_fold
 import sys
 import glob
 import uuid
+import os.path
 
 def AddTextDef(path):
     """
@@ -36,7 +37,7 @@ def AddTextDef(path):
 
 if __name__ == "__main__":
 
-    for thisfile in glob.glob(sys.argv[1] + "/*.txt"):
+    for thisfile in glob.glob(os.path.join(sys.argv[1], "*.txt")):
         try:
             AddTextDef(thisfile)
         except Exception as e:

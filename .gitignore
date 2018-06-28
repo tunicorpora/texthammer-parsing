@@ -13,3 +13,5 @@ txttoparserinput.log
 paredmetadata.json
 parsedmetadata.json
 test
+*.swp
+skippedfiles.txt
