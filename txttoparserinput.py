@@ -22,6 +22,8 @@ class Txtfile(Document):
         self.filetype = "txt"
         super().__init__(sourcefile)
         self.lines = self.content.splitlines()
+        # If the script is used just for fixing possibly too long txt files, use the following attribute
+        self.justfixing = False
 
     def ReadTextdefs(self):
         """
@@ -41,24 +43,34 @@ class Txtfile(Document):
         try:
             del self.lines[metalineidx]
         except TypeError:
-            self.errors.append("""You have not provided metadata for
-                the texts. The metadata should be provided as <textdef> tags
-                including, minimally, the attributes code and lang""")
+            ignore = False
+            if len(sys.argv) > 3:
+                if sys.argv[3] == "justfix":
+                    ignore = True
+                    self.justfixing = True
+            if not ignore:
+                self.errors.append("""You have not provided metadata for
+                    the texts. The metadata should be provided as <textdef> tags
+                    including, minimally, the attributes code and lang""")
 
     def MarkParagraphs(self):
         """
         Mark the place of paragraphs by using a predefined pattern
         """ 
-        ##NOTE: completely removing empty lines from the input (see the list comprehension inside join)
-        self.output = Txtfile.paragraphsplitpattern.join([thisline for thisline in self.lines if thisline])
+        if not self.justfixing:
+            ##NOTE: completely removing empty lines from the input (see the list comprehension inside join)
+            self.output = Txtfile.paragraphsplitpattern.join([thisline for thisline in self.lines if thisline])
+        else:
+            self.output = "\n".join([thisline for thisline in self.lines if thisline])
 
     def WritePreparedFiles(self):
         """
         Write all the prepared files to the specified destinations.
         Also complete the metadata for the file.
         """
-        self.metadata = self.metadata_for_versions[0]
-        self.metadata["filename"] = '{}/{}.prepared.conll'.format(sys.argv[2],self.mere_file)
+        if not self.justfixing:
+            self.metadata = self.metadata_for_versions[0]
+            self.metadata["filename"] = '{}/{}.prepared.conll'.format(sys.argv[2],self.mere_file)
         self.output = FixQuotes(self.output)
         self.prepared_filename = '{}.prepared'.format(self.filename)
         logging.info("Writing {}".format(self.prepared_filename))
@@ -125,9 +137,12 @@ class Txtfile(Document):
         """
         Run filters in order to strip or sentences that are too long to parse
         """ 
-        #Note: the sentences are filtered in order to detect sentences too long to parse
-        #see longsentencelog.txt and FilterLongSentences.py
-        self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True, Txtfile.paragraphsplitpattern)
+        if not self.justfixing:
+            #Note: the sentences are filtered in order to detect sentences too long to parse
+            #see longsentencelog.txt and FilterLongSentences.py
+            self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True, Txtfile.paragraphsplitpattern)
+        else:
+            self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True,"\n")
 
 def main():
     msg = 'Usage: {} <path to source txt or folder containing multiple txts> <folder to save the parsed files>'.format(sys.argv[0])
@@ -146,7 +161,8 @@ def main():
             if not thisfile.ReportProblems():
                 thisfile.WritePreparedFiles()
                 #Note: making this a list in order to be compatible with tmxs
-                output[thisfile.pair_id] = [thisfile.metadata]
+                if not thisfile.justfixing:
+                    output[thisfile.pair_id] = [thisfile.metadata]
         except Exception as e:
             thisfile.ReportProblems(e)
 
@@ -154,7 +170,8 @@ def main():
         with open("parsedmetadata.json","w") as f:
             json.dump(output, f, ensure_ascii=False, indent=4)
     else:
-        logging.error("No output produced.")
+        if not thisfile.justfixing:
+            logging.error("No output produced.")
 
 if __name__ == "__main__":
     main()
