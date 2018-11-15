@@ -10,15 +10,15 @@ Information about the parsers installed
 ========================================
 
 
-name|language|developer|url|reference|additional information
-----------|------|-----------------|----|----|
-Finnish dependency parser by the  Turku NLP group (TDT parser)|fi|Filip Ginter et al |http://turkunlp.github.io/Finnish-dep-parser/|[1]|we are using the UD version, cf. [8]. 
-Dependency parser for Russian by  Sharoff and Nivre |ru|Serge Sharoff, Joakim Nivre|http://corpus.leeds.ac.uk/mocky/|[2]|
-SweMalt:  MaltParser with a pre-trained model for Swedish|sv|Joakim Nivre et al?|http://www.maltparser.org/mco/swedish_parser/swemalt.html|[3] +  [4]|The parser was trained on the Swedish Treebank (Nivre et al., 2008) and the SUC PoS tagset with morphological features
-Mate parser with a pre-trained model for English |en|Bernd Bohnet et al |https://code.google.com/archive/p/mate-tools/|[5] + [6]|
-Mate parser with a pre-trained model for German |de|Bernd Bohnet et al|https://code.google.com/archive/p/mate-tools/|[5] + [6]|
-Mate parser with a pre-trained model for French |fr|Bernd Bohnet et al|https://code.google.com/archive/p/mate-tools/|[5] + [6] + [7]|
-Mate parser with a pre-trained model for Spanish|es|Bernd Bohnet et al|https://code.google.com/archive/p/mate-tools/|[5] + [6] + [9]|the Spanish parsing pipeline uses Stanford CoreNLP [https://stanfordnlp.github.io/CoreNLP/](https://stanfordnlp.github.io/CoreNLP/) for tokenization, cf. citation no [9]. 
+name                                                           | language | developer                   | url                                                       | reference       | additional information
+---------------------------------------------------------------|----------|-----------------------------|-----------------------------------------------------------|-----------------|--------------------------------------------------
+Finnish dependency parser by the  Turku NLP group (TDT parser) | fi       | Filip Ginter et al          | http://turkunlp.github.io/Finnish-dep-parser/             | [1]             | we are using the UD version, cf. [8].
+Dependency parser for Russian by  Sharoff and Nivre            | ru       | Serge Sharoff, Joakim Nivre | http://corpus.leeds.ac.uk/mocky/                          | [2]             |
+SweMalt:  MaltParser with a pre-trained model for Swedish      | sv       | Joakim Nivre et al?         | http://www.maltparser.org/mco/swedish_parser/swemalt.html | [3] +  [4]      | The parser was trained on the Swedish Treebank (Nivre et al., 2008) and the SUC PoS tagset with morphological features
+Mate parser with a pre-trained model for English               | en       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6]       |
+Mate parser with a pre-trained model for German                | de       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6]       |
+Mate parser with a pre-trained model for French                | fr       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6] + [7] |
+Mate parser with a pre-trained model for Spanish               | es       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6] + [9] | the Spanish parsing pipeline uses Stanford CoreNLP [https://stanfordnlp.github.io/CoreNLP/](https://stanfordnlp.github.io/CoreNLP/) for tokenization, cf. citation no [9].
 
 
 [1] Haverinen, Katri, et al. "Building the essential resources for Finnish: the Turku Dependency Treebank." Language Resources and Evaluation 48.3 (2014): 493-531. DOI: 10.1007/s10579-013-9244-1
