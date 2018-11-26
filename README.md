@@ -40,6 +40,35 @@ Mate parser with a pre-trained model for Spanish               | es       | Bern
 [9] Manning, Christopher D., Mihai Surdeanu, John Bauer, Jenny Finkel, Steven J. Bethard, and David McClosky. 2014. The Stanford CoreNLP Natural Language Processing Toolkit In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics: System Demonstrations, pp. 55-60
 
 
+Instructions on installing the parsers
+======================================
+
+...or rather, some remarks concerning the installation process.
+
+
+At the moment, the Russian parser is getting a bit old, and the pre-trained
+models provided by Serge Sharoff are either for matl 1.5 or 1.7. In 
+Ubuntu 18.04 the default java version is 1.11 and at least Malt 1.5
+doesn't work with that. Luckily, version 1.8 is okay, and it should
+also be available on an Ubuntu installation. This can be confirmed
+by:
+
+```
+update-java-alternatives --list
+```
+
+which should output:
+
+
+    java-1.11.0-openjdk-amd64      1101       /usr/lib/jvm/java-1.11.0-openjdk-amd64
+    java-1.8.0-openjdk-amd64       1081       /usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+the java version used by default can be changed with the same command, running:
+
+```
+sudo update-java-alternatives --set /usr/lib/jvm/java-1.8.0-openjdk-amd64
+```
+
 Instructions for parsing
 ========================
 
