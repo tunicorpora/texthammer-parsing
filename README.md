@@ -83,3 +83,8 @@ Multilingual tmx files
 3. run: `sh parse_and_convert.sh ` + abbreviations for all the languages included, e.g. `sh parse_and_convert.sh en fi ru`
 
 
+
+More
+====
+
+Check out the docs folder for more information
