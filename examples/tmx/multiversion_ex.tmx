@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tmx version="1.4">
+<body>
+<textdef author="Пушкин А.С." code="Pu_KD" lang="ru" permission="" publisher="" title="Капитанская дочка" translator="" yearorig="1836" yeartr=""/>
+<textdef author="Пушкин А.С." code="Pu_SS_KD" lang="fi" permission="" publisher="Oma" title="Kapteenin tytär" translator="Samuli Suomalainen" yearorig="1836" yeartr="1876"/>
+<textdef author="Пушкин А.С." code="Pu_Must_KD" lang="fi" permission="" publisher="Oma" title="Kapteenin tytär" translator="Juuso Mustonen" yearorig="1836" yeartr="1946"/>
+<textdef author="Пушкин А.С." code="Pu_Hann_KD" lang="fi" permission="" publisher="WSOY" title="Kapteenin tytär" translator="Siiri Hannikkainen" yearorig="1836" yeartr="1935"/>
+<textdef author="Пушкин А.С." code="Pu_Hollo_KD" lang="fi" permission="yes" publisher="WSOY" title="Kapteenintytär" translator="Hollo J." yearorig="1836" yeartr="1962"/>
+    
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> КАПИТАНСКАЯ ДОЧКА</seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> KAPTEENIN TYTÄR</seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Kapteenin tytär</seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Kapteenin tytär</seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> KAPTEENINTYTÄR</seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Береги честь смолоду. </seg><seg> Пословица. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> xxx</seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Vaali mainettasi nuoruudesta lähtien. </seg><seg> Sananlasku</seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Säilytä maineesi pienestä pitäen</seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Varjele kunniasi nuoruudesta alkaen. </seg><seg> SANANPARSI</seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Глава I СЕРЖАНТ ГВАРДИИ</seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> ENSIMMÄINEN LUKU. </seg><seg> Kaartin kersantti. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Ensimmäinen luku. </seg><seg> KAARTIN KERSANTTI. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Ensimmäinen luku KAARTIN KERSANTTI</seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> ENSIMMÄINEN LUKU KAARTINKERSANTTI</seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> - Был бы гвардии он завтра ж капитан. </seg><seg>/ - Того не надобно; пусть в армии послужит. </seg><seg>/ - Изрядно сказано! </seg><seg> пускай его потужит/........ </seg><seg>/ Да кто его отец? </seg><seg> Княжнин. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Kapteeniksi kaartin pääsis heti hän. </seg><seg>/ - Ei niin! </seg><seg> Mut ensin armeijassa palvelkohon. </seg><seg>/ Niin juuri, niin! </seg><seg> Ja siellä kovaa kokekohon/ - - - - - - - -/ Mut mikä hänen isäns on? </seg><seg> Knjashnin. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Kaartissa hän kapteenina olisi. </seg><seg>/ - Ei ollenkaan: mies armeijaan palvelkoon... </seg><seg>/ - Hyvin sanottu! </seg><seg> kuria hän kokekoon... </seg><seg>/ Vaan ken isä hällä on? </seg><seg> Knjaznin. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Pääsisi kaartiin heti kapteeniksi. </seg><seg>/  "  Ei tule mitään! </seg><seg> Pysyköön vain armeijassa. </seg><seg>/ On kuri ennen muuta tärkein maailmassa.  "  </seg><seg>/ Niin isä sanoisiko yksikään? </seg><seg> KNJAŽNIN</seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg>  "  Olisi jo huomenna kaartinkapteenina. </seg><seg>/  "  Ei käy päinsä; palvelkoon armeijassa.  "  </seg><seg>/ Oikein! </seg><seg> Viel' olkoon harjaantumassa... </seg><seg>/ - -/ Entä kuka on isä? </seg><seg> KNJAŽNIN  "  </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Отец мой Андрей Петрович Гринев в молодости своей служил при графе Минихе и вышел в отставку премьер-майором в 17.. </seg><seg> году. </seg><seg> С тех пор жил он в своей Симбирской деревне, где и женился на девице Авдотье Васильевне Ю. </seg><seg> дочери бедного тамошнего дворянина. </seg><seg> Нас было девять человек детей. </seg><seg> Все мои братья и сестры умерли во младенчестве. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Isäni, Andrei Petrovitsh Grinev, oli nuoruudessaan palvellut sotaväessä kreivi Minnichin aikana ja otti eron pää-majorina vuonna 17-. </seg><seg> Siitä pitäin asui hän kylässään Simbirskin kupernissa, jossa nai erään köyhän aatelisneidon Avdotja Vasiljevna: Jn. </seg><seg> Meitä oli yhdeksän lasta. </seg><seg> Kaikki veljeni ja sisareni kuolivat pieninä. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Isäni Andrej Petrovitš Grinev palveli nuoruudessaan kreivi Münnichin joukoissa ja erosi armeijasta ylimajurina vuonna 17.... </seg><seg> Siitä lähtien hän asui kylässään Simbirskin kuvernementissa ja meni naimisiin Avdotja Vasiljevna: 1n, erään varattoman aatelismiehen tyttären kanssa. </seg><seg> Meitä oli yhdeksän lasta. </seg><seg> Kaikki veljeni ja sisareni kuolivat lapsina. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Isäni Andrei Grinev oli nuoruudessaan palvellut kreivi Münnichin armeijassa. </seg><seg> Hänellä oli ylimajurin arvo, kun hän otti eron sotapalveluksesta v. </seg><seg> 17.. </seg><seg> Siitä lähtien hän asui kylässään Simbirskin kuvernementissa, missä oli mennyt naimisiinkin erään sikäläisen varattoman aatelismiehen tyttären Avdotja Vasiljevna: Jn kanssa. </seg><seg> Meitä oli yhdeksän lasta. </seg><seg> Kaikki sisareni ja veljeni kuolivat pieninä. </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Isäni, Andrei Petrovitš Grinev, oli nuorella iällään palvellut kreivi Muennichin alaisena ja oli eronnut palveluksesta ylimajurina vuonna 17.. </seg><seg> Siitä lähtien hän asui tilallaan Simbirskin kuvernementissa, missä hän oli mennyt naimisiinkin sikäläisen köyhän aatelismiehen tyttären Avdotja Vasiljevna Ju...: </seg><seg> n kanssa. </seg><seg> Meitä lapsia oli yhdeksän. </seg><seg> Kaikki veljeni ja sisareni kuolivat varhaisiällään. </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Матушка была еще мною брюхата, как уже я был записан в Семеновский полк сержантом, по милости майора гвардии князя В. </seg><seg> близкого нашего родственника. </seg><seg> Если бы паче всякого чаяния матушка родила дочь, то батюшка объявил бы куда следовало о смерти неявившегося сержанта, и дело тем бы и кончилось. </seg><seg> Я считался в отпуску до окончания наук. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Minä olin kirjoitettu kersantiksi Semenovskin kaartiin, ja siitä tuli meidän kiittää majoria samassa kaartissa, ruhtinas: Bta, likeistä sukulaistamme. </seg><seg> Minua luettiin virkavapauden saaneiden joukkoon kotikasvatukseni loppuun asti. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Minut oli merkitty kersantiksi Semjonovin rykmenttiin ( Vuoden 1762 asetuksen muukaan täytyi nuorten miesten palvella asevelvollisina armeijassa kaksitoista vuotta, minkä jälkeen heille myönnettiin upseerin arvo. </seg><seg> Tämän vuoksi aatelismiesten lapset merkittiin armeijan kirjoihin alaikäisinä. </seg><seg> He saivat astia kotonaan ja tultuaan täysikäisiksl heidät nimitettiin upseereiksi.) </seg><seg> kaartin majurin, ruhtinas: Bn suosituksesta, joka oli meidän sukulaisemme. </seg><seg> Asuin kotona virkavapaana opintojeni päättymiseen asti. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Minut oli merkitty kersanttina Semenovin rykmentin kirjoihin, ja siitä meidän oli kiittäminen kaartin majuria, ruhtinas: Btä, joka oli meidän läheinen sukulaisemme. </seg><seg> Minun katsottiin nauttivan virkavapautta siihen saakka, kunnes olen lopettanut opintoni. </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Olin vielä äitini kohdussa, kun minut merkittiin kersantiksi Semjonovin rykmenttiin - kiitos siitä lähisukulaisellemme ruhtinas B: lle. </seg><seg> Jos äitini olisi vastoin kaikkia otaksumia synnyttänyt tyttären, isäni olisi ilmoittanut asianomaiseen paikkaan että maailmaan ilmaantumaton kersantti oli kuollut, ja siinä kaikki. </seg><seg> Minun katsottiin olevan lomalla kunnes olisin päättänyt opintoni. </seg><seg> Meitä ei kasvatettu siihen aikaan niin kuin nykyisin. </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> В то время воспитывались мы не по-нонешнему. </seg><seg> С пятилетнего возраста отдан я был на руки стремянному Савельичу, за трезвое поведение пожалованному мне в дядьки. </seg><seg> Под его надзором на двенадцатом году выучился я русской грамоте и мог очень здраво судить о свойствах борзого кобеля. </seg><seg> В это время батюшка нанял для меня француза, мосье Бопре, которого выписали из Москвы вместе с годовым запасом вина и прованского масла. </seg><seg> Приезд его сильно не понравился Савельичу. </seg><seg> Слава богу, - ворчал он про себя, - кажется, дитя умыт, причесан, накормлен. </seg><seg> Куда как нужно тратить лишние деньги и нанимать мусье, как будто и своих людей не стало! </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Viisi-vuotisena annettiin minä ratsaspalvelijan Saveljitshin huostaan, joka nuhteettoman käytöksensä vuoksi oli koroitettu hoitajakseni. </seg><seg> Hänen johdollansa minä edistyin niin, että kahdentoista vuoden iässä osasin lukea ja kirjoittaa venättä ja aivan järkevästi kykenin arvostelemaan jäniskoirain ominaisuuksia. </seg><seg> Tähän aikaan palkkasi isä minulle Franskalaisen monsieur Beaupré'n, joka tilattiin taloon Moskovasta samalla kertaa kuin viinit ja ruokaöljy. </seg><seg> Franskalaisen tulo harmitti kovasti ukko Saveljitshia. </seg><seg> -  "  Hyvä Jumala!  "  mutisi hän itsekseen;  "  onhan luullakseni lapsi pesty ja kammattu ja kylläinen. </seg><seg> Mitäs varten rahoja turhaan viskataan ja palkataan munsyöriä, niinkuin ei omaa väkeä olisi yltä kyllä?  "  </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Siihen aikaan lapsia kasvatettiin toisin kuin nykyisin. </seg><seg> Viisivuotiaana minut annettiin ratsupalvelija Saveljitšin kasvatettavaksi. </seg><seg> Raittiin elämänsä ja hyvän käytöksensä vuoksi hänet määrättiin hoitajakseni. </seg><seg> Hänen huolenpitonsa alaisena minä opin yksitoistavuotiaana lukemaan venäjää ja tutustuin hyvin vinttikoiran ominaisuuksiin. </seg><seg> Siihen aikaan isäni hankki opettajakseni Moskovasta erään ranskalaisen, herra Beauprén, joka toi mukanaan vuoden viini- ja ruokaöljyvaraston. </seg><seg> Saveljitš oli kovin tyytymätön hänen tuloonsa. </seg><seg> - Luojan kiitos, murisi hän itsekseen, - onhan lapsi sentään pesty, harjattu ja ruokittu. </seg><seg> Mitä varten pitää tuhlata rahoja ja ottaa joku musjöö, ikäänkuin omasta väestä olisi puute! </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Siihen aikaan nuorukaisia kasvatettiin toisin kuin nykyään. </seg><seg> Viisivuotiaasta minut uskottiin ratsupalvelija Saveljitšin huostaan, joka hyvän käytöksensä vuoksi oli määrätty hoitajakseni. </seg><seg> Hänen huolenpitonsa alaisena minä opin yksitoistavuotiaana lukemaan venäjän kieltä ja minusta tuli melko taitava vinttikoiran ominaisuuksien tuntija. </seg><seg> Niihin aikoihin hankki isäni minun opettajakseni erään ranskalaisen herra Beauprén, joka tilattiin Moskovasta samalla kertaa kuin vuoden viini- ja ruokaöljyvarasto. </seg><seg> Hänen tulonsa ei ollut Saveljitšille ollenkaan mieleen. </seg><seg> - Eiköhän lapsi sentään liene, Luojan kiitos, pesty, harjattu ja ruokittu, murisi hän itsekseen. </seg><seg> - Mitä varten pitää turhaan hukata rahoja ja ottaa tänne mokomakin ' musjöö' ikään kuin olisi omasta väestä puute! </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Kun olin täyttänyt viisi vuotta, minut uskottiin hoivattavaksi ratsupalvelija Saveljitšille, joka hyvän käytöksensä vuoksi ja raittiina miehenä määrättiin kasvattajakseni. </seg><seg> Hänen silmälläpitonsa alaisena opin kahdennellatoista ikävuodellani lukemaan ja kirjoittamaan venäjää, ja minä osasin varsin hyvin arvostella vinttikoiran ominaisuuksia. </seg><seg> Siihen aikaan otti isäni opettajakseni ranskalaisen monsieur Beaupren, joka tilattiin Moskovasta vuotuisen viini- ja oliiviöljyvaraston ohella. </seg><seg> Hänen saapumisensa ei ensinkään miellyttänyt Saveljitšia. </seg><seg> Näyttäähän lapsi. </seg><seg> Luojan kiitos,  "  hän murisi itsekseen,  "  olevan pesty, kammattu ja ruokittu. </seg><seg> Eihän ole tarpeen tuhlata rahaa ja palkata musjöö, aivan kuin olisi puutetta omasta väestä! </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Бопре в отечестве своем был парикмахером, потом в Пруссии солдатом, потом приехал в Россию pour ôtre outchitel ( чтобы стать учителем ( франц)), не очень понимая значение этого слова. </seg><seg> Он был добрый малый, но ветрен и беспутен до крайности. </seg><seg> Главною его слабостию была страсть к прекрасному полу; нередко за свои нежности получал он толчки, от которых охал по целым суткам. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Beaupré oli isänmaassaan ollut peruukintekijänä, sitten Preussissa sotamiehenä, mutta muutti sieltä viimein Venäjälle, ruvetakseen utshitel'iksi ( opettajaksi), itsekään ymmärtämättä, mitä tuo sana oikeastaan merkitsee. </seg><seg> Hän oli hyväntahtoinen, mutta sanomattoman suuri hulivili. </seg><seg> Hänen suurin heikkoutensa oli herkkyys kauniisen sukupuoleen; usein hän hellyyksistänsä sai kolauksia, joita sitten voivotteli vuorokausin. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Beaupré oli harjoittanut kotimaassaan parturin ammattia, ollut sotilaana Preussissa ja myöhemmin matkustanut Venäjälle pour ȇtre outchitel ( outchitel - opettaja), käsittämättä lainkaan tämän sanan merkitystä. </seg><seg> Hän oli hyväntahtoinen ihminen, tuulihattu ja äärimmäisen tolkuton. </seg><seg> Kauniimpi sukupuoli oli hänen suurimpana heikkoutenaan, hellyyden osoituksistaan hän sai silloin tällöin kolhaisuja ja valitteli niiden johdosta vuorokausikaupalla. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Beaupré oli kotimaassaan harjoittanut parturin ammattia, sitten ollut Preussissa sotilaana, minkä jälkeen tuli Venäjälle pour être outchitel, ymmärtämättä kunnolleen tuon sanan merkitystä. </seg><seg> Hän oli hyväntahtoinen mies, mutta kevytmielinen ja suuri hulivili. </seg><seg> Hänen suurimpana heikkoutenaan oli kauniimman sukupuolen ihailu; tuontuostakin sai hän hellyydenosoituksistaan kyytiä, mistä sitten voivotteli vuorokausikaupalla. </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Beaupre oli ollut kotimaassaan parturina, sen jälkeen Preussissa sotilaana, oli sitten tullut Venäjälle pour etre outchitel ( kotiopettajaksi), oikein ymmärtämättä mitä tämä sana merkitsisi. </seg><seg> Hän oli kelpo mies, mutta kevytmielinen ja äärimmäisen huolimaton. </seg><seg> Hänen pahimpana heikkoutenaan oli intohimoinen kiintymys kauniimpaan sukupuoleen; hän sai usein hellyyden osoituksistaan kolhauksia ja valitti niitä sitten päiväkausia. </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> К тому же не был он ( по его выражению ) и врагом бутылки, т.е. ( говоря по-русски ) любил хлебнуть лишнее. </seg><seg> Но как вино подавалось у нас только за обедом, и то по рюмочке, причем учителя обыкновенно и обносили, то мой Бопре очень скоро привык к русской настойке и даже стал предпочитать ее винам своего отечества, как не в пример более полезную для желудка. </seg><seg> Мы тотчас поладили, и хотя по контракту обязан он был учить меня по-французски, по-немецки и всем наукам, но он предпочел наскоро выучиться от меня кое-как болтать по-русски, - и потом каждый из нас занимался уже своим делом. </seg><seg> Мы жили душа в душу. </seg><seg> Другого ментора я и не желал. </seg><seg> Но вскоре судьба нас разлучила, и вот по какому случаю: </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Sen lisäksi hän, kuten itse sanoi, ei vihannut pulloa, toisin sanoen hän naukkasi ja naukkasi liiaksikin. </seg><seg> Mutta kun viiniä meillä ei tarjottu kuin päivällisellä, jolloin opettaja usein jätettiin ilmankin, niin tottui herra Beaupré varsin pian paloviinaan, ja rupesi vihdoin pitämään sitä paljoa parempana kotimaansa viinejä, sanoen sitä vatsalle hyödyllisemmäksi. </seg><seg> Meistä tuli pian hyvät ystävät, ja vaikka hänen, niinkuin kontrahtiin oli kirjoitettu, tuli opettaa minulle _franskankieltä ja saksankieltä ja kaikkia tieteitä_, niin piti hän kumminkin sopivampana oppia minulta vähän söhertämään venättä, jonka jälkeen sitten kukin meistä teki omia askareitaan. </seg><seg> Me sovimme keskenämme erinomaisen hyvin. </seg><seg> Toista opettajaa en olisi tahtonutkaan. </seg><seg> Mutta pian meidät kohtalo eroitti. </seg><seg> - Tämmöinen oli tapaus. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Sen lisäksi hän ( omien sanojensa mukaan ) ei ollut myöskään pullon vihollinen,. so. </seg><seg> naukkasi liikaakin. </seg><seg> Mutta kun viiniä tarjoiltiin meillä päivällispöydässä vain ryyppy kerrallaan, jolloin opettaja tavallisesti sivuutettiin, niin Beaupré tottui pian venäläiseen viinaan siinä määrin, että joi sitä mieluimmin kuin ranskalaisia viinejä sanoen sen olevan vatsalle terveellisempää. </seg><seg> Tulimme pian hyviksi ystäviksi, ja vaikka sopimuksen mukan hänen olisi pitänyt opettaa minulle ranskaa, saksaa ja muita aineita, opettaja piti edullisempana, että minä opettaisin häntä jotenkuten mongertamaan venäjää - sen jälkeen me kumpikin hoitelimme omia tehtäviämme. </seg><seg> Me sovimme hyvin yhteen. </seg><seg> Mutta kohtalo eroitti meidät pian. </seg><seg> Se tapahtui seuraavasta syystä: </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Myöskään ei hän ollut ( omien sanojensa mukaan ) pullon vihollinen,. so. </seg><seg> mielellään ryyppäsi liikaakin. </seg><seg> Mutta kun viiniä meillä tarjottiin vain päivällispöydässä ja silloinkin ainoastaan yksi ryyppy, minkä lisäksi opettaja tällöin usein sivuutettiin, niin Beaupré-veitikka tottui hyvin pian venäläiseen viinaan, alkoipa pitää sitä kotimaansa viinejä parempana sanoen sen olevan verrattomasti terveellisempää vatsalle. </seg><seg> Meistä tuli heti hyvät ystävät, ja vaikka hänen sopimuksensa mukaan olisi pitänyt opettaa minulle ranskaa, saksaa ja kaikkia aineta, piti hän mukavampana oppia minulta jotenkuten mongertamaan venäjää, ja sen jälkeen me kumpikin hoidimme omia hommiamme. </seg><seg> Me sovimme mainiosti yhteen. </seg><seg> Muuta opastajaa en minä halunnutkaan. </seg><seg> Mutta ennen pitkää kohtalo meidät erotti, ja se tapahtui seuraavasta syystä. </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Hän ei liioin ( kuten itse sanoi ) vihannut pulloa; hän ( siisvenäjän kielellä asian ilmaistaksemme ) ryyppäsi mielellään liikaa. </seg><seg> Mutta kun meillä tarjottiin viiniä vain päivällisaterialla, ei silloinkaan enempää kuin lasillinen jokaiselle, ja opettaja tavallisesti sivuutettiin, opettajani Beaupre tottui pian venäläiseen ryytiviinaan, alkoi pitää siitä enemmän kuin isänmaansa viineistä ja sanoi sen olevan verrattomasti terveellisempää vatsalle. </seg><seg> Me tulimme heti hyvin toimeen keskenämme, ja vaikka sopimus velvoitti hänet opettamaan minulle ranskaa, saksaa ja kaikkia tieteitä, hän katsoi paremmaksi oppia minulta tuota pikaa juttelemaan hiukan venäjää - ja sitten me hoitelimme vain omia asioitamme. </seg><seg> Keskinäinen suhteemme oli sydämellinen. </seg><seg> En toivonutkaan toista ohjaajaa. </seg><seg> Mutta kohtalo erotti meidät pian, ja syy siihen oli seuraava. </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Прачка Палашка, толстая и рябая девка, и кривая коровница Акулька как-то согласились в одно время кинуться матушке в ноги, винясь в преступной слабости и с плачем жалуясь на мусье, обольстившего их неопытность. </seg><seg> Матушка шутить этим не любила и пожаловалась батюшке. </seg><seg> У него расправа была коротка. </seg><seg> Он тотчас потребовал каналью француза. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Lihava ja rokon-arpinen pesutyttö Palashka ja toissilmäinen karjapiika Akulika suostuivat kuin suostuivatkin eräänä päivänä menemään äitini luokse, heittäytyivät polvilleen ja tunnustivat rikoksen, johon heidät, kokemattomat, oli saattanut munsyöri. </seg><seg> Äitini kanteli asiasta heti isälle. </seg><seg> Hänellä taas oli laki lyhyt ja selvä. </seg><seg> Heti paikalla käski hän kutsua tuon kanaljan Franskalaisen luokseen, mutta, tuli sana, että hän paraikaan antaa minulle tuntia. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Pesijätär Palaška, lihava ja rokonarpinen tyttö sekä vinosilmäinen karjakko Akuljka polvistuivat yhteisestä sopimuksesta äitini eteen ja tunnustaen rikollisen heikkoutensa itkusilmin syyttivät musjöötä, että tämä oli heidät vietellyt. </seg><seg> Äitini tapana ei ollut leikitellä tällaisissa asioissa ja hän kertoi siitä isälleni. </seg><seg> Isä ratkaisi pian asian, vaatien heti luokseen ranskalaisen lurjuksen. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Pesijätär Palaška, lihava ja rokonarpinen tyttö, ja toissilmäinen karjakko Akuljka olivat jonkinmoisesta sopimuksesta samaan aikaan tulleet äitini luo ja polvistuneena hänen eteensä tunnustaneet rikollisen heikkoutensa ja itkien syyttäneet musjööta, joka oli vietellyt heidät, kokemattomat. </seg><seg> Äiti ei pitänyt leikistä tällaisissa asioissa ja kertoi asiasta isälle. </seg><seg> Isälläni oli tapana tehdä pian selvä asioista. </seg><seg> Hän lähetti hakemaan ranskalaista lurjusta. </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Pesijätär Palaška, lihava rokonarpinen tyttö, ja toissilmäinen karjakko Akuljka olivat jotenkin sopineet siitä, että tulisivat yhdessä äitini luo, polvistuisivat hänen eteensä, tunnustaisivat rikollisen heikkoutensa ja itkien syyttäisivät musjöötä, joka oli vietellyt heidät, kokemattomat. </seg><seg> Äiti ei sietänyt leikkiä näissä asioissa vaan valitti isälleni. </seg><seg> Tämä teki nopean päätöksen. </seg><seg> Hän käski hakea ranskalaiskanaljan. </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Доложили, что мусье давал мне свой урок. </seg><seg> Батюшка пошел в мою комнату. </seg><seg> В это время Бопре спал на кровати сном невинности. </seg><seg> Я был занят делом. </seg><seg> Надобно знать, что для меня выписана была из Москвы географическая карта. </seg><seg> Она висела на стене безо всякого употребления и давно соблазняла меня шириною и добротою бумаги. </seg><seg> Я решился сделать из нее змей и, пользуясь сном Бопре, принялся за работу. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Isä heti minun kamariini. </seg><seg> Siellä oli Beaupré makaamassa viattomuuden unta. </seg><seg> Minä puolestani olin täydessä työssä. </seg><seg> Minulle oli näet Moskovasta tilattu maantieteellinen kartta. </seg><seg> Se rippui seinällä ilman aikojaan ja tuo suuri, paksu paperi oli jo kauan kiusannut minua. </seg><seg> Viimein päätin kuin päätinkin tehdä siitä paperileijan ja ryhdyin nyt työhön, käyttäen hyödykseni Beaupré'n unta. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Hänelle ilmoitettiin, että musjöö oli minua opettamassa, jolloin hän lähti minun huoneeseeni. </seg><seg> Beaupré nukkui silloin viattomuuden unta ja minä olin omissa hommissani. </seg><seg> Minua varten oli tilattu Moskovasta maantieteellinen kartta, joka roikkui seinällä käyttämättömänä. </seg><seg> Minä ihailin sen suurta kokoa ja hyvää paperia. </seg><seg> Beauprén nukkuessa minä ryhdyin valmistamaan siitä paperileijaa, Isä astui huoneeseeni juuri silloin, kun minä yritin kiinnittää niinistä valmistettua pyrstöä Hyväntoivon niemeen. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Ilmoitettiin, että musjöö parast'aikaa oli minua opettamassa. </seg><seg> Isäukko lähti minun huoneeseeni. </seg><seg> Hänen tullessaan Beaupré veteli sängyssä viattomuuden unta. </seg><seg> Minä olin omissa hommissani. </seg><seg> Tässä on mainittava, että minua varten oli tilattu maantieteellinen kartta Moskovasta. </seg><seg> Se riippui seinällä käyttämättömänä, ja kun paperi oli isokokoinen ja sitä paitsi hyvää lajia, oli se jo kauan tuntunut minusta houkuttelevalta. </seg><seg> Minä päätin tehdä siitä paperileijan ja käyttäen hyväkseni Beauprén unta ryhdyin työhön. </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Hänelle ilmoitettiin että musjöö oli parhaillaan minua opettamassa. </seg><seg> Isä tuli huoneeseeni. </seg><seg> Beaupre nukkui tällöin sängyssään viattomuuden unta. </seg><seg> Minä olin työssä. </seg><seg> On mainittava että minulle oli tilattu Moskovasta maantieteellinen kartta. </seg><seg> Se riippui seinällä käyttämättömänä, ja sen koko sekä paperin hyvä laatu olivat jo kauan houkutelleet minua. </seg><seg> Olin päättänyt tehdä siitä leijan ja ryhdyin työhön, kun Beaupren nukkuessa tarjoutui siihen hyvä tilaisuus. </seg></tuv>
+</tu>
+<tu>
+<tuv code="Pu_KD" xml:lang="RU">
+<seg> Батюшка вошел в то самое время, как я прилаживал мочальный хвост к Мысу Доброй Надежды. </seg><seg> Увидя мои упражнения в географии, батюшка дернул меня за ухо, потом подбежал к Бопре, разбудил его очень неосторожно и стал осыпать укоризнами. </seg><seg> Бопре в смятении хотел было привстать и не мог: несчастный француз был мертво пьян. </seg><seg> Семь бед, один ответ. </seg><seg> Батюшка за ворот приподнял его с кровати, вытолкал из дверей и в тот же день прогнал со двора, к неописанной радости Савельича. </seg><seg> Тем и кончилось мое воспитание. </seg></tuv>
+<tuv code="Pu_SS_KD" xml:lang="FI">
+<seg> Olin juuri kiinnittämässä niinistä pyrstöä Hyvän toivon niemeen, kun isä tuli kamariin. </seg><seg> Nähtyään minun ponnistelujani maantiedon oppimisessa, nykäsi hän minua korvasta ja, juostuaan sitten Beaupré'n ääreen, herätti hänet jotenkin varomattomasti ja alkoi nuhdesaarnan. </seg><seg> Hämmästynyt Beaupré yritti nousta ylös, mutta ei jaksanut: hän oli kovin juovuksissa. </seg><seg> Isä tarttui silloin opettajan nutun kaulukseen ja sysäsi hänet porstuaan. </seg><seg> Samana päivänä jo sai Franskalainen virkaeron, ja tuostakos ilo ja riemu Saveljitshille. </seg><seg> Siihen päättyi minun kasvatukseni. </seg></tuv>
+<tuv code="Pu_Must_KD" xml:lang="FI">
+<seg> Huomatessaan maantieteelliset harrastukseni riuhtaisi isäni minua korvasta, kiiruhti Beauprén luo, herätti hänet kovakouraisesti ryhtyen häntä ankarasti moittimaan. </seg><seg> Beaupré yritti hädissään nousta sängystä, mutta ei voinutkaan, sillä hän oli kovin päihtynyt. </seg><seg> Vahinko ei tule kello kaulassa. </seg><seg> Isä kiskoi miehen kauluksesta pystyyn, tyrkkäsi ovesta ulos ajaen hänet samana päivänä pois talosta Saveljitšin suureksi iloksi. </seg><seg> Tähän päättyikin minun kasvatukseni. </seg></tuv>
+<tuv code="Pu_Hann_KD" xml:lang="FI">
+<seg> Isäukko astui huoneeseen juuri kun minä kiinnitin niinistä pyrstöä Hyväntoivonniemeen. </seg><seg> Nähdessään minun maantieteenharjoitukseni isä vetäisi minua korvasta, ryntäsi sitten Beauprén kimppuun, herätti hänet kovakouraisesti ja antoi hänen kuulla kunniansa. </seg><seg> Beaupré yritti siinä rytäkässä nousta seisomaan, mutta ei voinutkaan: miesparka oli aivan päissään. </seg><seg> Isäukko kiskoi hänet kauluksesta pystyyn, työnsi ulos ovesta ja jo samana päivänä ajoi hänet talosta Saveljitšin sanomattomaksi iloksi. </seg><seg> Siihen päättyikin minun kasvatukseni. </seg></tuv>
+<tuv code="Pu_Hollo_KD" xml:lang="FI">
+<seg> Isäni astui sisään juuri silloin, kun minä liitin niinihäntää Hyväntoivonniemeen. </seg><seg> Nähdessään miten opiskelin maantiedettä isäni ravisti minua korvasta, riensi sitten Beaupren luo, herätti hänet kovakouraisesti ja syyti hänelle moitteitaan. </seg><seg> Beaupre oli hämillään, yritti nousta, mutta se ei onnistunut: onneton ranskalainen oli tolkuttomasti päissään. </seg><seg> Isäni tarttui hänen kaulukseensa, nosti hänet seisomaan, työnsi ulos ovesta ja ajoi jo samana päivänä pois talosta Saveljitšin kuvaamattomaksi iloksi. </seg><seg> Siihen kasvatukseni päättyi. </seg></tuv>
+</tu>
+</body>
+</tmx>

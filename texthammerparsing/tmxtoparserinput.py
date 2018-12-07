@@ -1,17 +1,17 @@
 #! /usr/bin/env python
-import sys
-import csv
-import glob
+#import sys
+#import csv
+#import glob
 import os
 import uuid
 from lxml import etree
 from xml.sax.saxutils import unescape
-import re
-import FilterLongSentences
-from conll_to_xml import Logger, logging
+#import re
+from  texthammerparsing.FilterLongSentences import FilterByCharCount
 import json
-from python_tools import Prettify, FixQuotes
-import traceback
+from texthammerparsing.python_tools import Prettify, FixQuotes
+import logging
+#import traceback
 
 
 class Document:
@@ -29,7 +29,7 @@ class Document:
         - sourcefile: the full path  of the tmx file
         """
         self.pair_id = str(uuid.uuid4())
-        self.dumpfile = "{}/{}/{}.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", self.pair_id)
+        self.dumpfile = "/tmp/{}.json".format(self.pair_id)
         self.errors = []
         self.warnings = []
         self.filename = sourcefile
@@ -39,7 +39,7 @@ class Document:
             try:
                 self.content = f.read()
             except UnicodeDecodeError:
-                problem = "Tiedostossa {} koodausongelma. Luultavasti utf-16 pitäisi muuttaa utf-8:aan.".format(sourcefile)
+                problem = "Encoding porblem with file {}. Possible reason: utf-16 should be converted to utf-8.".format(sourcefile)
                 self.errors.append(problem)
                 return False
 
@@ -100,8 +100,6 @@ class Tmxfile(Document):
     def __init__(self, sourcefile):
         self.filetype = "tmx"
         super().__init__(sourcefile)
-        #Metadata for each text
-        self.metafile = "{}/{}/{}_segment_meta.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", self.pair_id)
         self.versions = []
 
     def GetXml(self):
@@ -125,16 +123,16 @@ class Tmxfile(Document):
                 the texts. The metadata should be provided as <textdef> tags
                 including, minimally, the attributes code and lang""")
 
-    def InitializeVersions(self):
+    def InitializeVersions(self, output_folder):
         """
         Initializes each text as a separate 'Version' object, which can be either 
         a regular text or a retranslation.
         """
         for thisversion in self.metadata_for_versions:
             if self.translations_per_language[thisversion["lang"]] == 1:
-                self.versions.append(Translation(thisversion["lang"],thisversion["code"],self.filename, self.pair_id))
+                self.versions.append(Translation(thisversion["lang"],thisversion["code"],self.filename, self.pair_id, output_folder))
             else:
-                self.versions.append(Retranslation(thisversion["lang"],thisversion["code"],self.filename, self.pair_id))
+                self.versions.append(Retranslation(thisversion["lang"],thisversion["code"],self.filename, self.pair_id, output_folder))
             #Add metadata for this version
             for attr in self.all_meta_attributes:
                 try:
@@ -178,15 +176,20 @@ class Tmxfile(Document):
         Write all the prepared files to the specified destinations.
         Also, write an auxiliary file containing segment-specific metadata.
         """
+        root = "/tmp/texthammerparsing/" + self.pair_id
+        # First, let's create a temporary directory for each tmx
+        os.makedirs(root, exist_ok=True)
+        os.makedirs(root + "/prepared", exist_ok=True)
         segment_meta = {}
         for version in self.versions:
-            logging.info("Writing {}. Number of segments: {}".format(version.prepared_filename, version.number_of_segments))
-            with open(version.prepared_filename,"w") as f:
+            if logging:
+                logging.info("Writing {}. Number of segments: {}".format(version.code, version.number_of_segments))
+            with open(root + "/prepared/" + version.code,"w") as f:
                 f.write(version.segmentsplitpattern.join(version.segments))
             segment_meta[version.lang] = version.segment_meta
 
         #Save the collected metadata about segments to a separate json dump
-        with open(self.metafile,"w") as f:
+        with open(root + "/metadata.json","w") as f:
             json.dump(segment_meta, f, ensure_ascii=False)
 
 class Version:
@@ -197,7 +200,7 @@ class Version:
     retranslations, so that one language may contain several versions
     """
 
-    def __init__(self, lang, code, sourcefile, pair_id):
+    def __init__(self, lang, code, sourcefile, pair_id, output_folder):
         self.segmentsplitpattern = "\n" + "!"*15 + "\n"
         self.lang = lang
         self.pair_id = pair_id
@@ -206,24 +209,24 @@ class Version:
         self.metadata = {}
         #This is for saving segment specific meta information such as speakers in a dialogue context
         self.segment_meta = []
-        self.prepared_filename = '{}_{}_{}.prepared'.format(sourcefile, self.code, self.lang)
+
         k = sourcefile.rfind("/")
         self.mere_file = sourcefile[k+1:]
-        self.parsed_filename  = '{}/{}/{}_{}_{}.prepared.conll'.format(sys.argv[2], self.lang, self.mere_file, self.code, self.lang)
+        self.parsed_filename  = '{}/{}/{}_{}_{}.prepared.conll'.format(output_folder, self.lang, self.mere_file, self.code, self.lang)
         self.metadata["filename"] = self.parsed_filename
+
         #Just as a useful information: collect the number of segments in each version
         self.number_of_segments = 0
 
     def AddRealSegment(self, segment_text):
         """
         Adds the segment to the list of segments for this version.
-        versioi
         """
         segment_text = FixQuotes(segment_text.strip())
         self.segments.append(segment_text)
         #Note: the sentences are filtered in order to detect sentences too long to parse
         #see longsentencelog.txt and FilterLongSentences.py
-        segment_text = FilterLongSentences.FilterByCharCount(segment_text, self.code)
+        segment_text = FilterByCharCount(segment_text, self.code)
         self.number_of_segments += 1
 
     def AddEmptySegment(self, seg_no):
@@ -243,8 +246,8 @@ class Translation(Version):
     If the version we are dealing with is a regular translation, it is represented by this class
     OR if this is the source text, the Translation class will be used anyway.
     """
-    def __init__(self, lang, code, sourcefile, pair_id):
-        super().__init__(lang, code, sourcefile, pair_id)
+    def __init__(self, lang, code, sourcefile, pair_id, output_folder):
+        super().__init__(lang, code, sourcefile, pair_id, output_folder)
         self.tuvpattern = "tuv[@xml:lang='{}' or  @xml:lang='{}']".format(self.lang, self.lang.upper())
         self.versiontype = "regular"
                 
@@ -252,8 +255,8 @@ class Retranslation(Version):
     """
     If the version we are dealing with is actually a retranslation, it is represented by this class
     """
-    def __init__(self, lang, code, sourcefile, pair_id):
-        super().__init__(lang, code, sourcefile, pair_id)
+    def __init__(self, lang, code, sourcefile, pair_id, output_folder):
+        super().__init__(lang, code, sourcefile, pair_id, output_folder)
         self.tuvpattern = "tuv[(@xml:lang='{}' or @xml:lang='{}') and @code='{}']".format(self.lang, self.lang.upper(), self.code)
         self.versiontype = "retranslation"
 
@@ -293,8 +296,8 @@ def main():
     output = {}
     for filename in files:
         logging.info("Starting to analyze the following tmx file: {}.".format(filename))
-        thisfile = Tmxfile(filename)
         try:
+            thisfile = Tmxfile(filename)
             thisfile.GetXml()
             thisfile.ReadTextdefs()
             thisfile.CollectMetaDataAttributes()

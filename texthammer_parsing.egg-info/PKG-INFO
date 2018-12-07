@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: texthammer-parsing
+Version: 0.0.dev0
+Summary: Tools and shortcuts for programmatically running dependency parsers for multiple languages to produce xml output
+Home-page: https://github.com/utacorpora/texthammer-parsing
+Author: Juho Härme
+Author-email: juho.harme@gmail.com
+License: MIT
+Description: Tools and shortcuts for programmatically running dependency parsers for multiple languages to produce xml output
+Keywords: corpora parsers xml parsing
+Platform: UNKNOWN

@@ -1,0 +1,11 @@
+README.md
+setup.cfg
+setup.py
+texthammer_parsing.egg-info/PKG-INFO
+texthammer_parsing.egg-info/SOURCES.txt
+texthammer_parsing.egg-info/dependency_links.txt
+texthammer_parsing.egg-info/entry_points.txt
+texthammer_parsing.egg-info/not-zip-safe
+texthammer_parsing.egg-info/top_level.txt
+texthammerparsing/__init__.py
+texthammerparsing/texthammerparsing.py
