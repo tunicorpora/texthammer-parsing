@@ -18,7 +18,8 @@ Tools and shortcuts for programmatically running dependency parsers for multiple
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'lxml'
+          'lxml',
+          'progressbar2'
       ],
       entry_points={
           'console_scripts': [

@@ -11,7 +11,7 @@ from  texthammerparsing.FilterLongSentences import FilterByCharCount
 import json
 from texthammerparsing.python_tools import Prettify, FixQuotes
 import logging
-#import traceback
+import traceback
 
 
 class Document:
@@ -79,8 +79,8 @@ class Document:
         if not self.errors:
             if thiserror:
                 logging.error(thiserror)
-                logging.error("Check the file detailed_error_log.txt for more details on why and where the python script failed.")
-                with open("detailed_error_log.txt","w") as f:
+                logging.error("Check the file /tmp/detailed_error_log.txt for more details on why and where the python script failed.")
+                with open("/tmp/detailed_error_log.txt","w") as f:
                     f.write(traceback.format_exc())
             #logging.info("Great! No critical problems found with the file {}".format(self.filename))
         else:
@@ -123,7 +123,7 @@ class Tmxfile(Document):
                 the texts. The metadata should be provided as <textdef> tags
                 including, minimally, the attributes code and lang""")
 
-    def InitializeVersions(self, output_folder):
+    def InitializeVersions(self, output_folder="/tmp"):
         """
         Initializes each text as a separate 'Version' object, which can be either 
         a regular text or a retranslation.
@@ -201,7 +201,7 @@ class Version:
     """
 
     def __init__(self, lang, code, sourcefile, pair_id, output_folder):
-        self.segmentsplitpattern = "\n" + "!"*15 + "\n"
+        self.segmentsplitpattern = "\n" + "###C:splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd" + "\n"
         self.lang = lang
         self.pair_id = pair_id
         self.code = code

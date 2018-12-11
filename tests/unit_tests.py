@@ -1,7 +1,9 @@
 import unittest
 import lxml
 import os.path
-from texthammerparsing import Tmxfile
+import glob
+import subprocess
+from texthammerparsing import Tmxfile, parseFiles
 
 
 class TmxToParserinputTest(unittest.TestCase):
@@ -76,6 +78,27 @@ class TmxToParserinputTest(unittest.TestCase):
         self.tmx.GetVersionContents()
         self.tmx.WritePreparedFiles()
         #self.assertTrue(os.path.isfile("/tmp/" + self.tmx.pair_id + ".json"))
+
+class ParseTest(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        path = "examples/tmx/ru_fi_example.tmx"
+        path = "examples/tmx/multiversion_ex.tmx"
+        tmx = Tmxfile(path)
+        tmx.GetXml()
+        tmx.ReadTextdefs()
+        tmx.CollectMetaDataAttributes()
+        tmx.InitializeVersions("/tmp")
+        tmx.GetVersionContents()
+        tmx.WritePreparedFiles()
+        cls.id = tmx.pair_id
+
+    def testListFilesToParse(self):
+        for f in glob.glob("/tmp/texthammerparsing/" + self.id + "/prepared/*"):
+            #cat myfile.txt | python3 full_pipeline_stream.py --conf models_fi_tdt/pipelines.yaml --pipeline parse_plaintext > myfile.conllu
+            self.assertTrue(os.path.isfile(f))
+
 
 
 if __name__ == '__main__':
