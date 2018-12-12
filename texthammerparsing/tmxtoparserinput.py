@@ -182,9 +182,11 @@ class Tmxfile(Document):
         os.makedirs(root + "/prepared", exist_ok=True)
         segment_meta = {}
         for version in self.versions:
+            langdir = root + "/prepared/" + version.lang
+            os.makedirs(langdir, exist_ok=True)
             if logging:
                 logging.info("Writing {}. Number of segments: {}".format(version.code, version.number_of_segments))
-            with open(root + "/prepared/" + version.code,"w") as f:
+            with open(langdir +  "/" + version.code,"w") as f:
                 f.write(version.segmentsplitpattern.join(version.segments))
             segment_meta[version.lang] = version.segment_meta
 
@@ -201,7 +203,7 @@ class Version:
     """
 
     def __init__(self, lang, code, sourcefile, pair_id, output_folder):
-        self.segmentsplitpattern = "\n" + "###C:splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd" + "\n"
+        self.segmentsplitpattern = "\n" + "###C:segmentsplit" + "\n"
         self.lang = lang
         self.pair_id = pair_id
         self.code = code

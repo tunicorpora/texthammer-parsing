@@ -24,6 +24,9 @@ def main():
     parser.add_argument('--output_ids', 
             metavar = 'filename or path',
             help="A temporary file for the ids to be stored in")
+    parser.add_argument('--parserpath', 
+            metavar = 'path',
+            help="absolute path to the folder containing the parser")
     parser.add_argument('--cleanup', 
             metavar = '',
             nargs = "?",
@@ -50,17 +53,25 @@ def main():
 
     if args.action == "parse":
         if not args.id:
-            print("Please spesify the ids of the prepared files with the --id option")
+            print("Please specify the ids of the prepared files with the --id option")
             sys.exit(0)
+
+        # TODO: .rcfile
+        parserpath = args.parserpath
+
+        if not parserpath:
+            print("Please specify the location of the parser with the --parserpath option")
+            sys.exit(0)
+
+        if os.path.isfile(args.id[0]):
+            #ids can be supplied via a file
+            with open(args.id[0], "r") as f:
+                ids = f.read().splitlines()
         else:
-            if os.path.isfile(args.id[0]):
-                #ids can be supplied via a file
-                with open(args.id[0], "r") as f:
-                    ids = f.read().splitlines()
-            else:
-                ids = args.id
-            for this_id in ids:
-                parseFiles(this_id)
+            ids = args.id
+
+        for this_id in ids:
+            parseFiles(this_id, parserpath)
 
     if args.action == "get_xml":
         for pair_id in args.id:

@@ -6,6 +6,11 @@ texthammer_parsing.egg-info/SOURCES.txt
 texthammer_parsing.egg-info/dependency_links.txt
 texthammer_parsing.egg-info/entry_points.txt
 texthammer_parsing.egg-info/not-zip-safe
+texthammer_parsing.egg-info/requires.txt
 texthammer_parsing.egg-info/top_level.txt
+texthammerparsing/FilterLongSentences.py
 texthammerparsing/__init__.py
+texthammerparsing/actions.py
+texthammerparsing/python_tools.py
 texthammerparsing/texthammerparsing.py
+texthammerparsing/tmxtoparserinput.py

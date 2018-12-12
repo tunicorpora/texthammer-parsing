@@ -1,5 +1,6 @@
 import os
 import glob
+import subprocess
 from texthammerparsing import Tmxfile
 
 
@@ -56,18 +57,33 @@ def parseFiles(pair_id, parserpath):
 
     """
 
+    #TODO: LANG!!!
+    #TODO: select which model if multiple available (rcfile?)
+
+    if parserpath[-1] != r"/":
+        parserpath += r"/"
+
+    models = {
+            "fi" : "models_fi_tdt",
+            "ru" : "models_ru_syntagrus"
+            }
     # Use the parser's virtual env
     python_bin = parserpath + "venv-parser-neural/bin/python3"
     script_file = parserpath + "full_pipeline_stream.py"
     parsed_dir = "/tmp/texthammerparsing/{}/parsed".format(pair_id)
-    os.makedirs(root, exist_ok=True)
+    os.makedirs(parsed_dir, exist_ok=True)
+    prepared_dir = "/tmp/texthammerparsing/" + pair_id + "/prepared/"
 
-    for f in glob.glob("/tmp/texthammerparsing/" + self.id + "/prepared/*"):
-        p1 = subprocess.Popen(["cat", f], stdout=subprocess.PIPE)
-        output = subprocess.check_output([python_bin, script_file, 
-            "--conf", parserpath + "models_fi_tdt/pipelines.yaml", 
-            "--pipeline", "parse_plaintext"], stdin=p1.stdout, cwd=parserpath)
-        with open(parsed_dir + "/" + os.path.basename(f)) as f:
-            f.write(output.decode("utf-8"))
+    for lang in os.listdir(prepared_dir):
+        lang = lang.replace(r"/","")
+        langdir = parsed_dir + "/" + lang 
+        os.makedirs(langdir, exist_ok=True)
+        for f in glob.glob(prepared_dir + lang + "/*"):
+            p1 = subprocess.Popen(["cat", f], stdout=subprocess.PIPE)
+            output = subprocess.check_output([python_bin, script_file, 
+                "--conf", parserpath + models[lang] + "/pipelines.yaml", 
+                "--pipeline", "parse_plaintext"], stdin=p1.stdout, cwd=parserpath)
+            with open(parsed_dir + "/" + lang + "/" + os.path.basename(f), "w") as f:
+                f.write(output.decode("utf-8"))
 
 
