@@ -27,9 +27,9 @@ class TextPair():
     - pair_id a unique id identifying the source tmx / txt file 
     """
 
-    def __init__(self, line, pair_id):
+    def __init__(self, filename, lang, code, pair_id):
         self.root = etree.Element("text")
-        self.sl_text = ParsedText(line['filename'], 'source', line['lang'], line['code'])
+        self.sl_text = ParsedText(filename, 'source', 'lang', 'code')
         self.tl_texts = list()
         #Read segmentwise metadata from a separate json file identified by the id of the text pair
         #(only if there is such a file, i.e. if this is a tmx we are parsing)
