@@ -1,0 +1,651 @@
+# newdoc
+# newpar
+# sent_id = 1
+# text = Sopimus
+1	Sopimus	sopimus	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Suomen tasavallan hallituksen ja Venäjän federaation hallituksen välillä Pietarissa sijaitsevien tilojen myynnistä Suomen tasavallan hallitukselle
+1	Suomen	Suomi	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	tasavallan	tasa#valta	NOUN	N	Case=Gen|Number=Sing	3	nmod:poss	_	_
+3	hallituksen	hallitus	NOUN	N	Case=Gen|Number=Sing	12	nmod:gsubj	_	_
+4	ja	ja	CCONJ	C	_	7	cc	_	_
+5	Venäjän	Venäjä	PROPN	N	Case=Gen|Number=Sing	6	nmod:poss	_	_
+6	federaation	federaatio	NOUN	N	Case=Gen|Number=Sing	7	nmod:poss	_	_
+7	hallituksen	hallitus	NOUN	N	Case=Gen|Number=Sing	3	conj	_	_
+8	välillä	välillä	ADP	Adp	AdpType=Post	3	case	_	_
+9	Pietarissa	Pietari	PROPN	N	Case=Ine|Number=Sing	10	obl	_	_
+10	sijaitsevien	sijaita	VERB	V	Case=Gen|Degree=Pos|Number=Plur|PartForm=Pres|VerbForm=Part|Voice=Act	11	acl	_	_
+11	tilojen	tila	NOUN	N	Case=Gen|Number=Plur	12	nmod:gobj	_	_
+12	myynnistä	myynti	NOUN	N	Case=Ela|Number=Sing	0	root	_	_
+13	Suomen	Suomi	PROPN	N	Case=Gen|Number=Sing	14	nmod:poss	_	_
+14	tasavallan	tasa#valta	NOUN	N	Case=Gen|Number=Sing	15	nmod:poss	_	_
+15	hallitukselle	hallitus	NOUN	N	Case=All|Number=Sing	12	nmod	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Suomen tasavallan hallitus ja Venäjän federaation hallitus, jäljempänä osapuolet,
+1	Suomen	Suomi	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	tasavallan	tasa#valta	NOUN	N	Case=Gen|Number=Sing	3	nmod:poss	_	_
+3	hallitus	hallitus	NOUN	N	Case=Nom|Number=Sing	0	root	_	_
+4	ja	ja	CCONJ	C	_	7	cc	_	_
+5	Venäjän	Venäjä	PROPN	N	Case=Gen|Number=Sing	6	nmod:poss	_	_
+6	federaation	federaatio	NOUN	N	Case=Gen|Number=Sing	7	nmod:poss	_	_
+7	hallitus	hallitus	NOUN	N	Case=Nom|Number=Sing	3	conj	_	SpaceAfter=No
+8	,	,	PUNCT	Punct	_	10	punct	_	_
+9	jäljempänä	jäljempänä	ADV	Adv	_	10	advmod	_	_
+10	osapuolet	osa#puoli	NOUN	N	Case=Nom|Number=Plur	7	appos	_	SpaceAfter=No
+11	,	,	PUNCT	Punct	_	3	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = jotka haluavat lujittaa ja edelleen kehittää maidensa välistä vuorovaikutusta kulttuurin, elinkeinoelämän ja koulutuksen alalla,
+1	jotka	joka	PRON	Pron	Case=Nom|Number=Plur|PronType=Rel	2	nsubj	_	_
+2	haluavat	haluta	VERB	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+3	lujittaa	lujittaa	VERB	V	InfForm=1|Number=Sing|VerbForm=Inf|Voice=Act	2	xcomp	_	_
+4	ja	ja	CCONJ	C	_	6	cc	_	_
+5	edelleen	edelleen	ADV	Adv	_	6	advmod	_	_
+6	kehittää	kehittää	VERB	V	InfForm=1|Number=Sing|VerbForm=Inf|Voice=Act	3	conj	_	_
+7	maidensa	maa	NOUN	N	Case=Gen|Number=Plur|Person[psor]=3	8	nmod:poss	_	_
+8	välistä	välinen	ADJ	A	Case=Par|Degree=Pos|Derivation=Inen|Number=Sing	9	amod	_	_
+9	vuorovaikutusta	vuoro#vaikutus	NOUN	N	Case=Par|Number=Sing	6	obj	_	_
+10	kulttuurin	kulttuuri	NOUN	N	Case=Gen|Number=Sing	15	nmod:poss	_	SpaceAfter=No
+11	,	,	PUNCT	Punct	_	12	punct	_	_
+12	elinkeinoelämän	elin#keino#elämä	NOUN	N	Case=Gen|Number=Sing	10	conj	_	_
+13	ja	ja	CCONJ	C	_	14	cc	_	_
+14	koulutuksen	koulutus	NOUN	N	Case=Gen|Number=Sing	10	conj	_	_
+15	alalla	ala	NOUN	N	Case=Ade|Number=Sing	9	nmod	_	SpaceAfter=No
+16	,	,	PUNCT	Punct	_	2	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = jotka ottavat huomioon hyvän naapuruuden ja luottamuksen perinteet maidensa välisissä suhteissa,
+1	jotka	joka	PRON	Pron	Case=Nom|Number=Plur|PronType=Rel	2	nsubj	_	_
+2	ottavat	ottaa	VERB	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+3	huomioon	huomio	NOUN	N	Case=Ill|Number=Sing	2	obl	_	_
+4	hyvän	hyvä	ADJ	A	Case=Gen|Degree=Pos|Number=Sing	5	amod	_	_
+5	naapuruuden	naapuruus	NOUN	N	Case=Gen|Derivation=Vs|Number=Sing	8	nmod:poss	_	_
+6	ja	ja	CCONJ	C	_	7	cc	_	_
+7	luottamuksen	luottamus	NOUN	N	Case=Gen|Number=Sing	5	conj	_	_
+8	perinteet	perinne	NOUN	N	Case=Nom|Number=Plur	2	obj	_	_
+9	maidensa	maa	NOUN	N	Case=Gen|Number=Plur|Person[psor]=3	10	nmod:poss	_	_
+10	välisissä	välinen	ADJ	A	Case=Ine|Degree=Pos|Derivation=Inen|Number=Plur	11	amod	_	_
+11	suhteissa	suhde	NOUN	N	Case=Ine|Number=Plur	2	obl	_	SpaceAfter=No
+12	,	,	PUNCT	Punct	_	2	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = ovat sopineet seuraavasta:
+1	ovat	olla	AUX	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	2	aux	_	_
+2	sopineet	sopia	VERB	V	Case=Nom|Degree=Pos|Number=Plur|PartForm=Past|VerbForm=Part|Voice=Act	0	root	_	_
+3	seuraavasta	seuraava	ADJ	A	Case=Ela|Degree=Pos|Number=Sing	2	obl	_	SpaceAfter=No
+4	:	:	PUNCT	Punct	_	2	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = 1 artikla
+1	1	1	NUM	Num	NumType=Card	2	nummod	_	_
+2	artikla	artikla	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Venäläinen osapuoli myy suomalaiselle osapuolelle tämän sopimuksen erottamattomana osana olevan Liitteen nro 1 mukaiset tilat, kokonaispinta-alaltaan 4 515,3 m2 alueellista merkitystä omaavassa kulttuuriperintökohteessa ( " Talo, jossa vuosina 1890-1918 asui taloustieteilijä N.
+1	Venäläinen	venäläinen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Lainen|Number=Sing	2	amod	_	_
+2	osapuoli	osa#puoli	NOUN	N	Case=Nom|Number=Sing	3	nsubj	_	_
+3	myy	myydä	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+4	suomalaiselle	suomalainen	ADJ	A	Case=All|Degree=Pos|Derivation=Lainen|Number=Sing	5	amod	_	_
+5	osapuolelle	osa#puoli	NOUN	N	Case=All|Number=Sing	3	obl	_	_
+6	tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	11	det	_	_
+7	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	9	nmod:poss	_	_
+8	erottamattomana	erottamaton	ADJ	A	Case=Ess|Degree=Pos|Derivation=Ton|Number=Sing	9	amod	_	_
+9	osana	osa	NOUN	N	Case=Ess|Number=Sing	10	obl	_	_
+10	olevan	olla	VERB	V	Case=Gen|Degree=Pos|Number=Sing|PartForm=Pres|VerbForm=Part|Voice=Act	11	acl	_	_
+11	Liitteen	liite	NOUN	N	Case=Gen|Number=Sing	14	nmod:poss	_	_
+12	nro	nro	NOUN	N	Abbr=Yes|Case=Nom|Number=Sing	11	nmod	_	_
+13	1	1	NUM	Num	NumType=Card	12	nummod	_	_
+14	mukaiset	mukainen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Inen|Number=Plur	15	amod	_	_
+15	tilat	tila	NOUN	N	Case=Nom|Number=Plur	3	obj	_	SpaceAfter=No
+16	,	,	PUNCT	Punct	_	19	punct	_	_
+17	kokonaispinta-alaltaan	kokonainen#pinta#ala	NOUN	N	Case=Abl|Number=Sing|Person[psor]=3	19	nmod	_	_
+18	4 515,3	4 515,3	NUM	Num	NumType=Card	19	nummod	_	_
+19	m2	m2	SYM	Symb	_	15	appos	_	_
+20	alueellista	alueellinen	ADJ	A	Case=Par|Degree=Pos|Derivation=Llinen|Number=Sing	21	amod	_	_
+21	merkitystä	merkitys	NOUN	N	Case=Par|Number=Sing	22	obj	_	_
+22	omaavassa	omata	VERB	V	Case=Ine|Degree=Pos|Number=Sing|PartForm=Pres|VerbForm=Part|Voice=Act	23	acl	_	_
+23	kulttuuriperintökohteessa	kulttuuri#perintö#kohde	NOUN	N	Case=Ine|Number=Sing	19	nmod	_	_
+24	(	(	PUNCT	Punct	_	26	punct	_	_
+25	"	"	PUNCT	Punct	_	26	punct	_	_
+26	Talo	talo	NOUN	N	Case=Nom|Number=Sing	15	appos	_	SpaceAfter=No
+27	,	,	PUNCT	Punct	_	31	punct	_	_
+28	jossa	joka	PRON	Pron	Case=Ine|Number=Sing|PronType=Rel	31	obl	_	_
+29	vuosina	vuosi	NOUN	N	Case=Ess|Number=Plur	31	obl	_	_
+30	1890-1918	1890-1918	NUM	Num	NumType=Card	29	nummod	_	_
+31	asui	asua	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act	26	acl:relcl	_	_
+32	taloustieteilijä	talous#tieteilijä	NOUN	N	Case=Nom|Derivation=Ja|Number=Sing	33	compound:nn	_	_
+33	N	N	PROPN	N	Abbr=Yes|Case=Gen|Number=Sing	31	nsubj	_	SpaceAfter=No
+34	.	.	PUNCT	Punct	_	3	punct	_	_
+
+# sent_id = 2
+# text = F. Danielsson " , vuodelta 1847, arkkitehti G. A. Bosse), joka sijaitsee osoitteessa Bolsaja Konjusennaja ulitsa 4-6-8 A, Pietari (jatkossa Tilat).
+1	F.	F.	PROPN	N	Abbr=Yes|Case=Nom|Number=Sing	0	root	_	_
+2	Danielsson	Danielsson	PROPN	N	Case=Nom|Number=Sing	1	flat:name	_	_
+3	"	"	PUNCT	Punct	_	5	punct	_	_
+4	,	,	PUNCT	Punct	_	5	punct	_	_
+5	vuodelta	vuosi	NOUN	N	Case=Abl|Number=Sing	1	nmod	_	_
+6	1847	1847	NUM	Num	NumType=Card	5	nummod	_	SpaceAfter=No
+7	,	,	PUNCT	Punct	_	9	punct	_	_
+8	arkkitehti	arkkitehti	NOUN	N	Case=Nom|Number=Sing	9	compound:nn	_	_
+9	G.	G.	PROPN	N	Abbr=Yes|Case=Nom|Number=Sing	5	nmod	_	_
+10	A.	A.	PROPN	N	Abbr=Yes|Case=Nom|Number=Sing	9	flat:name	_	_
+11	Bosse	Bosse	PROPN	N	Case=Nom|Number=Sing	9	flat:name	_	SpaceAfter=No
+12	)	)	PUNCT	Punct	_	5	punct	_	SpaceAfter=No
+13	,	,	PUNCT	Punct	_	15	punct	_	_
+14	joka	joka	PRON	Pron	Case=Nom|Number=Sing|PronType=Rel	15	nsubj	_	_
+15	sijaitsee	sijaita	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	1	acl:relcl	_	_
+16	osoitteessa	osoite	NOUN	N	Case=Ine|Number=Sing	15	obl	_	_
+17	Bolsaja	Bolsaja	PROPN	N	Case=Nom|Number=Sing	16	appos	_	_
+18	Konjusennaja	konjus#ennaja	NOUN	N	Case=Nom|Derivation=Ja|Number=Sing	19	compound:nn	_	_
+19	ulitsa	ulitsa	PROPN	N	Case=Nom|Number=Sing	16	appos	_	_
+20	4-6-8	4-6-8	NUM	Num	NumType=Card	19	flat:name	_	_
+21	A	A	PROPN	N	Case=Nom|Number=Sing	19	flat:name	_	SpaceAfter=No
+22	,	,	PUNCT	Punct	_	19	flat:name	_	_
+23	Pietari	Pietari	PROPN	N	Case=Nom|Number=Sing	19	flat:name	_	_
+24	(	(	PUNCT	Punct	_	26	punct	_	SpaceAfter=No
+25	jatkossa	jatko	NOUN	N	Case=Ine|Number=Sing	26	nmod	_	_
+26	Tilat	tila	NOUN	N	Case=Nom|Number=Plur	23	appos	_	SpaceAfter=No
+27	)	)	PUNCT	Punct	_	26	punct	_	SpaceAfter=No
+28	.	.	PUNCT	Punct	_	1	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Kaupan kokonaishinta on 508 100 000 ruplaa.
+1	Kaupan	kauppa	NOUN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	kokonaishinta	kokonais#hinta	NOUN	N	Case=Nom|Number=Sing	5	nsubj:cop	_	_
+3	on	olla	AUX	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	5	cop	_	_
+4	508 100 000	508 100 000	NUM	Num	NumType=Card	5	nummod	_	_
+5	ruplaa	rupla	NOUN	N	Case=Par|Number=Sing	0	root	_	SpaceAfter=No
+6	.	.	PUNCT	Punct	_	5	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Suomalainen osapuoli ostaa Tilat ja maksaa kauppahinnan kertasuorituksena venäläiselle osapuolelle.
+1	Suomalainen	suomalainen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Lainen|Number=Sing	2	amod	_	_
+2	osapuoli	osa#puoli	NOUN	N	Case=Nom|Number=Sing	3	nsubj	_	_
+3	ostaa	ostaa	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+4	Tilat	tila	NOUN	N	Case=Nom|Number=Plur	3	obj	_	_
+5	ja	ja	CCONJ	C	_	6	cc	_	_
+6	maksaa	maksaa	VERB	V	InfForm=1|Number=Sing|VerbForm=Inf|Voice=Act	3	conj	_	_
+7	kauppahinnan	kauppa#hinta	NOUN	N	Case=Gen|Number=Sing	6	obj	_	_
+8	kertasuorituksena	kerta#suoritus	NOUN	N	Case=Ess|Number=Sing	6	obl	_	_
+9	venäläiselle	venäläinen	ADJ	A	Case=All|Degree=Pos|Derivation=Lainen|Number=Sing	10	amod	_	_
+10	osapuolelle	osa#puoli	NOUN	N	Case=All|Number=Sing	3	obl	_	SpaceAfter=No
+11	.	.	PUNCT	Punct	_	3	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Tilojen sijaintikaavio on esitetty Liitteessä nro 2, joka on erottamaton osa tätä sopimusta.
+1	Tilojen	tila	NOUN	N	Case=Gen|Number=Plur	2	nmod:poss	_	_
+2	sijaintikaavio	sijainti#kaavio	NOUN	N	Case=Nom|Number=Sing	4	obj	_	_
+3	on	olla	AUX	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	4	aux:pass	_	_
+4	esitetty	esittää	VERB	V	Case=Nom|Degree=Pos|Number=Sing|PartForm=Past|VerbForm=Part|Voice=Pass	0	root	_	_
+5	Liitteessä	liite	NOUN	N	Case=Ine|Number=Sing	4	obl	_	_
+6	nro	nro	NOUN	N	Abbr=Yes|Case=Nom|Number=Sing	5	nmod	_	_
+7	2	2	NUM	Num	NumType=Card	6	nummod	_	SpaceAfter=No
+8	,	,	PUNCT	Punct	_	12	punct	_	_
+9	joka	joka	PRON	Pron	Case=Nom|Number=Sing|PronType=Rel	12	nsubj:cop	_	_
+10	on	olla	AUX	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	12	cop	_	_
+11	erottamaton	erottamaton	ADJ	A	Case=Nom|Degree=Pos|Derivation=Ton|Number=Sing	12	amod	_	_
+12	osa	osa	NOUN	N	Case=Nom|Number=Sing	5	acl:relcl	_	_
+13	tätä	tämä	PRON	Pron	Case=Par|Number=Sing|PronType=Dem	14	det	_	_
+14	sopimusta	sopimus	NOUN	N	Case=Par|Number=Sing	12	nmod	_	SpaceAfter=No
+15	.	.	PUNCT	Punct	_	4	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = 2 artikla
+1	2	2	NUM	Num	NumType=Card	2	nummod	_	_
+2	artikla	artikla	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Osapuolten valtuutetut elimet tämän sopimuksen toteuttamiseksi ovat:
+1	Osapuolten	osa#puoli	NOUN	N	Case=Gen|Number=Plur	3	nmod:poss	_	_
+2	valtuutetut	valtuuttaa	VERB	V	Case=Nom|Degree=Pos|Number=Plur|PartForm=Past|VerbForm=Part|Voice=Pass	3	acl	_	_
+3	elimet	elin	NOUN	N	Case=Nom|Number=Plur	7	nsubj	_	_
+4	tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	5	det	_	_
+5	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	6	nmod:gobj	_	_
+6	toteuttamiseksi	toteuttaminen	NOUN	N	Case=Tra|Derivation=Minen|Number=Sing	3	nmod	_	_
+7	ovat	olla	AUX	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	SpaceAfter=No
+8	:	:	PUNCT	Punct	_	7	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Venäjän puolelta - Federaation valtion omaisuuden hallintovirasto (Федеральное агентство по управлению государственным имуществом);
+1	Venäjän	Venäjä	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	puolelta	puoli	NOUN	N	Case=Abl|Number=Sing	7	nmod	_	_
+3	-	-	PUNCT	Punct	_	2	punct	_	_
+4	Federaation	Federaatio	PROPN	N	Case=Gen|Number=Sing	5	nmod:poss	_	_
+5	valtion	valtio	NOUN	N	Case=Gen|Number=Sing	6	nmod:poss	_	_
+6	omaisuuden	omaisuus	NOUN	N	Case=Gen|Derivation=Inen,Vs|Number=Sing	7	nmod:poss	_	_
+7	hallintovirasto	hallinto#virasto	NOUN	N	Case=Nom|Number=Sing	0	root	_	_
+8	(	(	PUNCT	Punct	_	9	punct	_	SpaceAfter=No
+9	Федеральное	Федеральное	X	Foreign	Foreign=Yes	7	appos	_	_
+10	агентство	агентство	X	Foreign	Foreign=Yes	9	flat:foreign	_	_
+11	по	по	X	Foreign	Foreign=Yes	9	flat:foreign	_	_
+12	управлению	управлению	X	Foreign	Foreign=Yes	9	flat:foreign	_	_
+13	государственным	государственным	X	Foreign	Foreign=Yes	9	flat:foreign	_	_
+14	имуществом	имуществом	X	Foreign	Foreign=Yes	9	flat:foreign	_	SpaceAfter=No
+15	)	)	PUNCT	Punct	_	9	punct	_	SpaceAfter=No
+16	;	;	PUNCT	Punct	_	7	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Suomen puolelta - Valtion erityistehtäväyhtiö Governia Oy.
+1	Suomen	Suomi	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	puolelta	puoli	NOUN	N	Case=Abl|Number=Sing	6	nmod	_	_
+3	-	-	PUNCT	Punct	_	2	punct	_	_
+4	Valtion	valtio	NOUN	N	Case=Gen|Number=Sing	5	nmod:poss	_	_
+5	erityistehtäväyhtiö	erityis#tehtävä#yhtiö	NOUN	N	Case=Nom|Number=Sing	6	compound:nn	_	_
+6	Governia	Governia	PROPN	N	Case=Nom|Number=Sing	0	root	_	_
+7	Oy	oy	NOUN	N	Abbr=Yes|Case=Nom|Number=Sing	6	flat:name	_	SpaceAfter=No
+8	.	.	PUNCT	Punct	_	6	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = 3 artikla
+1	3	3	NUM	Num	NumType=Card	2	nummod	_	_
+2	artikla	artikla	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Tämän sopimuksen toteuttamiseksi osapuolten valtuutetut elimet tekevät Tilojen kauppakirjan 20 (kahdenkymmenen) päivän kuluessa tämän sopimuksen voimaantulosta tämän sopimuksen 1 artiklassa mainittuun Tilojen hintaan Venäjän federaation lainsäädännön mukaisesti siten, että suomalainen osapuoli allekirjoittaa ensin sopimukset sopimuksen erottamattomana osana olevassa liitteessä nro 3 osoitettujen tonttien vuokraamisesta 49 vuodeksi.
+1	Tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	2	det	_	_
+2	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	3	nmod:gobj	_	_
+3	toteuttamiseksi	toteuttaminen	NOUN	N	Case=Tra|Derivation=Minen|Number=Sing	7	obl	_	_
+4	osapuolten	osa#puoli	NOUN	N	Case=Gen|Number=Plur	6	nmod:poss	_	_
+5	valtuutetut	valtuuttaa	VERB	V	Case=Nom|Degree=Pos|Number=Plur|PartForm=Past|VerbForm=Part|Voice=Pass	6	acl	_	_
+6	elimet	elin	NOUN	N	Case=Nom|Number=Plur	7	nsubj	_	_
+7	tekevät	tehdä	VERB	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+8	Tilojen	tila	NOUN	N	Case=Gen|Number=Plur	9	nmod:poss	_	_
+9	kauppakirjan	kauppa#kirja	NOUN	N	Case=Gen|Number=Sing	7	obj	_	_
+10	20	20	NUM	Num	NumType=Card	14	nummod	_	_
+11	(	(	PUNCT	Punct	_	12	punct	_	SpaceAfter=No
+12	kahdenkymmenen	kaksi#kymmenen	NUM	Num	Case=Gen|Number=Sing|NumType=Card	10	appos	_	SpaceAfter=No
+13	)	)	PUNCT	Punct	_	12	punct	_	_
+14	päivän	päivä	NOUN	N	Case=Gen|Number=Sing	15	nsubj	_	_
+15	kuluessa	kulua	VERB	V	Case=Ine|InfForm=2|Number=Sing|VerbForm=Inf|Voice=Act	7	advcl	_	_
+16	tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	17	det	_	_
+17	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	18	nmod:poss	_	_
+18	voimaantulosta	voimaan#tulo	NOUN	N	Case=Ela|Number=Sing	15	obl	_	_
+19	tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	20	det	_	_
+20	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	22	nmod:poss	_	_
+21	1	1	NUM	Num	NumType=Card	22	nummod	_	_
+22	artiklassa	artikla	NOUN	N	Case=Ine|Number=Sing	23	obl	_	_
+23	mainittuun	mainita	VERB	V	Case=Ill|Degree=Pos|Number=Sing|PartForm=Past|VerbForm=Part|Voice=Pass	25	acl	_	_
+24	Tilojen	tila	NOUN	N	Case=Gen|Number=Plur	25	nmod:poss	_	_
+25	hintaan	hinta	NOUN	N	Case=Ill|Number=Sing	7	obl	_	_
+26	Venäjän	Venäjä	PROPN	N	Case=Gen|Number=Sing	27	nmod:poss	_	_
+27	federaation	federaatio	NOUN	N	Case=Gen|Number=Sing	28	nmod:poss	_	_
+28	lainsäädännön	lain#säädäntö	NOUN	N	Case=Gen|Number=Sing	29	nmod:poss	_	_
+29	mukaisesti	mukaisesti	ADV	Adv	Derivation=Sti	15	advmod	_	_
+30	siten	siten	ADV	Adv	_	15	advmod	_	SpaceAfter=No
+31	,	,	PUNCT	Punct	_	35	punct	_	_
+32	että	että	SCONJ	C	_	35	mark	_	_
+33	suomalainen	suomalainen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Lainen|Number=Sing	34	amod	_	_
+34	osapuoli	osa#puoli	NOUN	N	Case=Nom|Number=Sing	35	nsubj	_	_
+35	allekirjoittaa	allekirjoittaa	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	30	ccomp	_	_
+36	ensin	ensin	ADV	Adv	_	35	advmod	_	_
+37	sopimukset	sopimus	NOUN	N	Case=Nom|Number=Plur	35	obj	_	_
+38	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	40	nmod:poss	_	_
+39	erottamattomana	erottamaton	ADJ	A	Case=Ess|Degree=Pos|Derivation=Ton|Number=Sing	40	amod	_	_
+40	osana	osa	NOUN	N	Case=Ess|Number=Sing	41	obl	_	_
+41	olevassa	olla	VERB	V	Case=Ine|Degree=Pos|Number=Sing|PartForm=Pres|VerbForm=Part|Voice=Act	42	acl	_	_
+42	liitteessä	liite	NOUN	N	Case=Ine|Number=Sing	45	obl	_	_
+43	nro	nro	NOUN	N	Abbr=Yes|Case=Nom|Number=Sing	42	nmod	_	_
+44	3	3	NUM	Num	NumType=Card	43	nummod	_	_
+45	osoitettujen	osoittaa	VERB	V	Case=Gen|Degree=Pos|Number=Plur|PartForm=Past|VerbForm=Part|Voice=Pass	46	acl	_	_
+46	tonttien	tontti	NOUN	N	Case=Gen|Number=Plur	47	nmod:gobj	_	_
+47	vuokraamisesta	vuokraaminen	NOUN	N	Case=Ela|Derivation=Minen|Number=Sing	37	nmod	_	_
+48	49	49	NUM	Num	NumType=Card	49	nummod	_	_
+49	vuodeksi	vuosi	NOUN	N	Case=Tra|Number=Sing	47	nmod	_	SpaceAfter=No
+50	.	.	PUNCT	Punct	_	7	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Suomalainen osapuoli kattaa kulut, jotka liittyvät suomalaisen osapuolen Tiloihin kohdistuvan omistusoikeuden valtiolliseen rekisteröintiin.
+1	Suomalainen	suomalainen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Lainen|Number=Sing	2	amod	_	_
+2	osapuoli	osa#puoli	NOUN	N	Case=Nom|Number=Sing	3	nsubj	_	_
+3	kattaa	kattaa	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+4	kulut	kulu	NOUN	N	Case=Nom|Derivation=U|Number=Plur	3	obj	_	SpaceAfter=No
+5	,	,	PUNCT	Punct	_	7	punct	_	_
+6	jotka	joka	PRON	Pron	Case=Nom|Number=Plur|PronType=Rel	7	nsubj	_	_
+7	liittyvät	liittyä	VERB	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	4	acl:relcl	_	_
+8	suomalaisen	suomalainen	ADJ	A	Case=Gen|Degree=Pos|Derivation=Lainen|Number=Sing	9	amod	_	_
+9	osapuolen	osa#puoli	NOUN	N	Case=Gen|Number=Sing	10	nmod:poss	_	_
+10	Tiloihin	tila	NOUN	N	Case=Ill|Number=Plur	11	obl	_	_
+11	kohdistuvan	kohdistua	VERB	V	Case=Gen|Degree=Pos|Number=Sing|PartForm=Pres|VerbForm=Part|Voice=Act	12	acl	_	_
+12	omistusoikeuden	omistus#oikeus	NOUN	N	Case=Gen|Derivation=Vs|Number=Sing	14	nmod:gobj	_	_
+13	valtiolliseen	valtiollinen	ADJ	A	Case=Ill|Degree=Pos|Derivation=Llinen|Number=Sing	14	amod	_	_
+14	rekisteröintiin	rekisteröinti	NOUN	N	Case=Ill|Number=Sing	7	obl	_	SpaceAfter=No
+15	.	.	PUNCT	Punct	_	3	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = 4 artikla
+1	4	4	NUM	Num	NumType=Card	2	nummod	_	_
+2	artikla	artikla	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Tämän sopimuksen 3 artiklan toimenpiteiden toteuttamisen tuloksena suomalainen osapuoli on velvollinen Venäjän federaation kansojen kulttuuriperintökohteiden (historiallisten ja kulttuurillisten muistomerkkien) säilyttämistä, käyttöä ja suojelua koskevan lainsäädännön mukaisesti toteuttamaan Tilojen suhteen vaatimukset alueellista merkitystä omaavan kulttuuriperintökohteen " Talon, jossa taloustieteilijä N.
+1	Tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	2	det	_	_
+2	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	4	nmod:poss	_	_
+3	3	3	NUM	Num	NumType=Card	4	nummod	_	_
+4	artiklan	artikla	NOUN	N	Case=Gen|Number=Sing	5	nmod:poss	_	_
+5	toimenpiteiden	toimen#pide	NOUN	N	Case=Gen|Number=Plur	6	nmod:gobj	_	_
+6	toteuttamisen	toteuttaminen	NOUN	N	Case=Gen|Derivation=Minen|Number=Sing	7	nmod:poss	_	_
+7	tuloksena	tulos	NOUN	N	Case=Ess|Number=Sing	11	obl	_	_
+8	suomalainen	suomalainen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Lainen|Number=Sing	9	amod	_	_
+9	osapuoli	osa#puoli	NOUN	N	Case=Nom|Number=Sing	11	nsubj:cop	_	_
+10	on	olla	AUX	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	11	cop	_	_
+11	velvollinen	velvollinen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Llinen|Number=Sing	0	root	_	_
+12	Venäjän	Venäjä	PROPN	N	Case=Gen|Number=Sing	13	nmod:poss	_	_
+13	federaation	federaatio	NOUN	N	Case=Gen|Number=Sing	14	nmod:poss	_	_
+14	kansojen	kansa	NOUN	N	Case=Gen|Number=Plur	15	nmod:poss	_	_
+15	kulttuuriperintökohteiden	kulttuuri#perintö#kohde	NOUN	N	Case=Gen|Number=Plur	22	nmod:gobj	_	_
+16	(	(	PUNCT	Punct	_	20	punct	_	SpaceAfter=No
+17	historiallisten	historiallinen	ADJ	A	Case=Gen|Degree=Pos|Derivation=Llinen|Number=Plur	20	amod	_	_
+18	ja	ja	CCONJ	C	_	19	cc	_	_
+19	kulttuurillisten	kulttuurillinen	ADJ	A	Case=Gen|Degree=Pos|Derivation=Llinen|Number=Plur	17	conj	_	_
+20	muistomerkkien	muisto#merkki	NOUN	N	Case=Gen|Number=Plur	15	appos	_	SpaceAfter=No
+21	)	)	PUNCT	Punct	_	20	punct	_	_
+22	säilyttämistä	säilyttäminen	NOUN	N	Case=Par|Derivation=Minen|Number=Sing	27	obj	_	SpaceAfter=No
+23	,	,	PUNCT	Punct	_	24	punct	_	_
+24	käyttöä	käyttö	NOUN	N	Case=Par|Number=Sing	22	conj	_	_
+25	ja	ja	CCONJ	C	_	26	cc	_	_
+26	suojelua	suojelu	NOUN	N	Case=Par|Derivation=U|Number=Sing	22	conj	_	_
+27	koskevan	koskea	VERB	V	Case=Gen|Degree=Pos|Number=Sing|PartForm=Pres|VerbForm=Part|Voice=Act	28	acl	_	_
+28	lainsäädännön	lain#säädäntö	NOUN	N	Case=Gen|Number=Sing	29	nmod:poss	_	_
+29	mukaisesti	mukaisesti	ADV	Adv	Derivation=Sti	30	advmod	_	_
+30	toteuttamaan	toteuttaa	VERB	V	Case=Ill|InfForm=3|Number=Sing|VerbForm=Inf|Voice=Act	11	xcomp	_	_
+31	Tilojen	tila	NOUN	N	Case=Gen|Number=Plur	30	obl	_	_
+32	suhteen	suhteen	ADP	Adp	AdpType=Post	31	case	_	_
+33	vaatimukset	vaatimus	NOUN	N	Case=Nom|Number=Plur	30	obj	_	_
+34	alueellista	alueellinen	ADJ	A	Case=Par|Degree=Pos|Derivation=Llinen|Number=Sing	35	amod	_	_
+35	merkitystä	merkitys	NOUN	N	Case=Par|Number=Sing	36	obj	_	_
+36	omaavan	omata	VERB	V	Case=Gen|Degree=Pos|Number=Sing|PartForm=Pres|VerbForm=Part|Voice=Act	37	acl	_	_
+37	kulttuuriperintökohteen	kulttuuri#perintö#kohde	NOUN	N	Case=Gen|Number=Sing	30	obj	_	SpacesAfter=\s\s
+38	"	"	PUNCT	Punct	_	39	punct	_	_
+39	Talon	talo	NOUN	N	Case=Gen|Number=Sing	37	appos	_	SpaceAfter=No
+40	,	,	PUNCT	Punct	_	43	punct	_	_
+41	jossa	joka	PRON	Pron	Case=Ine|Number=Sing|PronType=Rel	43	nmod	_	_
+42	taloustieteilijä	talous#tieteilijä	NOUN	N	Case=Nom|Derivation=Ja|Number=Sing	43	compound:nn	_	_
+43	N	N	PROPN	N	Abbr=Yes|Case=Gen|Number=Sing	39	conj	_	SpaceAfter=No
+44	.	.	PUNCT	Punct	_	11	punct	_	_
+
+# sent_id = 2
+# text = F. Danielsson asui vuosina 1890-1918 " suojelemisesta, ylläpitämisestä, käytöstä ja saavutettavuudesta.
+1	F.	F.	PROPN	N	Abbr=Yes|Case=Nom|Number=Sing	3	nsubj	_	_
+2	Danielsson	Danielsson	PROPN	N	Case=Nom|Number=Sing	1	flat:name	_	_
+3	asui	asua	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act	0	root	_	_
+4	vuosina	vuosi	NOUN	N	Case=Ess|Number=Plur	3	obl	_	_
+5	1890-1918	1890-1918	NUM	Num	NumType=Card	4	nummod	_	_
+6	"	"	PUNCT	Punct	_	7	punct	_	SpacesAfter=\s\s
+7	suojelemisesta	suojeleminen	NOUN	N	Case=Ela|Derivation=Minen|Number=Sing	3	obl	_	SpaceAfter=No
+8	,	,	PUNCT	Punct	_	9	punct	_	_
+9	ylläpitämisestä	yllä#pitäminen	NOUN	N	Case=Ela|Derivation=Minen|Number=Sing	7	conj	_	SpaceAfter=No
+10	,	,	PUNCT	Punct	_	11	punct	_	_
+11	käytöstä	käyttö	NOUN	N	Case=Ela|Number=Sing	7	conj	_	_
+12	ja	ja	CCONJ	C	_	13	cc	_	_
+13	saavutettavuudesta	saavutettavuus	NOUN	N	Case=Ela|Derivation=Vs|Number=Sing	7	conj	_	SpaceAfter=No
+14	.	.	PUNCT	Punct	_	3	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = 5 artikla
+1	5	5	NUM	Num	NumType=Card	2	nummod	_	_
+2	artikla	artikla	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Mikäli suomalainen osapuoli myy Tilat, on venäläisellä osapuolella etuoikeus niiden hankintaan.
+1	Mikäli	mikäli	SCONJ	C	_	4	mark	_	_
+2	suomalainen	suomalainen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Lainen|Number=Sing	3	amod	_	_
+3	osapuoli	osa#puoli	NOUN	N	Case=Nom|Number=Sing	4	nsubj	_	_
+4	myy	myydä	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	9	advcl	_	_
+5	Tilat	tila	NOUN	N	Case=Nom|Number=Plur	4	obj	_	SpaceAfter=No
+6	,	,	PUNCT	Punct	_	4	punct	_	_
+7	on	olla	AUX	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	9	cop	_	_
+8	venäläisellä	venäläinen	ADJ	A	Case=Ade|Degree=Pos|Derivation=Lainen|Number=Sing	9	amod	_	_
+9	osapuolella	osa#puoli	NOUN	N	Case=Ade|Number=Sing	0	root	_	_
+10	etuoikeus	etu#oikeus	NOUN	N	Case=Nom|Derivation=Vs|Number=Sing	9	nsubj:cop	_	_
+11	niiden	se	PRON	Pron	Case=Gen|Number=Plur|PronType=Dem	12	nmod:gobj	_	_
+12	hankintaan	hankinta	NOUN	N	Case=Ill|Number=Sing	10	nmod	_	SpaceAfter=No
+13	.	.	PUNCT	Punct	_	9	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Tilojen myyminen kolmannelle taholle on mahdollista, jos venäläinen osapuoli luopuu etuoikeudestaan ostaa Tilat kolmannelle taholle tarjotuilla ehdoilla.
+1	Tilojen	tila	NOUN	N	Case=Gen|Number=Plur	2	nmod:gobj	_	_
+2	myyminen	myyminen	NOUN	N	Case=Nom|Derivation=Minen|Number=Sing	6	nsubj:cop	_	_
+3	kolmannelle	kolmas	ADJ	A	Case=All|Degree=Sup|Number=Sing	4	amod	_	_
+4	taholle	taho	NOUN	N	Case=All|Number=Sing	2	nmod	_	_
+5	on	olla	AUX	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	6	cop	_	_
+6	mahdollista	mahdollinen	ADJ	A	Case=Par|Degree=Pos|Derivation=Llinen|Number=Sing	0	root	_	SpaceAfter=No
+7	,	,	PUNCT	Punct	_	11	punct	_	_
+8	jos	jos	SCONJ	C	_	11	mark	_	_
+9	venäläinen	venäläinen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Lainen|Number=Sing	10	amod	_	_
+10	osapuoli	osa#puoli	NOUN	N	Case=Nom|Number=Sing	11	nsubj	_	_
+11	luopuu	luopua	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	6	advcl	_	_
+12	etuoikeudestaan	etu#oikeus	NOUN	N	Case=Ela|Derivation=Vs|Number=Sing|Person[psor]=3	11	obl	_	_
+13	ostaa	ostaa	VERB	V	InfForm=1|Number=Sing|VerbForm=Inf|Voice=Act	12	acl	_	_
+14	Tilat	tila	NOUN	N	Case=Nom|Number=Plur	13	obj	_	_
+15	kolmannelle	kolmas	ADJ	A	Case=All|Degree=Sup|Number=Sing	16	amod	_	_
+16	taholle	taho	NOUN	N	Case=All|Number=Sing	17	obl	_	_
+17	tarjotuilla	tarjota	VERB	V	Case=Ade|Degree=Pos|Number=Plur|PartForm=Past|VerbForm=Part|Voice=Pass	18	acl	_	_
+18	ehdoilla	ehto	NOUN	N	Case=Ade|Number=Plur	13	obl	_	SpaceAfter=No
+19	.	.	PUNCT	Punct	_	6	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = 6 artikla
+1	6	6	NUM	Num	NumType=Card	2	nummod	_	_
+2	artikla	artikla	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Osapuolten väliset riidat ja erimielisyydet tämän sopimuksen määräysten täytäntöönpanosta ja (tai) tulkinnasta ratkaistaan osapuolten välisissä neuvotteluissa.
+1	Osapuolten	osa#puoli	NOUN	N	Case=Gen|Number=Plur	2	nmod:poss	_	_
+2	väliset	välinen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Inen|Number=Plur	3	amod	_	_
+3	riidat	riita	NOUN	N	Case=Nom|Number=Plur	15	obj	_	_
+4	ja	ja	CCONJ	C	_	5	cc	_	_
+5	erimielisyydet	eri#mielisyys	NOUN	N	Case=Nom|Number=Plur	3	conj	_	_
+6	tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	7	det	_	_
+7	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	8	nmod:poss	_	_
+8	määräysten	määräys	NOUN	N	Case=Gen|Number=Plur	9	nmod:gobj	_	_
+9	täytäntöönpanosta	täytäntöönpano	NOUN	N	Case=Ela|Number=Sing	5	nmod	_	_
+10	ja	ja	CCONJ	C	_	14	cc	_	_
+11	(	(	PUNCT	Punct	_	12	punct	_	SpaceAfter=No
+12	tai	tai	CCONJ	C	_	14	advmod	_	SpaceAfter=No
+13	)	)	PUNCT	Punct	_	12	punct	_	_
+14	tulkinnasta	tulkinta	NOUN	N	Case=Ela|Number=Sing	3	nmod	_	_
+15	ratkaistaan	ratkaista	VERB	V	Mood=Ind|Tense=Pres|VerbForm=Fin|Voice=Pass	0	root	_	_
+16	osapuolten	osa#puoli	NOUN	N	Case=Gen|Number=Plur	17	nmod:poss	_	_
+17	välisissä	välinen	ADJ	A	Case=Ine|Degree=Pos|Derivation=Inen|Number=Plur	18	amod	_	_
+18	neuvotteluissa	neuvottelu	NOUN	N	Case=Ine|Derivation=U|Number=Plur	15	obl	_	SpaceAfter=No
+19	.	.	PUNCT	Punct	_	15	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = 7 artikla
+1	7	7	NUM	Num	NumType=Card	2	nummod	_	_
+2	artikla	artikla	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Osapuolet ilmoittavat toisilleen diplomaattiteitse, kun tämän sopimuksen voimaantulon edellyttämät kansalliset toimenpiteet on toteutettu.
+1	Osapuolet	osa#puoli	NOUN	N	Case=Nom|Number=Plur	2	nsubj	_	_
+2	ilmoittavat	ilmoittaa	VERB	V	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+3	toisilleen	toinen	PRON	Pron	Case=All|Number=Plur|Person[psor]=3|PronType=Rcp	2	obl	_	_
+4	diplomaattiteitse	diplomaatti#teitse	ADV	Adv	_	2	advmod	_	SpaceAfter=No
+5	,	,	PUNCT	Punct	_	14	punct	_	_
+6	kun	kun	SCONJ	C	_	14	mark	_	_
+7	tämän	tämä	PRON	Pron	Case=Gen|Number=Sing|PronType=Dem	8	det	_	_
+8	sopimuksen	sopimus	NOUN	N	Case=Gen|Number=Sing	9	nmod:poss	_	_
+9	voimaantulon	voimaan#tulo	NOUN	N	Case=Gen|Number=Sing	10	nsubj	_	_
+10	edellyttämät	edellyttää	VERB	V	Case=Nom|Degree=Pos|Number=Plur|PartForm=Agt|VerbForm=Part|Voice=Act	12	acl	_	_
+11	kansalliset	kansallinen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Llinen|Number=Plur	12	amod	_	_
+12	toimenpiteet	toimen#pide	NOUN	N	Case=Nom|Number=Plur	14	obj	_	_
+13	on	olla	AUX	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	14	aux:pass	_	_
+14	toteutettu	toteuttaa	VERB	V	Case=Nom|Degree=Pos|Number=Sing|PartForm=Past|VerbForm=Part|Voice=Pass	2	advcl	_	SpaceAfter=No
+15	.	.	PUNCT	Punct	_	2	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Sopimus tulee voimaan 30 (kolmenkymmenen) päivän kuluttua jälkimmäisen ilmoituksen vastaanottopäivästä.
+1	Sopimus	sopimus	NOUN	N	Case=Nom|Number=Sing	2	nsubj	_	_
+2	tulee	tulla	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|Voice=Act	0	root	_	_
+3	voimaan	voimaan	ADV	Adv	_	2	compound:prt	_	_
+4	30	30	NUM	Num	NumType=Card	8	nummod	_	_
+5	(	(	PUNCT	Punct	_	6	punct	_	SpaceAfter=No
+6	kolmenkymmenen	kolme#kymmenen	NUM	Num	Case=Gen|Number=Sing|NumType=Card	4	appos	_	SpaceAfter=No
+7	)	)	PUNCT	Punct	_	6	punct	_	_
+8	päivän	päivä	NOUN	N	Case=Gen|Number=Sing	9	nsubj	_	_
+9	kuluttua	kulua	VERB	V	Case=Par|Degree=Pos|Number=Sing|PartForm=Past|VerbForm=Part|Voice=Pass	2	advcl	_	_
+10	jälkimmäisen	jälkimmäinen	ADJ	A	Case=Gen|Degree=Pos|Derivation=Inen|Number=Sing	11	amod	_	_
+11	ilmoituksen	ilmoitus	NOUN	N	Case=Gen|Number=Sing	12	nmod:poss	_	_
+12	vastaanottopäivästä	vastaanotto#päivä	NOUN	N	Case=Ela|Number=Sing	9	obl	_	SpaceAfter=No
+13	.	.	PUNCT	Punct	_	2	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Tehty Moskovassa 4 päivänä heinäkuuta 2017 kahtena kappaleena suomen ja venäjän kielellä molempien tekstien ollessa yhtä todistusvoimaiset.
+1	Tehty	tehdä	VERB	V	Case=Nom|Degree=Pos|Number=Sing|PartForm=Past|VerbForm=Part|Voice=Pass	0	root	_	_
+2	Moskovassa	Moskova	PROPN	N	Case=Ine|Number=Sing	1	obl	_	_
+3	4	4	NUM	Num	NumType=Card	1	obl	_	_
+4	päivänä	päivä	NOUN	N	Case=Ess|Number=Sing	3	flat	_	_
+5	heinäkuuta	heinäkuu	NOUN	N	Case=Par|Number=Sing	3	flat	_	_
+6	2017	2017	NUM	Num	NumType=Card	3	flat	_	_
+7	kahtena	kaksi	NUM	Num	Case=Ess|Number=Sing|NumType=Card	8	nummod	_	_
+8	kappaleena	kappale	NOUN	N	Case=Ess|Number=Sing	1	obl	_	_
+9	suomen	Suomi	PROPN	N	Case=Gen|Number=Sing	12	nmod:poss	_	_
+10	ja	ja	CCONJ	C	_	11	cc	_	_
+11	venäjän	venäjä	PROPN	N	Case=Gen|Number=Sing	9	conj	_	_
+12	kielellä	kieli	NOUN	N	Case=Ade|Number=Sing	1	obl	_	_
+13	molempien	molemmat	PRON	Pron	Case=Gen|Number=Plur|PronType=Ind	14	det	_	_
+14	tekstien	teksti	NOUN	N	Case=Gen|Number=Plur	17	nsubj:cop	_	_
+15	ollessa	olla	AUX	V	Case=Ine|InfForm=2|Number=Sing|VerbForm=Inf|Voice=Act	17	cop	_	_
+16	yhtä	yhtä	ADV	Adv	_	17	advmod	_	_
+17	todistusvoimaiset	todistus#voimainen	ADJ	A	Case=Nom|Degree=Pos|Derivation=Inen|Number=Plur	1	advcl	_	SpaceAfter=No
+18	.	.	PUNCT	Punct	_	1	punct	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Mikko Hautala
+1	Mikko	Mikko	PROPN	N	Case=Nom|Number=Sing	0	root	_	_
+2	Hautala	Hautala	PROPN	N	Case=Nom|Number=Sing	1	flat:name	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Suomen suurlähettiläs
+1	Suomen	Suomi	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	suurlähettiläs	suur#lähettiläs	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Suomen tasavallan hallituksen puolesta
+1	Suomen	Suomi	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	tasavallan	tasa#valta	NOUN	N	Case=Gen|Number=Sing	3	nmod:poss	_	_
+3	hallituksen	hallitus	NOUN	N	Case=Gen|Number=Sing	0	root	_	_
+4	puolesta	puolesta	ADP	Adp	AdpType=Post	3	case	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Aleksandr Tsybulski
+1	Aleksandr	Aleksandr	PROPN	N	Case=Nom|Number=Sing	0	root	_	_
+2	Tsybulski	Tsybulski	PROPN	N	Case=Nom|Number=Sing	1	flat:name	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Venäjän federaation varatalouskehitysministeri
+1	Venäjän	Venäjä	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	federaation	federaatio	PROPN	N	Case=Gen|Number=Sing	3	nmod:poss	_	_
+3	varatalouskehitysministeri	vara#talous#kehitys#ministeri	NOUN	N	Case=Nom|Number=Sing	0	root	_	SpacesAfter=\n
+
+# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# newdoc
+# newpar
+# sent_id = 1
+# text = Venäjän federaation hallituksen puolesta
+1	Venäjän	Venäjä	PROPN	N	Case=Gen|Number=Sing	2	nmod:poss	_	_
+2	federaation	federaatio	PROPN	N	Case=Gen|Number=Sing	3	nmod:poss	_	_
+3	hallituksen	hallitus	NOUN	N	Case=Gen|Number=Sing	0	root	_	_
+4	puolesta	puolesta	ADP	Adp	AdpType=Post	3	case	_	SpacesAfter=\n
+

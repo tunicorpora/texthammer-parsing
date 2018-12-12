@@ -57,7 +57,6 @@ def parseFiles(pair_id, parserpath):
 
     """
 
-    #TODO: LANG!!!
     #TODO: select which model if multiple available (rcfile?)
 
     if parserpath[-1] != r"/":
@@ -85,5 +84,19 @@ def parseFiles(pair_id, parserpath):
                 "--pipeline", "parse_plaintext"], stdin=p1.stdout, cwd=parserpath)
             with open(parsed_dir + "/" + lang + "/" + os.path.basename(f), "w") as f:
                 f.write(output.decode("utf-8"))
+
+
+def convertFiles(pair_id, outputpath):
+    """
+    Converts the prepared and parsed files to texthammer's xml format
+
+    - pair_id the unique id of a source file
+    - outputpath were to output the xml
+
+    """
+
+    if outputpath[-1] != r"/":
+        outputpath += r"/"
+
 
 

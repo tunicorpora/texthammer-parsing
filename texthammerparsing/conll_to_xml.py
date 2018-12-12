@@ -5,7 +5,7 @@ import string
 from csv import DictReader
 import os
 import re
-from python_tools import AlignMismatch, TrimList, MissingTextError, ArgumentError
+from texthammerparsing.python_tools import AlignMismatch, TrimList, MissingTextError, ArgumentError
 from collections import OrderedDict
 import os.path
 import logging

@@ -50,11 +50,11 @@ def main():
         with open(args.output_ids, "w") as f:
             f.write("\n".join(ids))
 
+    if args.action in ["parse", "get_xml"] and not args.id:
+        print("Please specify the ids of the prepared files with the --id option")
+        sys.exit(0)
 
     if args.action == "parse":
-        if not args.id:
-            print("Please specify the ids of the prepared files with the --id option")
-            sys.exit(0)
 
         # TODO: .rcfile
         parserpath = args.parserpath
@@ -74,8 +74,8 @@ def main():
             parseFiles(this_id, parserpath)
 
     if args.action == "get_xml":
-        for pair_id in args.id:
-            fname = "/tmp/texthammerparsing/" + pair_id + "/parsed/"
+        for this_id in args.id:
+            convertFiles(this_id, output)
 
 
     if args.cleanup:
