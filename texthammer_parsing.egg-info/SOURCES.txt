@@ -11,6 +11,8 @@ texthammer_parsing.egg-info/top_level.txt
 texthammerparsing/FilterLongSentences.py
 texthammerparsing/__init__.py
 texthammerparsing/actions.py
+texthammerparsing/configs.py
+texthammerparsing/conll_to_xml.py
 texthammerparsing/python_tools.py
 texthammerparsing/texthammerparsing.py
 texthammerparsing/tmxtoparserinput.py

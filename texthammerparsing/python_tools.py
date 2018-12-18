@@ -41,3 +41,6 @@ def FixQuotes(fixedstring):
     fixedstring =  re.sub(r"[^a-za-öа-я](\')"," \\1 ",fixedstring, flags=re.I)
     return re.sub(r"([\"]|&quot;)"," \\1 ",fixedstring)
 
+
+def printHeading(text, hmark = "="):
+    print("{0}\n{1}\n{0}".format(hmark*len(text), text))

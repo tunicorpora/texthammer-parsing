@@ -7,6 +7,8 @@ import sys
 import shutil
 import progressbar
 from texthammerparsing import getFiles, prepareTmx, parseFiles, checkDefaults, getPairIds, convertFiles
+from texthammerparsing.python_tools import printHeading
+from termcolor import colored
 
 
 def main():
@@ -46,9 +48,10 @@ def main():
 
     logfile = "/tmp/texthammerparsing_log_"  + str(datetime.datetime.now()).replace(" ","_").replace(":","-")
     logging.basicConfig(filename=logfile, level=logging.INFO, format='%(asctime)s %(message)s')
-    print("Starting.\nIn case of problems take a look at the logfile at " + logfile + "\n"*2)
+    print("Starting.\nRun texthammerparsing --help to get more instructions.\nIn case of problems take a look at the logfile at " + logfile + "\n\n")
 
     if args.action in ["run", "prepare"]:
+        printHeading("Preparing files")
         if not args.input:
             print("Please specify the files to parse or the folder containing the files using the --input option")
             sys.exit(0)
@@ -59,10 +62,12 @@ def main():
                 if success:
                     args.id.append(success)
                 else:
-                    print("Preparation failed for " + f)
+                    print(colored("Preparation failed for " + f, "red"))
             else:
                 pass
                 #monolings?
+        if args.id:
+            print("Prepared {} files to /tmp/texthammerparsing".format(args.id))
 
     if args.output_ids and args.id:
         with open(args.output_ids, "w") as f:

@@ -19,6 +19,7 @@ Tools and shortcuts for programmatically running dependency parsers for multiple
       zip_safe=False,
       install_requires=[
           'wheel',
+          'termcolor',
           'lxml',
           'progressbar2'
       ],
