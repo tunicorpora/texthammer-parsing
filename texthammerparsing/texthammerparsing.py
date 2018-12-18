@@ -52,7 +52,7 @@ def main():
     if args.action in ["run", "prepare"]:
         printHeading("Preparing files")
         if not args.input:
-            print("Please specify the files to parse or the folder containing the files using the --input option")
+            print(colored("Please specify the files to parse or the folder containing the files using the --input option","red"))
             sys.exit(0)
         files = getFiles(args.input)
         for f in files:
@@ -66,22 +66,22 @@ def main():
                 pass
                 #monolings?
         if args.id:
-            print("Prepared {} files to /tmp/texthammerparsing".format(args.id))
+            print("Prepared {} files to /tmp/texthammerparsing".format(len(args.id)))
 
     if args.id:
         if args.action in ["run", "parse"]:
             printHeading("Parsing files")
             print("This is going to take time.")
-            print("Look at the log files at /tmp/texthammerparsing/parserlog")
-            print("hint: use tail -f for realtime updates).")
+            print("Look at the log files at /tmp/texthammerparsing/parserlog (hint: use tail -f for realtime updates).")
             print("For less verbose output check out " + logfile)
             if not args.parserpath:
-                print("Please specify the location of the parser with the --parserpath option")
+                print(colored("Please specify the location of the parser with the --parserpath option","red"))
                 sys.exit(0)
             for this_id in progressbar.progressbar(args.id):
                 parseFiles(this_id, args.parserpath)
     if args.id:
         if args.action in ["run", "get_xml"]:
+            printHeading("Outputting xml")
             for this_id in args.id:
                 if os.path.isdir("/tmp/texthammerparsing/{}/parsed".format(this_id)):
                     convertFiles(this_id, args.output)
