@@ -87,7 +87,7 @@ def main():
 
 
     if args.id:
-        print("Ids: \n" + "\n".join(ids))
+        print("Ids: \n" + "\n".join(args.id))
 
 
 
