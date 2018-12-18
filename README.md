@@ -3,88 +3,96 @@ TEXTMINE-PARSING
 
 
 This project contains the utilities needed to parse multilingual tmx-files and convert them
-to xml files with syntactic and morphological annotations. These xml files are meant to be used 
+to xml files with syntactic and morphological annotations. These xml files are intended to be used 
 in the Texthammer or [Nexthammer](https://github.com/hrmJ/nexthammer) corpus projects.
 
-Information about the parsers installed 
-========================================
+The current version of the project has moved to using the new multilingual
+Universal Dependencies -based [Turku neural parser](https://turkunlp.github.io/Turku-neural-parser-pipeline/),
+which significanty simplifies and unifies the process of creating unified output. 
+To examine the old version using several different parsers check out the
+"dev" branch of this repository.
 
 
-name                                                           | language | developer                   | url                                                       | reference       | additional information
----------------------------------------------------------------|----------|-----------------------------|-----------------------------------------------------------|-----------------|--------------------------------------------------
-Finnish dependency parser by the  Turku NLP group (TDT parser) | fi       | Filip Ginter et al          | http://turkunlp.github.io/Finnish-dep-parser/             | [1]             | we are using the UD version, cf. [8].
-Dependency parser for Russian by  Sharoff and Nivre            | ru       | Serge Sharoff, Joakim Nivre | http://corpus.leeds.ac.uk/mocky/                          | [2]             |
-SweMalt:  MaltParser with a pre-trained model for Swedish      | sv       | Joakim Nivre et al?         | http://www.maltparser.org/mco/swedish_parser/swemalt.html | [3] +  [4]      | The parser was trained on the Swedish Treebank (Nivre et al., 2008) and the SUC PoS tagset with morphological features
-Mate parser with a pre-trained model for English               | en       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6]       |
-Mate parser with a pre-trained model for German                | de       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6]       |
-Mate parser with a pre-trained model for French                | fr       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6] + [7] |
-Mate parser with a pre-trained model for Spanish               | es       | Bernd Bohnet et al          | https://code.google.com/archive/p/mate-tools/             | [5] + [6] + [9] | the Spanish parsing pipeline uses Stanford CoreNLP [https://stanfordnlp.github.io/CoreNLP/](https://stanfordnlp.github.io/CoreNLP/) for tokenization, cf. citation no [9].
+Installation
+------------
 
+### Prerequisites
 
-[1] Haverinen, Katri, et al. "Building the essential resources for Finnish: the Turku Dependency Treebank." Language Resources and Evaluation 48.3 (2014): 493-531. DOI: 10.1007/s10579-013-9244-1
+The Turku neural parser mentioned above is a pre-requisite and we refer to the
+excellent and easy-to-follow installation instructions at the project's
+website.
 
-[2] Sharoff, Serge, and Joakim Nivre. "The proper place of men and machines in language technology: Processing Russian without any linguistic knowledge." Proc. Dialogue 2011, Russian Conference on Computational Linguistics. 2011. http://www.dialog-21.ru/digests/dialog2011/materials/en/pdf/58.pdf
+### Installing using pip
 
-[3] Nivre, Joakim, Johan Hall, and Jens Nilsson. "Maltparser: A data-driven parser-generator for dependency parsing." Proceedings of LREC. Vol. 6. 2006. http://lrec-conf.org/proceedings/lrec2006/pdf/162_pdf.pdf
-
-[4] Nivre, Joakim, et al. "Cultivating a Swedish treebank." Resourceful Language Technology (2008): 111. http://stp.lingfil.uu.se/~nivre/docs/saagvall1.pdf
-
-[5] Björkelund, A., Bohnet, B., Hafdell, L., & Nugues, P. (2010, August). A high-performance syntactic and semantic dependency parser. In Proceedings of the 23rd International Conference on Computational Linguistics: Demonstrations (pp. 33-36). Association for Computational Linguistics. https://dl.acm.org/citation.cfm?id=1944293
-
-[6] Bohnet, B., Nivre, J., Boguslavsky, I., Farkas, R., Ginter, F., & Hajič, J. (2013). Joint morphological and syntactic analysis for richly inflected languages. Transactions of the Association for Computational Linguistics, 1, 415-428. https://www.transacl.org/ojs/index.php/tacl/article/view/158/77
-
-[7] Marie Candito, Benoˆıt Crabb´e, Pascal Denis. Statistical French dependency parsing: treebank conversion and first results. Seventh International Conference on Language Resources and Evaluation - LREC 2010, May 2010, La Valletta, Malta. European Language Resources Association (ELRA), pp.1840-1847, 2010. https://hal.inria.fr/file/index/docid/495196/filename/LREC2010-canditocrabbedenis-final.pdf
-
-[8] Pyysalo, S., Kanerva, J., Missilä, A., Laippala, V., & Ginter, F. (2015, May). Universal dependencies for Finnish. In Proceedings of the 20th Nordic Conference of Computational Linguistics, NODALIDA 2015, May 11-13, 2015, Vilnius, Lithuania (No. 109, pp. 163-172). Linköping University Electronic Press. http://www.ep.liu.se/ecp/109/021/ecp15109021.pdf
-
-[9] Manning, Christopher D., Mihai Surdeanu, John Bauer, Jenny Finkel, Steven J. Bethard, and David McClosky. 2014. The Stanford CoreNLP Natural Language Processing Toolkit In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics: System Demonstrations, pp. 55-60
-
-
-Instructions on installing the parsers
-======================================
-
-...or rather, some remarks concerning the installation process.
-
-
-At the moment, the Russian parser is getting a bit old, and the pre-trained
-models provided by Serge Sharoff are either for matl 1.5 or 1.7. In 
-Ubuntu 18.04 the default java version is 1.11 and at least Malt 1.5
-doesn't work with that. Luckily, version 1.8 is okay, and it should
-also be available on an Ubuntu installation. This can be confirmed
-by:
+The software has been built and tested on Ubuntu 18.04, but any linux platform
+supporting python3 should be ok.
+First, make sure you have pip3 installed (`sudo apt install python3-pip`)
+and then install the project directly from github:
 
 ```
-update-java-alternatives --list
+pip3 install git+https://github.com/utacorpora/texthammer-parsing
 ```
 
-which should output:
+Usage
+-----
+
+Installing with the above instructions creates a command called `texthammerparsing`. It's 
+a command line utility with the following specifications:
+
+    texthammerparsing [-h] [--input [inputfiles [inputfiles ...]]]
+                         [--output outputfolder] [--id [ids [ids ...]]]
+                         [--output_ids filename or path] [--parserpath path]
+                         [--cleanup ]
+                         action
 
 
-    java-1.11.0-openjdk-amd64      1101       /usr/lib/jvm/java-1.11.0-openjdk-amd64
-    java-1.8.0-openjdk-amd64       1081       /usr/lib/jvm/java-1.8.0-openjdk-amd64
+The command takes one mandatory argument, `action`, which can be one of the following:
 
-the java version used by default can be changed with the same command, running:
+- run: runs the full pipeline to produce xmls from tmx
 
+The run command is what you usually need. If needed  (for debugging or otherwise),
+the program can be run in separate stages with the following commands:
+
+### prepare
+
+- separates each language from the tmx and stores possible metadata 
+- use the `--input` option to specify the folder containing the files
+- Example:
+
+```bash
+#Each file separately...
+texthammerparsing prepare --input myfolder/myfile.tmx myfolder_b/myfile.tmx
+
+#...or a folder
+texthammerparsing prepare --input myfolder
 ```
-sudo update-java-alternatives --set /usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+### parse
+
+- Sends the prepared files (specified by ids) to the parser
+- use the `--id` option to specify the ids of the prepared files or the 
+- use the `--parserpath` option to specify the folder containing the parser
+- Example:
+
+```bash
+#Each file separately...
+texthammerparsing prepare --input myfolder/myfile.tmx myfolder_b/myfile.tmx
+
+#...or a folder
+texthammerparsing prepare --input myfolder
 ```
 
-Instructions for parsing
-========================
 
-Multilingual tmx files
-----------------------
 
-1. Put the files you want to ~/corpusinput/tmx
-    - note: the files must all include <textdef> tags for all languages (containing metadata)
+- parse: sends the prepared files to the parser
+- get_xml: combines the parsed files into a single xml file
 
-2. Cd to textmine-parsing
+### Parsing TMX
 
-3. run: `sh parse_and_convert.sh ` + abbreviations for all the languages included, e.g. `sh parse_and_convert.sh en fi ru`
+In order to parse a single tmx file
+
+### Creating a default configuration
 
 
 
-More
-====
 
-Check out the docs folder for more information

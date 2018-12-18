@@ -13,7 +13,8 @@ def main():
     parser = argparse.ArgumentParser(description='Programmatically runs dependency parsers and outputs to texthammer xml')
     parser.add_argument('action', 
             metavar = 'action',
-            choices = ["prepare", "get_xml", "parse"], help="The action to run")
+            default = 'run',
+            choices = ["run","prepare", "get_xml", "parse", "version"], help="The action to run")
     parser.add_argument('--input',  '-i',
             metavar = 'inputfiles',
             nargs = "*",
@@ -43,6 +44,9 @@ def main():
     ids = []
 
     if args.action == "prepare":
+        if not args.input:
+            print("Please specify the files to parse or the folder containing the files using the --input option")
+            sys.exit(0)
         files = getFiles(args.input)
         for f in files:
             if ".tmx" in f:
@@ -55,6 +59,11 @@ def main():
         with open(args.output_ids, "w") as f:
             f.write("\n".join(ids))
 
+    if os.path.isfile(args.id[0]):
+        #ids can be supplied via a file
+        with open(args.id[0], "r") as f:
+            args.id = f.read().splitlines()
+
     if args.action in ["parse", "get_xml"] and not args.id:
         args.id = getPairIds()
         if not args.id:
@@ -62,23 +71,13 @@ def main():
             sys.exit(0)
 
     if args.action == "parse":
-
         if not args.parserpath:
             print("Please specify the location of the parser with the --parserpath option")
             sys.exit(0)
-
-        if os.path.isfile(args.id[0]):
-            #ids can be supplied via a file
-            with open(args.id[0], "r") as f:
-                ids = f.read().splitlines()
-        else:
-            ids = args.id
-
-        for this_id in ids:
+        for this_id in args.id:
             parseFiles(this_id, parserpath)
 
     if args.action == "get_xml":
-
         for this_id in args.id:
             convertFiles(this_id, args.output)
 
