@@ -86,19 +86,32 @@ def parseFiles(pair_id, parserpath):
     python_bin = parserpath + "venv-parser-neural/bin/python3"
     script_file = parserpath + "full_pipeline_stream.py"
     parsed_dir = "/tmp/texthammerparsing/{}/parsed".format(pair_id)
+    log_dir = "/tmp/texthammerparsing/parserlog/"
     os.makedirs(parsed_dir, exist_ok=True)
+    os.makedirs(log_dir, exist_ok=True)
     prepared_dir = "/tmp/texthammerparsing/" + pair_id + "/prepared/"
 
     for lang in os.listdir(prepared_dir):
         lang = lang.replace(r"/","")
         langdir = parsed_dir + "/" + lang 
         os.makedirs(langdir, exist_ok=True)
+        logging.info("Starting to parse the files in the following language: " + lang)
         for f in glob.glob(prepared_dir + lang + "/*"):
+            code = os.path.basename(f)
+            logging.info("Starting to parse the following file: " + code)
             p1 = subprocess.Popen(["cat", f], stdout=subprocess.PIPE)
-            output = subprocess.check_output([python_bin, script_file, 
-                "--conf", parserpath + models[lang] + "/pipelines.yaml", 
-                "--pipeline", "parse_plaintext"], stdin=p1.stdout, cwd=parserpath)
-            with open(parsed_dir + "/" + lang + "/" + os.path.basename(f), "w") as f:
+            with open(log_dir + code, "w") as outfile:
+                output = subprocess.check_output(
+                    [
+                        python_bin,
+                        script_file, 
+                        "--conf", parserpath + models[lang] + "/pipelines.yaml", 
+                        "--pipeline", "parse_plaintext"
+                    ], 
+                    stdin=p1.stdout, 
+                    cwd=parserpath,
+                    stderr=outfile)
+            with open(parsed_dir + "/" + lang + "/" + code, "w") as f:
                 f.write(output.decode("utf-8"))
 
 

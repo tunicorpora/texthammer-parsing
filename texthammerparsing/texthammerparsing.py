@@ -30,9 +30,6 @@ def main():
             metavar = 'ids',
             default = [],
             nargs = "*", help="The ids of the input files to be processed. These are produced by the 'prepare' action of this program")
-    parser.add_argument('--output_ids', 
-            metavar = 'filename or path',
-            help="A temporary file for the ids to be stored in")
     parser.add_argument('--parserpath', 
             metavar = 'path',
             help="absolute path to the folder containing the parser")
@@ -46,9 +43,11 @@ def main():
     #Check the rc file for defaults
     args = checkDefaults(parser.parse_args())
 
-    logfile = "/tmp/texthammerparsing_log_"  + str(datetime.datetime.now()).replace(" ","_").replace(":","-")
+    os.makedirs("/tmp/texthammerparsing/", exist_ok=True)
+    logfile = "/tmp/texthammerparsing/log_"  + str(datetime.datetime.now()).replace(" ","_").replace(":","-")
     logging.basicConfig(filename=logfile, level=logging.INFO, format='%(asctime)s %(message)s')
-    print("Starting.\nRun texthammerparsing --help to get more instructions.\nIn case of problems take a look at the logfile at " + logfile + "\n\n")
+    print("Starting.\nRun texthammerparsing --help to get more instructions.")
+    print("Writing Logfile at " + logfile)
 
     if args.action in ["run", "prepare"]:
         printHeading("Preparing files")
@@ -69,28 +68,23 @@ def main():
         if args.id:
             print("Prepared {} files to /tmp/texthammerparsing".format(args.id))
 
-    if args.output_ids and args.id:
-        with open(args.output_ids, "w") as f:
-            f.write("\n".join(args.id))
-
     if args.id:
-        if os.path.isfile(args.id[0]):
-            #ids can be supplied via a file
-            with open(args.id[0], "r") as f:
-                args.id = f.read().splitlines()
-
-    if args.action in ["run", "parse"]:
-        printHeading("Parsing files")
-        if not args.parserpath:
-            print("Please specify the location of the parser with the --parserpath option")
-            sys.exit(0)
-        for this_id in progressbar.progressbar(args.id):
-            parseFiles(this_id, args.parserpath)
-
-    if args.action in ["run", "get_xml"]:
-        for this_id in args.id:
-            if os.path.isdir("/tmp/texthammerparsing/{}/parsed".format(this_id)):
-                convertFiles(this_id, args.output)
+        if args.action in ["run", "parse"]:
+            printHeading("Parsing files")
+            print("This is going to take time.")
+            print("Look at the log files at /tmp/texthammerparsing/parserlog")
+            print("hint: use tail -f for realtime updates).")
+            print("For less verbose output check out " + logfile)
+            if not args.parserpath:
+                print("Please specify the location of the parser with the --parserpath option")
+                sys.exit(0)
+            for this_id in progressbar.progressbar(args.id):
+                parseFiles(this_id, args.parserpath)
+    if args.id:
+        if args.action in ["run", "get_xml"]:
+            for this_id in args.id:
+                if os.path.isdir("/tmp/texthammerparsing/{}/parsed".format(this_id)):
+                    convertFiles(this_id, args.output)
 
     if args.cleanup:
         shutil.rmtree("/tmp/texthammerparsing/", ignore_errors=True)

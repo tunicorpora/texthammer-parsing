@@ -43,4 +43,4 @@ def FixQuotes(fixedstring):
 
 
 def printHeading(text, hmark = "="):
-    print("{0}\n{1}\n{0}".format(hmark*len(text), text))
+    print("\n{0}\n{1}\n{0}".format(hmark*len(text), text))
