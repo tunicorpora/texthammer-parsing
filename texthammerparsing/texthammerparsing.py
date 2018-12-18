@@ -24,6 +24,7 @@ def main():
             help="Path to the desired destination folder")
     parser.add_argument('--id', 
             metavar = 'ids',
+            default = [],
             nargs = "*", help="The ids of the input files to be processed. These are produced by the 'prepare' action of this program")
     parser.add_argument('--output_ids', 
             metavar = 'filename or path',
@@ -41,23 +42,21 @@ def main():
     #Check the rc file for defaults
     args = checkDefaults(parser.parse_args())
 
-    ids = []
-
-    if args.action == "prepare":
+    if args.action in ["run", "prepare"]:
         if not args.input:
             print("Please specify the files to parse or the folder containing the files using the --input option")
             sys.exit(0)
         files = getFiles(args.input)
         for f in files:
             if ".tmx" in f:
-                ids.append(prepareTmx(f))
+                args.id.append(prepareTmx(f))
             else:
                 pass
                 #monolings?
 
-    if args.output_ids:
+    if args.output_ids and args.id:
         with open(args.output_ids, "w") as f:
-            f.write("\n".join(ids))
+            f.write("\n".join(args.id))
 
     if args.id:
         if os.path.isfile(args.id[0]):
@@ -65,29 +64,28 @@ def main():
             with open(args.id[0], "r") as f:
                 args.id = f.read().splitlines()
 
-    if args.action in ["parse", "get_xml"] and not args.id:
+    if args.action in ["parse", "get_xml", "run"] and not args.id:
         args.id = getPairIds()
         if not args.id:
             print("Please specify the ids of the prepared files with the --id option")
             sys.exit(0)
 
-    if args.action == "parse":
+    if args.action in ["run", "parse"]:
         if not args.parserpath:
             print("Please specify the location of the parser with the --parserpath option")
             sys.exit(0)
         for this_id in args.id:
-            parseFiles(this_id, parserpath)
+            parseFiles(this_id, args.parserpath)
 
-    if args.action == "get_xml":
+    if args.action in ["run", "get_xml"]:
         for this_id in args.id:
             convertFiles(this_id, args.output)
-
 
     if args.cleanup:
         shutil.rmtree("/tmp/texthammerparsing/", ignore_errors=True)
 
 
-    if ids:
+    if args.id:
         print("Ids: \n" + "\n".join(ids))
 
 

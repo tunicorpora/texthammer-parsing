@@ -36,24 +36,20 @@ pip3 install git+https://github.com/utacorpora/texthammer-parsing
 Usage
 -----
 
-Installing with the above instructions creates a command called `texthammerparsing`. It's 
-a command line utility with the following specifications:
-
-    texthammerparsing [-h] [--input [inputfiles [inputfiles ...]]]
-                         [--output outputfolder] [--id [ids [ids ...]]]
-                         [--output_ids filename or path] [--parserpath path]
-                         [--cleanup ]
-                         action
+### Quick start
 
 
-The command takes one mandatory argument, `action`, which can be one of the following:
 
-- run: runs the full pipeline to produce xmls from tmx
 
-The run command is what you usually need. If needed  (for debugging or otherwise),
-the program can be run in separate stages with the following commands:
+### Individual actions
 
-### prepare
+The command takes one mandatory argument, `action`, which 
+by default is set to `run`.  This runs the full pipeline from
+file preparation to xml output but, if needed, the job
+can be split to substeps described below. The substeps
+are defined by the following actions:
+
+#### prepare
 
 - separates each language from the tmx and stores possible metadata 
 - use the `--input` option to specify the folder containing the files
@@ -67,31 +63,36 @@ texthammerparsing prepare --input myfolder/myfile.tmx myfolder_b/myfile.tmx
 texthammerparsing prepare --input myfolder
 ```
 
-### parse
+#### parse
 
 - Sends the prepared files (specified by ids) to the parser
-- use the `--id` option to specify the ids of the prepared files or the 
+- use the `--id` option to specify the ids of the prepared files (if left out, all the prepared files located at /tmp/texthammerparsing/ will be processed)
 - use the `--parserpath` option to specify the folder containing the parser
 - Example:
 
 ```bash
-#Each file separately...
-texthammerparsing prepare --input myfolder/myfile.tmx myfolder_b/myfile.tmx
+#With the id specified (useful for debugging a single file)
+texthammerparsing parse --parserpath ~/parsers/Turku-neural-parser --id 09348021349lk4j-234lk234934
+#Without the id (will parse everything found at /tmp/texthammerparsing)
+texthammerparsing parse --parserpath ~/parsers/Turku-neural-parser 
+```
 
-#...or a folder
-texthammerparsing prepare --input myfolder
+
+#### get_xml
+
+- combines the parsed files into a single xml file
+- use the `--id` option to specify the ids of the prepared files (if left out, all the parsed files located at /tmp/texthammerparsing/ will be processed)
+
+```bash
+#With the id specified (useful for debugging a single file)
+texthammerparsing get_xml --id 09348021349lk4j-234lk234934
+#Without the id (will convert everything found at /tmp/texthammerparsing)
+texthammerparsing get_xml 
 ```
 
 
 
-- parse: sends the prepared files to the parser
-- get_xml: combines the parsed files into a single xml file
-
-### Parsing TMX
-
-In order to parse a single tmx file
-
-### Creating a default configuration
+#### Creating a default configuration
 
 
 
