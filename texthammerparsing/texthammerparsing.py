@@ -2,6 +2,7 @@
 import argparse
 import logging
 import os.path
+import datetime
 import sys
 import shutil
 import progressbar
@@ -43,6 +44,10 @@ def main():
     #Check the rc file for defaults
     args = checkDefaults(parser.parse_args())
 
+    logfile = "/tmp/texthammerparsing_log_"  + str(datetime.datetime.now()).replace(" ","_").replace(":","-")
+    logging.basicConfig(filename=logfile, level=logging.INFO, format='%(asctime)s %(message)s')
+    print("Starting.\nIn case of problems take a look at the logfile at " + logfile + "\n"*2)
+
     if args.action in ["run", "prepare"]:
         if not args.input:
             print("Please specify the files to parse or the folder containing the files using the --input option")
@@ -50,7 +55,11 @@ def main():
         files = getFiles(args.input)
         for f in files:
             if ".tmx" in f:
-                args.id.append(prepareTmx(f))
+                success = prepareTmx(f)
+                if success:
+                    args.id.append(success)
+                else:
+                    print("Preparation failed for " + f)
             else:
                 pass
                 #monolings?
@@ -85,10 +94,6 @@ def main():
 
     if args.cleanup:
         shutil.rmtree("/tmp/texthammerparsing/", ignore_errors=True)
-
-
-    if args.id:
-        print("Ids: \n" + "\n".join(args.id))
 
 
 

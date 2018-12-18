@@ -64,6 +64,31 @@ texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neur
 
 ```
 
+If you wish to clean up the `/tmp/texthammerparsing` folder after the parsing is done
+(in order to save space or otherwise) add the `--cleanup` to the command, e.g.
+
+
+```bash
+
+texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/ --output ~/texthammer_xml --cleanup
+
+```
+
+All this can also be specified in a separate configuration file. This should
+be a `yaml` file located at `~/.config/` and named `texthammerparsing.yaml`, i.e.
+`~/.config/texthammerparsing.yaml`. Below is short example configuration:
+
+```yaml
+---
+
+- parserpath: 
+- output: 
+- input: 
+
+
+---
+```
+
 
 #### Parsing monolingual files
 

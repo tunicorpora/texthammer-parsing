@@ -5,17 +5,11 @@
 <textdef author="Konkka J." code="Konkka_Lap_PV" lang="ru" permission="" publisher="Гйоль" title="Огни Петербурга" translator="Лапатка, Якуб" yearorig="1958" yeartr="2014"/>
 
 <tu>
-<tuv xml:lang="fi">
-Syntymäkotini Koivumäen eteläisessä päädyssä kasvoi kolme vanhaa, rosopintaista koivua, joista pisimpään aloin kiipeillä neljän vuoden ikäisenä.
-</tuv>
-<tuv xml:lang="ru">
+<tu
 Наш дом стоял на Березовом холме - Койвумяки, на южной стороне которого росли три старые березы, покрытые толстой шершавой корой. Наверное, с четырех лет я повадился забираться на самую высокую из них.
 </tuv>
 </tu>
 <tu>
-<tuv xml:lang="fi">
-Päivällä en siitä puuhasta välittänyt niinkään paljon kuin illalla pimeän tultua.
-</tuv>
 <tuv xml:lang="ru">
 Днем это привлекало меня не так сильно, как вечером, когда густые сумерки спускались на землю.
 </tuv>

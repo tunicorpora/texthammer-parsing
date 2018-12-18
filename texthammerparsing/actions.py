@@ -1,4 +1,5 @@
 import os
+import logging
 import glob
 import subprocess
 from texthammerparsing import Tmxfile, TextPair
@@ -53,12 +54,14 @@ def prepareTmx(filename):
             thisfile.WritePreparedFiles()
     except Exception as e:
         thisfile.ReportProblems(e)
+        print("Problems in preparing " + filename + ". Check out the log file at " + logging.getLoggerClass().root.handlers[0].baseFilename)
     finally:
         pass
         #do some cleaning up...?
 
     if thisfile:
-        return thisfile.pair_id
+        if not thisfile.errors:
+            return thisfile.pair_id
 
 def parseFiles(pair_id, parserpath):
     """
