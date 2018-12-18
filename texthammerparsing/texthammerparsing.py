@@ -80,7 +80,8 @@ def main():
 
     if args.action in ["run", "get_xml"]:
         for this_id in args.id:
-            convertFiles(this_id, args.output)
+            if os.path.isdir("/tmp/texthammerparsing/{}/parsed".format(this_id)):
+                convertFiles(this_id, args.output)
 
     if args.cleanup:
         shutil.rmtree("/tmp/texthammerparsing/", ignore_errors=True)

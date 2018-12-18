@@ -38,7 +38,36 @@ Usage
 
 ### Quick start
 
+#### Parsing tmx
 
+In order to parse a tmx file, run the program with the arguments 
+`--input` and `--parserpath`. The former can be a list of tmx files
+or a folder containing those files. The latter is the installation
+folder of the turku neural parser.
+
+Example:
+
+```bash
+
+texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/
+
+```
+
+By default this will output the final xml file to `/tmp/texthammerparsing/[id]/xml` where `[id]`
+is a unique id the program will generate for each tmx file. You can change this
+behaviour and put all the output files to your desired location by using the `--output` option,
+e.g. as follows:
+
+```bash
+
+texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/ --output ~/texthammer_xml
+
+```
+
+
+#### Parsing monolingual files
+
+TODO
 
 
 ### Individual actions
