@@ -13,6 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description='Programmatically runs dependency parsers and outputs to texthammer xml')
     parser.add_argument('action', 
             metavar = 'action',
+            nargs = '?',
             default = 'run',
             choices = ["run","prepare", "get_xml", "parse", "version"], help="The action to run")
     parser.add_argument('--input',  '-i',
