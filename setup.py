@@ -18,6 +18,7 @@ Tools and shortcuts for programmatically running dependency parsers for multiple
       include_package_data=True,
       zip_safe=False,
       install_requires=[
+          'wheel',
           'lxml',
           'progressbar2'
       ],

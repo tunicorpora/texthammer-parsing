@@ -59,10 +59,11 @@ def main():
         with open(args.output_ids, "w") as f:
             f.write("\n".join(ids))
 
-    if os.path.isfile(args.id[0]):
-        #ids can be supplied via a file
-        with open(args.id[0], "r") as f:
-            args.id = f.read().splitlines()
+    if args.id:
+        if os.path.isfile(args.id[0]):
+            #ids can be supplied via a file
+            with open(args.id[0], "r") as f:
+                args.id = f.read().splitlines()
 
     if args.action in ["parse", "get_xml"] and not args.id:
         args.id = getPairIds()
