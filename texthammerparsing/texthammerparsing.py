@@ -79,17 +79,12 @@ def main():
             with open(args.id[0], "r") as f:
                 args.id = f.read().splitlines()
 
-    if args.action in ["parse", "get_xml", "run"] and not args.id:
-        args.id = getPairIds()
-        if not args.id:
-            print("Please specify the ids of the prepared files with the --id option")
-            sys.exit(0)
-
     if args.action in ["run", "parse"]:
+        printHeading("Parsing files")
         if not args.parserpath:
             print("Please specify the location of the parser with the --parserpath option")
             sys.exit(0)
-        for this_id in args.id:
+        for this_id in progressbar.progressbar(args.id):
             parseFiles(this_id, args.parserpath)
 
     if args.action in ["run", "get_xml"]:
