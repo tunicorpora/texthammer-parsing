@@ -1,7 +1,20 @@
 import os
 import glob
 import subprocess
-from texthammerparsing import Tmxfile
+from texthammerparsing import Tmxfile, TextPair
+
+def getPairIds():
+    """
+    Finds all the processed files in /tmp/texthammerparsing
+
+    """
+
+    ids = [  ]
+    for fname in glob.glob("/tmp/texthammerparsing/*"):
+        if os.path.isdir(fname):
+            ids.append(os.path.basename(fname))
+    return ids
+
 
 
 def getFiles(files):
@@ -86,7 +99,7 @@ def parseFiles(pair_id, parserpath):
                 f.write(output.decode("utf-8"))
 
 
-def convertFiles(pair_id, outputpath):
+def convertFiles(pair_id, outputpath=""):
     """
     Converts the prepared and parsed files to texthammer's xml format
 
@@ -95,8 +108,9 @@ def convertFiles(pair_id, outputpath):
 
     """
 
-    if outputpath[-1] != r"/":
-        outputpath += r"/"
+    pair = TextPair(pair_id)
+    pair.LoopThroughSegments()
+    pair.WriteXml(outputpath)
 
 
 

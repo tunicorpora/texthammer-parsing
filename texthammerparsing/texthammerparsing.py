@@ -5,7 +5,7 @@ import os.path
 import sys
 import shutil
 import progressbar
-from texthammerparsing import getFiles, prepareTmx, parseFiles
+from texthammerparsing import getFiles, prepareTmx, parseFiles, checkDefaults, getPairIds, convertFiles
 
 
 def main():
@@ -18,6 +18,9 @@ def main():
             metavar = 'inputfiles',
             nargs = "*",
             help="Path to the folder containing the input files")
+    parser.add_argument('--output',  '-o',
+            metavar = 'outputfolder',
+            help="Path to the desired destination folder")
     parser.add_argument('--id', 
             metavar = 'ids',
             nargs = "*", help="The ids of the input files to be processed. These are produced by the 'prepare' action of this program")
@@ -33,7 +36,9 @@ def main():
             const = True,
             default = False,
             help="Weather or not to clean the /tmp/texthammerparsing/ folder")
-    args = parser.parse_args()
+
+    #Check the rc file for defaults
+    args = checkDefaults(parser.parse_args())
 
     ids = []
 
@@ -51,15 +56,14 @@ def main():
             f.write("\n".join(ids))
 
     if args.action in ["parse", "get_xml"] and not args.id:
-        print("Please specify the ids of the prepared files with the --id option")
-        sys.exit(0)
+        args.id = getPairIds()
+        if not args.id:
+            print("Please specify the ids of the prepared files with the --id option")
+            sys.exit(0)
 
     if args.action == "parse":
 
-        # TODO: .rcfile
-        parserpath = args.parserpath
-
-        if not parserpath:
+        if not args.parserpath:
             print("Please specify the location of the parser with the --parserpath option")
             sys.exit(0)
 
@@ -74,15 +78,17 @@ def main():
             parseFiles(this_id, parserpath)
 
     if args.action == "get_xml":
+
         for this_id in args.id:
-            convertFiles(this_id, output)
+            convertFiles(this_id, args.output)
 
 
     if args.cleanup:
         shutil.rmtree("/tmp/texthammerparsing/", ignore_errors=True)
 
 
-    print("Ids: \n" + "\n".join(ids))
+    if ids:
+        print("Ids: \n" + "\n".join(ids))
 
 
 

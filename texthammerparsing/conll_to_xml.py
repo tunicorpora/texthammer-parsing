@@ -6,10 +6,12 @@ from csv import DictReader
 import os
 import re
 from texthammerparsing.python_tools import AlignMismatch, TrimList, MissingTextError, ArgumentError
+from texthammerparsing.configs import getConf
 from collections import OrderedDict
 import os.path
 import logging
 import json
+import glob
 
 class ParserInfo():
     """The parsers' conll output format may vary.
@@ -23,23 +25,60 @@ class TextPair():
     Pair is actually somewhat misleading: these objects consist of a source
     text and as many translations as specified
     
-    - line: a list of dicts or a dict containing all metadata
     - pair_id a unique id identifying the source tmx / txt file 
+    - source lang (optionally): specify which language is the source 
     """
 
-    def __init__(self, filename, lang, code, pair_id):
+    def __init__(self, pair_id, source_lang=None):
+        self.pair_id = pair_id
+        self.tl_texts = []
+        self.GetParsedDocuments(source_lang)
         self.root = etree.Element("text")
-        self.sl_text = ParsedText(filename, 'source', 'lang', 'code')
-        self.tl_texts = list()
+        self.has_segment_meta = False
+
+    def GetParsedDocuments(self, source_lang):
+        """
+        Iterates through the folder specified by the pair id
+        and reads the parsed files
+
+        - source lang: specify which language is the source 
+        """
+        langs = {}
+        sourcetext = None
+        for filename in glob.glob('/tmp/texthammerparsing/{}/parsed/**/*'.format(self.pair_id), recursive=True):
+            if filename[-5:] != ".json" and os.path.isfile(filename):
+                lang = re.search(r"[^/]+$",filename[:filename.rfind("/")])
+                if not lang:
+                    print("Error in determinig languages")
+                elif lang.group(0) not in langs:
+                    langs[lang.group(0)] = [os.path.basename(filename)]
+                else:
+                    langs[lang.group(0)].append(os.path.basename(filename))
+
+        if source_lang:
+            self.sl_text = ParsedText(langs[source_lang][0], 'source', self.pair_id)
+        else:
+            #No source lang specified, pick whichever comes first
+            text_type = "source"
+            for lang, versions in langs.items():
+                for version in versions:
+                    text = ParsedText(version, text_type, lang, self.pair_id)
+                    if text_type == "source":
+                       self.sl_text = text
+                       text_type = "target"
+                    else:
+                        self.tl_texts.append(text)
+
         #Read segmentwise metadata from a separate json file identified by the id of the text pair
         #(only if there is such a file, i.e. if this is a tmx we are parsing)
-        metafile = "{}/{}/{}_segment_meta.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", pair_id)
-        if os.path.isfile(metafile):
-            with open(metafile, "r") as f:
-                self.segment_meta = json.load(f)
-            self.has_segment_meta = True
-        else:
-            self.has_segment_meta = False
+
+        #metafile = "{}/{}/{}_segment_meta.json".format(os.path.dirname(os.path.abspath(__file__)), "auxiliary_files", pair_id)
+        #if os.path.isfile(metafile):
+        #    with open(metafile, "r") as f:
+        #        self.segment_meta = json.load(f)
+        #    self.has_segment_meta = True
+        #else:
+        #    self.has_segment_meta = False
 
     def FormatMetaData(self, metaline):
         """Write the metadata for this language as a 'textdef' tag"""
@@ -101,11 +140,19 @@ class TextPair():
                     return False
         return True
 
-    def WriteXml(self):
-        #Write the string to file
+    def WriteXml(self, outputpath=""):
+        """
+        - outputpath the folder to output the xml files to
+        """
+        if not outputpath:
+            outputpath = "/tmp/texthammerparsing/{}/xml".format(self.pair_id)
+            os.makedirs(outputpath, exist_ok=True)
+
+        if outputpath[-1] != r"/":
+            outputpath += r"/"
+
         xmlstring = etree.tounicode(self.root, pretty_print=True)
-        #use 
-        filename = 'xmloutput/' + self.sl_text.code + '.xml'
+        filename = outputpath + self.sl_text.code + '.xml'
         with open(filename,'w') as f:
             f.write(xmlstring)
         print('Done. Wrote {}'.format(filename))
@@ -209,148 +256,58 @@ class TextPair():
                 self.current_seg.attrib[meta_attr] = meta_val
 
 class ParsedText():
-    """A conll formatted text file that is seperated into align segments by bangs"""
+    """
+    A conll formatted text file that is seperated into align segments 
 
-    def __init__(self, inputfile, status, language, code):
+    - inputfile: the filename of the source (= the code of the file)
+    - status: source or target
+    - language: a two-letter language code
+    - pair_id: the unique identifier of the document
+
+    """
+
+    def __init__(self, inputfile, status, language, pair_id):
         #Read the data from the file and save it in a list called 'alignsegments'
-        self.inputfile = inputfile
+        self.inputfile = '/tmp/texthammerparsing/{}/parsed/{}/{}'.format(pair_id, language, inputfile)
+        self.code = inputfile
         self.status = status
         self.language = language
-        self.CompileSplitPattern()
-        self.code = code
         self.haserrors = False
         try:
-            with open(inputfile, 'r') as f:
-                conllinput = f.read()
+            with open(self.inputfile, 'r') as f:
+                raw = f.read()
+            #Removing all irrelevant comment lines
+            conllinput = "\n".join([line 
+                    for line in raw.splitlines() 
+                    if not re.search("^#", line) or re.search("^# [a-z]+split", line)])
         except UnicodeDecodeError:
             msg = "Encoding error! Id of the text: {}\n ".format(code)
             logging.info(msg)
-            Logger.loggederrors.append(msg)
+            #Logger.loggederrors.append(msg)
             self.haserrors = True
         if not self.haserrors:
             #This is only needed for multilingual aligned files
-            self.alignsegments = TrimList(re.split(self.segmentsplitpattern, conllinput))
+            self.alignsegments = TrimList(re.split("# " + getConf("segmentsplit"), conllinput))
             #This is still experimental in june 2016:
-            self.paragraphs = TrimList(re.split(self.paragraphsplitpattern, conllinput))
-            #This is only needed for monolingual files
-            self.sentences = TrimList(re.split(self.sentencesplitpattern, conllinput))
+            #self.paragraphs = TrimList(re.split(getConf("segmentsplit"), conllinput))
+            ##This is only needed for monolingual files
+            #self.sentences = TrimList(re.split(self.sentencesplitpattern, conllinput))
 
-    def CompileSplitPattern(self):
-        """ Depenging on the input language's parser's output, determine the pattern by which
-        to split the file to align segments"""
-        if self.language == 'en' and ParserInfo.parsername == 'stanford':
-                self.segmentsplitpattern = re.compile(r"\d+\t!{14}[^\n]+\n\n")
-                self.paragraphsplitpattern = re.compile(r"\d+\t\?{10}[^\n]+\n\n")
-        elif self.language == 'is':
-                self.segmentsplitpattern = re.compile(r"!!!!!!!!!!!!!!!.*\n")
-                #TODO!
-                self.paragraphsplitpattern = re.compile(r"\d+\t\?{10}[^\n]+\n\n")
-        elif self.language == 'es':
-            #segments are recognized by sequences of 15 exclamation marks
-            self.segmentsplitpattern = re.compile(r"\d+\t!{14}[^\n]+")
-            #paragrapghs are recognized by sequences of 10 question marks
-            self.paragraphsplitpattern = re.compile(r"\d+\t\?{10}[^\n]+")
-        elif self.language == 'fr':
-            #segments are recognized by sequences of 15 exclamation marks
-            self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*13 + r"\d+\t![^\n]+\n\n")
-            #paragrapghs are recognized by sequences of 10 question marks
-            self.paragraphsplitpattern = re.compile(r"\d+\t\?[^\n]+\n\n?"*9 + r"\d+\t\?[^\n]+\n\n")
-        elif self.language == 'sv':
-            #segments are recognized by sequences of 15 exclamation marks
-            self.segmentsplitpattern = re.compile(r"\d+\t!!!!!!!!!!!!!!!\t!!!!!!!!!!!!!!!.*")
-            #paragrapghs are recognized by sequences of 10 question marks
-            #NOTE: for swedish paragraphs: appending a question mark in the end to account for the
-            #fact that sometimes the parser has interpreted the q-marks as the first word of the sentence
-            self.paragraphsplitpattern = re.compile(r"\d\t\?{10}\t\?{10}[^\n]+\n\n?")
-        else:
-            #segments are recognized by sequences of 15 exclamation marks
-            self.segmentsplitpattern = re.compile(r"\d+\t![^\n]+\n\n?"*14 + r"\d+\t![^\n]+\n\n")
-            #paragrapghs are recognized by sequences of 10 question marks
-            self.paragraphsplitpattern = re.compile(r"\d+\t\?[^\n]+\n\n?"*9 + r"\d+\t\?[^\n]+\n\n")
-
-            #This would be cleaner but something's wrong:
-            #self.segmentsplitpattern = re.compile(r"(\d+\t![^\n]+\n\n?){10}")
-            #self.paragraphsplitpattern = re.compile(r"(\d+\t\?[^\n]+\n\n?){10}")
-
-        #set the pattern for monolingual files without
-        self.sentencesplitpattern = re.compile(r"\n\s*\n")
 
     def CollectTokenProperties(self, columns):
         """Collect the data about a single word and give it reasonable labels"""
-        if len(columns)  < 7 and self.language != "is":
+        if len(columns)  < 7:
             #If an empty segment encountered
             print('Note: an empty segment encountered')
             return {'align_id' : '', 'sentence_id' : '', 'text_id' : '',  'tokenid' : 1, 'token' : 'EMPTYSEGMENT', 'lemma' : 'EMPTYSEGMENT', 'pos' : 'EMPTYSEGMENT', 'feat' : 'EMPTYSEGMENT', 'head' : 0, 'deprel' : 'EMPTY'}
         else:
-            #If this is a word with information, initialize a new row
-                if self.language == 'ru':
-                    return {'tokenid'     : columns[0],
-                           'token'       : columns[1],
-                           'lemma'       : columns[2],
-                           'pos'         : columns[4],
-                           'feat'        : columns[5],
-                           'head'        : columns[6],
-                           'deprel'      : columns[7]}
-                elif self.language == 'fi':
-                    return  {'tokenid'     : columns[0],
-                            'token'       : columns[1],
-                            'lemma'       : columns[2],
-                            'pos'         : columns[3],
-                            'feat'        : columns[5],
-                            'head'        : columns[6],
-                            'deprel'      : columns[7]}
-                elif self.language in ['es','de','fr']:
-                    return  {'tokenid'     : columns[0],
-                            'token'       : columns[1],
-                            'lemma'       : columns[3],
-                            'pos'         : columns[5],
-                            'feat'        : columns[7],
-                            'head'        : columns[9],
-                            'deprel'      : columns[11]}
-                elif self.language == 'sv':
-                    return  {'tokenid'     : columns[0],
-                            'token'       : columns[1],
-                            'lemma'       : columns[2],
-                            'pos'         : columns[3],
-                            'feat'        : columns[5],
-                            'head'        : columns[6],
-                            'deprel'      : columns[7]}
-                elif self.language == 'is' or self.language == 'isl':
-                    return  {'tokenid'     : "0",
-                            'token'       : columns[0],
-                            'lemma'       : columns[2],
-                            'pos'         : columns[1] if len(columns[1]) < 1 else columns[1][0],
-                            'feat'        : columns[1],
-                            'head'        : "0",
-                            'deprel'      : columns[1]}
-                elif self.language == 'en':
-                    #Note: the English parsers don't give specific morphological annotations
-                    #in the "feat" column. This is why the POS tag is used for the feat also
-                    if ParserInfo.parsername == 'stanford':
-                        return  {'tokenid'     : columns[0],
-                                'token'       : columns[1],
-                                'lemma'       : columns[2],
-                                'pos'         : columns[3],
-                                'feat'        : columns[3],
-                                'head'        : columns[5],
-                                'deprel'      : columns[6]}
-                    elif ParserInfo.parsername == 'mate':
-                        return  {'tokenid'     : columns[0],
-                                'token'       : columns[1],
-                                'lemma'       : columns[3],
-                                'pos'         : columns[5],
-                                'feat'        : columns[5],
-                                'head'        : columns[9],
-                                'deprel'      : columns[11]}
-                    else:
-                        #not specified, guessing mate
-                        return  {'tokenid'     : columns[0],
-                                'token'       : columns[1],
-                                'lemma'       : columns[3],
-                                'pos'         : columns[5],
-                                'feat'        : columns[5],
-                                'head'        : columns[9],
-                                'deprel'      : columns[11]}
+            return  {'tokenid'     : columns[0],
+                    'token'       : columns[1],
+                    'lemma'       : columns[2],
+                    'pos'         : columns[3],
+                    'feat'        : columns[5],
+                    'head'        : columns[6],
+                    'deprel'      : columns[7]}
 
 def ReadFiledata(csvpath):
     """Read information about the files to be converted from a csv file. 

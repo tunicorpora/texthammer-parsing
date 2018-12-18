@@ -4,7 +4,7 @@
 # text = Соглашение
 1	Соглашение	соглашение	NOUN	_	Animacy=Inan|Case=Nom|Gender=Neut|Number=Sing	0	root	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -28,7 +28,7 @@
 17	.	.	PUNCT	_	_	16	punct	_	_
 18	Санкт-Петербурге	санкт-петербург	PROPN	_	Animacy=Inan|Case=Loc|Gender=Masc|Number=Sing	2	appos	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -47,7 +47,7 @@
 12	Сторонами	сторона	NOUN	_	Animacy=Inan|Case=Ins|Gender=Fem|Number=Plur	11	obl	_	SpaceAfter=No
 13	,	,	PUNCT	_	_	11	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -70,7 +70,7 @@
 16	образования	образование	NOUN	_	Animacy=Inan|Case=Gen|Gender=Neut|Number=Sing	12	conj	_	SpaceAfter=No
 17	,	,	PUNCT	_	_	16	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -88,7 +88,7 @@
 11	стран	страна	NOUN	_	Animacy=Inan|Case=Gen|Gender=Fem|Number=Plur	9	nmod	_	SpaceAfter=No
 12	,	,	PUNCT	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -98,7 +98,7 @@
 3	нижеследующем	нижеследующий	ADJ	_	Case=Loc|Degree=Pos|Gender=Neut|Number=Sing	1	obl	_	SpaceAfter=No
 4	:	:	PUNCT	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -106,7 +106,7 @@
 1	Статья	статья	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	0	root	_	_
 2	1	1	NUM	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -199,7 +199,7 @@
 86	Помещения	помещение	NOUN	_	Animacy=Inan|Case=Nom|Gender=Neut|Number=Plur	81	parataxis	_	SpaceAfter=No
 87	)	)	PUNCT	_	_	86	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -211,7 +211,7 @@
 5	рублей	рубль	NOUN	_	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	2	nmod	_	SpaceAfter=No
 6	.	.	PUNCT	_	_	2	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -229,7 +229,7 @@
 11	Стороне	сторона	NOUN	_	Animacy=Inan|Case=Loc|Gender=Fem|Number=Sing	7	iobj	_	SpaceAfter=No
 12	.	.	PUNCT	_	_	7	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -250,7 +250,7 @@
 14	Соглашения	соглашение	NOUN	_	Animacy=Inan|Case=Gen|Gender=Neut|Number=Sing	12	nmod	_	SpaceAfter=No
 15	.	.	PUNCT	_	_	10	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -258,7 +258,7 @@
 1	Статья	статья	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	0	root	_	_
 2	2	2	NUM	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -273,7 +273,7 @@
 8	являются	являться	VERB	_	Aspect=Imp|Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin|Voice=Mid	0	root	_	SpaceAfter=No
 9	:	:	PUNCT	_	_	8	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -290,7 +290,7 @@
 10	имуществом	имущество	NOUN	_	Animacy=Inan|Case=Ins|Gender=Neut|Number=Sing	8	nmod	_	SpaceAfter=No
 11	;	;	PUNCT	_	_	6	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -312,7 +312,7 @@
 15	)	)	PUNCT	_	_	13	punct	_	SpaceAfter=No
 16	.	.	PUNCT	_	_	13	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -320,7 +320,7 @@
 1	Статья	статья	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	0	root	_	_
 2	3	3	NUM	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -397,7 +397,7 @@
 70	лет	год	NOUN	_	Animacy=Inan|Case=Gen|Gender=Masc|Number=Plur	68	nmod	_	SpaceAfter=No
 71	.	.	PUNCT	_	_	68	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -420,7 +420,7 @@
 16	Сторона	сторона	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	14	nsubj	_	SpaceAfter=No
 17	.	.	PUNCT	_	_	14	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -428,7 +428,7 @@
 1	Статья	статья	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	0	root	_	_
 2	4	4	NUM	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -506,7 +506,7 @@
 71	"	"	PUNCT	_	_	58	punct	_	_
 72	.	.	PUNCT	_	_	66	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -514,7 +514,7 @@
 1	Статья	статья	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	0	root	_	_
 2	5	5	NUM	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -535,7 +535,7 @@
 14	приобретение	приобретение	NOUN	_	Animacy=Inan|Case=Acc|Gender=Neut|Number=Sing	11	nmod	_	SpaceAfter=No
 15	.	.	PUNCT	_	_	9	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -565,7 +565,7 @@
 23	лицу	лицо	NOUN	_	Animacy=Inan|Case=Dat|Gender=Neut|Number=Sing	21	iobj	_	SpaceAfter=No
 24	.	.	PUNCT	_	_	12	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -573,7 +573,7 @@
 1	Статья	статья	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	0	root	_	_
 2	6	6	NUM	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -600,7 +600,7 @@
 20	Сторонами	сторона	NOUN	_	Animacy=Inan|Case=Ins|Gender=Fem|Number=Plur	18	nmod	_	SpaceAfter=No
 21	.	.	PUNCT	_	_	16	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -608,7 +608,7 @@
 1	Статья	статья	NOUN	_	Animacy=Inan|Case=Nom|Gender=Fem|Number=Sing	0	root	_	_
 2	7	7	NUM	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -634,7 +634,7 @@
 19	Соглашения	соглашение	NOUN	_	Animacy=Inan|Case=Gen|Gender=Neut|Number=Sing	17	nmod	_	SpaceAfter=No
 20	.	.	PUNCT	_	_	13	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -658,7 +658,7 @@
 17	уведомления	уведомление	NOUN	_	Animacy=Inan|Case=Gen|Gender=Neut|Number=Sing	15	nmod	_	SpaceAfter=No
 18	.	.	PUNCT	_	_	14	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -691,7 +691,7 @@
 26	силу	сила	NOUN	_	Animacy=Inan|Case=Acc|Gender=Fem|Number=Sing	24	obj	_	SpaceAfter=No
 27	.	.	PUNCT	_	_	24	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -699,7 +699,7 @@
 1	Микко	микко	PROPN	_	Animacy=Anim|Case=Nom|Gender=Masc|Number=Sing	0	root	_	_
 2	Хаутала	хаутала	PUNCT	_	_	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -707,7 +707,7 @@
 1	Посол	посол	NOUN	_	Animacy=Anim|Case=Nom|Gender=Masc|Number=Sing	0	root	_	_
 2	Финляндии	финляндия	PROPN	_	Animacy=Inan|Case=Gen|Gender=Fem|Number=Sing	1	punct	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -717,7 +717,7 @@
 3	Финляндской	финляндский	ADJ	_	Case=Gen|Degree=Pos|Gender=Fem|Number=Sing	4	amod	_	_
 4	Республики	республика	NOUN	_	Animacy=Inan|Case=Gen|Gender=Fem|Number=Sing	2	nmod	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -725,7 +725,7 @@
 1	Александр	александр	PROPN	_	Animacy=Anim|Case=Nom|Gender=Masc|Number=Sing	0	root	_	_
 2	Цыбульский	цыбульский	PROPN	_	Animacy=Anim|Case=Nom|Gender=Masc|Number=Sing	1	appos	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
@@ -736,7 +736,7 @@
 4	развития	развитие	NOUN	_	Animacy=Inan|Case=Gen|Gender=Neut|Number=Sing	2	nmod	_	_
 5	РФ	рф	PROPN	_	Animacy=Inan|Case=Gen|Gender=Fem|Number=Sing	1	nmod	_	SpacesAfter=\n
 
-# splitsegmentsbymepleasewouldyoubesokindhtankyouverymuchxdxdxd
+# segmentsplit
 # newdoc
 # newpar
 # sent_id = 1
