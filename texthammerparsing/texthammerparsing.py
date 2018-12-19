@@ -33,7 +33,10 @@ def main():
             nargs = "*", help="The ids of the input files to be processed. These are produced by the 'prepare' action of this program")
     parser.add_argument('--parserpath', 
             metavar = 'path',
-            help="Absolute path to the folder containing the parser")
+            help="Path to the folder containing the parser")
+    parser.add_argument('--conf', 
+            metavar = 'file',
+            help="a yaml configuration file")
 #    parser.add_argument('--filetype', 
 #            metavar = 'file ending',
 #            help="Restrict the input files to a certain file type only (eg. tmx / txt)")

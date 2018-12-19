@@ -193,7 +193,6 @@ class Tmxfile(Document):
         with open(root + "/metadata.json","w") as f:
             json.dump(segment_meta, f, ensure_ascii=False)
         #Finally, write the metadata about each version 
-        print([version.metadata for version in self.versions])
         with open(root + "/versionmetadata.json","w") as f:
             json.dump([version.metadata for version in self.versions], f, ensure_ascii=False, indent=4)
 

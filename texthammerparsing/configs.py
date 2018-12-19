@@ -1,4 +1,6 @@
 import sys
+import os.path
+import yaml
 
 #TODO: read rcfiles
 def getConf(key):
@@ -24,6 +26,28 @@ def checkDefaults(args):
     - args: argparser argument object
 
     """
+    config = {}
+    fnames = [os.path.expanduser("~/.config/texthammerparsing.yaml"),
+            os.path.expanduser("~/.config/texthammerparsing.yml")]
+    if args.conf:
+        fnames = [args.conf]
+    for fname in fnames:
+        if os.path.isfile(fname):
+            with open(fname, "r") as f:
+                raw = f.read()
+            yamlconfig = yaml.load(raw)
+            for item in yamlconfig:
+                if not config:
+                    config = item
+                else:
+                    config.update(item)
+            break
+    if config:
+        for key, item in config.items():
+            if not getattr(args, key):
+                setattr(args, key, item)
+    print(args)
+
 
     return args
 

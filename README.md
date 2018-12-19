@@ -95,17 +95,22 @@ be a `yaml` file located at `~/.config/` and named `texthammerparsing.yaml`, i.e
 `~/.config/texthammerparsing.yaml`. Below is short example configuration:
 
 ```yaml
----
 
-- parserpath: 
-- output: 
-- input: 
-- keepfiles: true
-
----
+- parserpath: ~/parserit/Turku-neural-parser-pipeline
+- output: ~/texthammer_xml
+- input: ~/corpusinput/tmx
 
 ```
 
+Note, that aything specified explicitly as command line options will override
+the default configuration. The configuration file can also be specified via
+the `--conf` option, e.g.
+
+```bash
+
+texthammerparsing --input examples/tmx/ru_fi_short.tmx --conf myconf.yaml
+
+```
 
 #### Parsing monolingual files
 
