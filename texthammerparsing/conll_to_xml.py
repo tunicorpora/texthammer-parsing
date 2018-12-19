@@ -37,8 +37,13 @@ class TextPair():
         versionmetafile = "/tmp/texthammerparsing/{}/versionmetadata.json".format(self.pair_id)
         with open(versionmetafile, "r") as f:
             version_meta = json.load(f)
-        for entry in version_meta:
-            self.FormatMetaData(entry)
+
+        if isinstance(version_meta, dict):       
+            for entry in version_meta:    
+                self.FormatMetaData(entry)    
+        elif isinstance(version_meta, dict):    
+            self.FormatMetaData(version_meta)    
+
 
     def GetParsedDocuments(self, source_lang):
         """
