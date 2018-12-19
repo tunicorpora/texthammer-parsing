@@ -96,7 +96,7 @@ class TextPair():
         metatag = etree.SubElement(self.root, "textdef", metaline)
 
     def LoopThroughSentences(self):
-        paragraphs = TrimList(re.split(getConf("paragraphsplit"), self.sl_text.conllinput))
+        paragraphs = TrimList(re.split("# " + getConf("paragraphsplit"), self.sl_text.conllinput))
         paragraphs = [p for p in paragraphs if not re.search("^#", p)]
         for idx, paragraph in enumerate(paragraphs):
             #start a new paragraph and a new sentencce
