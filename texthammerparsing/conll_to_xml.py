@@ -38,7 +38,7 @@ class TextPair():
         with open(versionmetafile, "r") as f:
             version_meta = json.load(f)
 
-        if isinstance(version_meta, dict):       
+        if isinstance(version_meta, list):       
             for entry in version_meta:    
                 self.FormatMetaData(entry)    
         elif isinstance(version_meta, dict):    
