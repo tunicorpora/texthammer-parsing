@@ -134,13 +134,20 @@ Note, that for monolingual files it is not obligatory to have `textdef` tags at
 the beginning of each file. If the program cannot find those tags, it will,
 however, prompt the user for the language of each document.
 
+If you would rather not have the program try to mark the paragraphs, you
+can use the `--nopara` option:
+
+```
+texthammerparsing --input examples/fi/example.txt --parserpath ~/Turku-neural-parser-pipeline/
+```
+
 ### Individual actions
 
 The command takes one mandatory argument, `action`, which 
 by default is set to `run`.  This runs the full pipeline from
 file preparation to xml output but, if needed, the job
 can be split to substeps described below. The substeps
-are defined by the following actions:
+can be launched by specifying the following actions:
 
 #### prepare
 
@@ -148,7 +155,7 @@ are defined by the following actions:
 - use the `--input` option to specify the folder containing the files
 - Example:
 
-```bash
+```
 #Each file separately...
 texthammerparsing prepare --input myfolder/myfile.tmx myfolder_b/myfile.tmx
 
@@ -176,7 +183,7 @@ texthammerparsing parse --parserpath ~/parsers/Turku-neural-parser
 - combines the parsed files into a single xml file
 - use the `--id` option to specify the ids of the prepared files (if left out, all the parsed files located at /tmp/texthammerparsing/ will be processed)
 
-```bash
+```
 #With the id specified (useful for debugging a single file)
 texthammerparsing get_xml --id 09348021349lk4j-234lk234934
 #Without the id (will convert everything found at /tmp/texthammerparsing)
@@ -184,8 +191,6 @@ texthammerparsing get_xml
 ```
 
 
-
-#### Creating a default configuration
 
 
 
