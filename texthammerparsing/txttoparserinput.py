@@ -42,7 +42,7 @@ class Txtfile(Document):
         try:
             del self.lines[metalineidx]
         except TypeError:
-            ignore = False
+            ignore = True
             if len(sys.argv) > 3:
                 if sys.argv[3] == "justfix":
                     ignore = True
