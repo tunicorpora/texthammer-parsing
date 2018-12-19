@@ -89,7 +89,8 @@ class TextPair():
 
     def FormatMetaData(self, metaline):
         """Write the metadata for this language as a 'textdef' tag"""
-        del(metaline['filename'])
+        if 'filename' in metaline:
+            del(metaline['filename'])
         if 'pair_id' in metaline:
             del(metaline['pair_id'])
         metatag = etree.SubElement(self.root, "textdef", metaline)
