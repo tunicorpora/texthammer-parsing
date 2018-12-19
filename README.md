@@ -2,13 +2,13 @@ TEXTMINE-PARSING
 ================
 
 
-This project contains the utilities needed to parse multilingual tmx-files and convert them
+This project contains the utilities needed to parse multilingual tmx files and convert them
 to xml files with syntactic and morphological annotations. These xml files are intended to be used 
 in the Texthammer or [Nexthammer](https://github.com/hrmJ/nexthammer) corpus projects.
 
 The current version of the project has moved to using the new multilingual
 Universal Dependencies -based [Turku neural parser](https://turkunlp.github.io/Turku-neural-parser-pipeline/),
-which significanty simplifies and unifies the process of creating unified output. 
+which significantly simplifies and unifies the process of creating unified output. 
 To examine the old version using several different parsers check out the
 "dev" branch of this repository.
 
