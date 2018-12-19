@@ -2,7 +2,7 @@ import os
 import logging
 import glob
 import subprocess
-from texthammerparsing import Tmxfile, TextPair
+from texthammerparsing import Tmxfile, TextPair, Txtfile
 
 def getPairIds():
     """
@@ -50,6 +50,34 @@ def prepareTmx(filename):
         thisfile.CollectMetaDataAttributes()
         thisfile.InitializeVersions()
         thisfile.GetVersionContents()
+        if not thisfile.ReportProblems():
+            thisfile.WritePreparedFiles()
+    except Exception as e:
+        thisfile.ReportProblems(e)
+        print("Problems in preparing " + filename + ". Check out the log file at " + logging.getLoggerClass().root.handlers[0].baseFilename)
+    finally:
+        pass
+        #do some cleaning up...?
+
+    if thisfile:
+        if not thisfile.errors:
+            return thisfile.pair_id
+
+def prepareTxt(filename):
+    """
+    Prepares  txt files for parsing
+
+    - filename the name of the txt file
+    - returns the id of the file
+    """
+
+    thisfile = Txtfile(filename)
+    try:
+        thisfile.ReadTextdefs()
+        thisfile.CheckIfHardWrap()
+        thisfile.CollectMetaDataAttributes()
+        thisfile.MarkParagraphs()
+        thisfile.FilterSentencesAndParagraphs()
         if not thisfile.ReportProblems():
             thisfile.WritePreparedFiles()
     except Exception as e:
@@ -131,7 +159,10 @@ def convertFiles(pair_id, outputpath=""):
     """
 
     pair = TextPair(pair_id)
-    pair.LoopThroughSegments()
+    if pair.tl_texts:
+        pair.LoopThroughSegments()
+    else:
+        pair.LoopThroughSentences()
     pair.WriteXml(outputpath)
 
 

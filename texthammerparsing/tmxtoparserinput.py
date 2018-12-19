@@ -29,7 +29,6 @@ class Document:
         - sourcefile: the full path  of the tmx file
         """
         self.pair_id = str(uuid.uuid4())
-        self.dumpfile = "/tmp/{}.json".format(self.pair_id)
         self.errors = []
         self.warnings = []
         self.filename = sourcefile
@@ -193,6 +192,10 @@ class Tmxfile(Document):
         #Save the collected metadata about segments to a separate json dump
         with open(root + "/metadata.json","w") as f:
             json.dump(segment_meta, f, ensure_ascii=False)
+        #Finally, write the metadata about each version 
+        print([version.metadata for version in self.versions])
+        with open(root + "/versionmetadata.json","w") as f:
+            json.dump([version.metadata for version in self.versions], f, ensure_ascii=False, indent=4)
 
 class Version:
     """

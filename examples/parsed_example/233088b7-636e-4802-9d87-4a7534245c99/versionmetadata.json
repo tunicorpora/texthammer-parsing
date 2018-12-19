@@ -1,0 +1,20 @@
+[
+    {
+        "filename": "/tmp/fi/ru_fi_example.tmx_FI_RF_consular_real_estate_2017_fi_fi.prepared.conll",
+        "code": "FI_RF_consular_real_estate_2017_fi",
+        "title": "Sopimus Pietarissa sijaitsevien tilojen myynnistä Suomen tasavallan hallitukselle",
+        "subject": "consular_real_estate",
+        "yearorig": "2017",
+        "yeartr": "2017",
+        "lang": "fi"
+    },
+    {
+        "filename": "/tmp/ru/ru_fi_example.tmx_FI_RF_consular_real_estate_2017_ru_ru.prepared.conll",
+        "code": "FI_RF_consular_real_estate_2017_ru",
+        "title": "Соглашение о продаже Правительству Финляндии помещений в Санкт-Петербурге",
+        "subject": "consular_real_estate",
+        "yearorig": "2017",
+        "yeartr": "2017",
+        "lang": "ru"
+    }
+]

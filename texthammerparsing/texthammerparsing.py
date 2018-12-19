@@ -3,10 +3,11 @@ import argparse
 import logging
 import os.path
 import datetime
+import glob
 import sys
 import shutil
 import progressbar
-from texthammerparsing import getFiles, prepareTmx, parseFiles, checkDefaults, getPairIds, convertFiles
+from texthammerparsing import getFiles, prepareTmx, parseFiles, checkDefaults, getPairIds, convertFiles, prepareTxt
 from texthammerparsing.python_tools import printHeading
 from termcolor import colored
 
@@ -36,12 +37,12 @@ def main():
 #    parser.add_argument('--filetype', 
 #            metavar = 'file ending',
 #            help="Restrict the input files to a certain file type only (eg. tmx / txt)")
-    parser.add_argument('--cleanup', 
+    parser.add_argument('--keepfiles', 
             metavar = '',
             nargs = "?",
             const = True,
             default = False,
-            help="Whether or not to clean the /tmp/texthammerparsing/ folder")
+            help="Whether or not to keep the temporary files at /tmp/texthammerparsing/[id]")
 
     #Check the rc file for defaults
     args = checkDefaults(parser.parse_args())
@@ -63,8 +64,7 @@ def main():
             if ".tmx" in f:
                 success = prepareTmx(f)
             else:
-                pass
-                #monolings?
+                success = prepareTxt(f)
             if success:
                 args.id.append(success)
             else:
@@ -90,8 +90,11 @@ def main():
                 if os.path.isdir("/tmp/texthammerparsing/{}/parsed".format(this_id)):
                     convertFiles(this_id, args.output)
 
-    if args.cleanup:
-        shutil.rmtree("/tmp/texthammerparsing/", ignore_errors=True)
+    if not args.keepfiles:
+        #Default: clean up the temporary files when finished
+        for folder in glob.glob("/tmp/texthammerparsing/*"):
+            if os.path.isdir(folder) and os.path.basename(folder) in args.id:
+                shutil.rmtree(folder, ignore_errors=True)
 
 
 

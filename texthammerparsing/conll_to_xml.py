@@ -34,6 +34,11 @@ class TextPair():
         self.tl_texts = []
         self.GetParsedDocuments(source_lang)
         self.root = etree.Element("text")
+        versionmetafile = "/tmp/texthammerparsing/{}/versionmetadata.json".format(self.pair_id)
+        with open(versionmetafile, "r") as f:
+            version_meta = json.load(f)
+        for entry in version_meta:
+            self.FormatMetaData(entry)
 
     def GetParsedDocuments(self, source_lang):
         """
@@ -75,6 +80,7 @@ class TextPair():
         with open(metafile, "r") as f:
             self.segment_meta = json.load(f)
 
+
     def FormatMetaData(self, metaline):
         """Write the metadata for this language as a 'textdef' tag"""
         del(metaline['filename'])
@@ -83,7 +89,8 @@ class TextPair():
         metatag = etree.SubElement(self.root, "textdef", metaline)
 
     def LoopThroughSentences(self):
-        for idx, paragraph in enumerate(self.sl_text.paragraphs):
+        paragraphs = TrimList(re.split(getConf("paragraphsplit"), self.sl_text.conllinput))
+        for idx, paragraph in enumerate(paragraphs):
             #start a new paragraph and a new sentencce
             linesofparagraph = paragraph.splitlines()
             processed = True
@@ -284,6 +291,7 @@ class ParsedText():
         if not self.haserrors:
             #This is only needed for multilingual aligned files
             self.alignsegments = TrimList(re.split("# " + getConf("segmentsplit"), conllinput))
+            self.conllinput = conllinput
             #This is still experimental in june 2016:
             #self.paragraphs = TrimList(re.split(getConf("segmentsplit"), conllinput))
             ##This is only needed for monolingual files

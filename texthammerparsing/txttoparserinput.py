@@ -1,22 +1,21 @@
 #! /usr/bin/env python
 import sys
-import csv
 import glob
+import logging
 import os
 import uuid
 import re
+import json
 from lxml import etree
-from python_tools import MissingMetaError
-from tmxtoparserinput import FixQuotes, FilterLongSentences, FireScript, Document
-from conll_to_xml import Logger, logging, json
+from texthammerparsing.python_tools import MissingMetaError
+from texthammerparsing.configs import getConf
+from texthammerparsing import FilterLongSentences
+from texthammerparsing.tmxtoparserinput import FixQuotes,  Document
 
 class Txtfile(Document):
     """
     Represents the text file as a whole.
     """
-
-    #This is how paragraphs are marked so that they can be interpreted after the parsing
-    paragraphsplitpattern = "{0}{1}{0}".format("\n","?"*10)
 
     def __init__(self, sourcefile):
         self.filetype = "txt"
@@ -57,25 +56,43 @@ class Txtfile(Document):
         """
         Mark the place of paragraphs by using a predefined pattern
         """ 
+        pattern = "\n" + "###C:" + getConf("paragraphsplit") + "\n"
         if not self.justfixing:
             ##NOTE: completely removing empty lines from the input (see the list comprehension inside join)
-            self.output = Txtfile.paragraphsplitpattern.join([thisline for thisline in self.lines if thisline])
+            self.output = pattern.join([thisline for thisline in self.lines if thisline])
         else:
             self.output = "\n".join([thisline for thisline in self.lines if thisline])
 
     def WritePreparedFiles(self):
         """
-        Write all the prepared files to the specified destinations.
-        Also complete the metadata for the file.
+        Writes the prepared file
         """
-        if not self.justfixing:
-            self.metadata = self.metadata_for_versions[0]
-            self.metadata["filename"] = '{}/{}.prepared.conll'.format(sys.argv[2],self.mere_file)
+
+        try:
+            lang = self.metadata_for_versions[0]["lang"]
+        except:
+            lang = input("Please specify the language of the document ({}) using a two-character language code \n>".format(self.filename))
+        try:
+            code = self.metadata_for_versions[0]["code"]
+        except:
+            code = re.sub(r"([^.]+)\.\w+$",r"\1",os.path.basename(self.filename))
+
+        root = "/tmp/texthammerparsing/" + self.pair_id + "/"  
+        langdir = "/tmp/texthammerparsing/" + self.pair_id + "/prepared/" + lang + "/"
+
+        os.makedirs(root, exist_ok=True)
+        os.makedirs(langdir, exist_ok=True)
+
         self.output = FixQuotes(self.output)
-        self.prepared_filename = '{}.prepared'.format(self.filename)
-        logging.info("Writing {}".format(self.prepared_filename))
-        with open(self.prepared_filename,"w") as f:
+        logging.info("Writing {}".format(langdir + code))
+        with open(langdir + code,"w") as f:
             f.write(self.output)
+        try:
+            with open(root + "versionmetadata.json","w") as f:
+                json.dump(self.metadata_for_versions[0], f, ensure_ascii=False, indent=4)
+        except:
+            with open(root + "versionmetadata.json","w") as f:
+                json.dump({"lang" : lang, "code": code}, f, ensure_ascii=False, indent=4)
 
     def CheckIfHardWrap(self):
         """
@@ -131,16 +148,16 @@ class Txtfile(Document):
                 This script is now going to automatically convert the file into
                 a soft-wrapped version.
                 """.format(self.filename,round(noterm_percentage,2)))
-            self.lines = unwrapped_lines
 
     def FilterSentencesAndParagraphs(self):
         """
         Run filters in order to strip or sentences that are too long to parse
         """ 
+        pattern = "\n" + "###C:" + getConf("paragraphsplit") + "\n"
         if not self.justfixing:
             #Note: the sentences are filtered in order to detect sentences too long to parse
             #see longsentencelog.txt and FilterLongSentences.py
-            self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True, Txtfile.paragraphsplitpattern)
+            self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True, pattern)
         else:
             self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True,"\n")
 

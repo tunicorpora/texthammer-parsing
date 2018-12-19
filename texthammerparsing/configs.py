@@ -11,8 +11,8 @@ def getConf(key):
     if not rcfile:
         config = {
                     "segmentsplit" :  "segmentsplit",
-                    "paragraphsplit" : ":paragraphsplit",
-                    "sentencesplit" : ":sentencesplit"
+                    "paragraphsplit" : "paragraphsplit",
+                    "sentencesplit" : "sentencesplit"
                 }
 
     return config[key]

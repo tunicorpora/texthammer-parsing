@@ -38,6 +38,22 @@ Usage
 
 ### Quick start
 
+### Defining metadata
+
+The documents sent to parsers through this script can contain xml tags at the beginning
+of each file specifying the metadata related to the documents. The format of the 
+tag is as follows:
+
+```
+
+```
+
+When using tmx input, such tags should be specified for each language / version
+individually, for instance in the following way:
+
+```
+```
+
 #### Parsing tmx
 
 In order to parse a tmx file, run the program with the arguments 
@@ -64,13 +80,13 @@ texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neur
 
 ```
 
-If you wish to clean up the `/tmp/texthammerparsing` folder after the parsing is done
-(in order to save space or otherwise) add the `--cleanup` to the command, e.g.
+Be default, the script cleans up the temporary files related to preparing the texts for parsers
+etc. If you wish to  keep thees files,  add the `--keepfiles` option to the command, e.g.
 
 
 ```bash
 
-texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/ --output ~/texthammer_xml --cleanup
+texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/ --output ~/texthammer_xml --keepfiles
 
 ```
 
@@ -84,9 +100,10 @@ be a `yaml` file located at `~/.config/` and named `texthammerparsing.yaml`, i.e
 - parserpath: 
 - output: 
 - input: 
-
+- keepfiles: true
 
 ---
+
 ```
 
 
