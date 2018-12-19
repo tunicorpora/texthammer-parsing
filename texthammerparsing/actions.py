@@ -73,15 +73,21 @@ def parseFiles(pair_id, parserpath):
 
     """
 
-    #TODO: select which model if multiple available (rcfile?)
 
     if parserpath[-1] != r"/":
         parserpath += r"/"
 
+    #TODO: select which model if multiple available (rcfile?)
     models = {
             "fi" : "models_fi_tdt",
-            "ru" : "models_ru_syntagrus"
+            "ru" : "models_ru_syntagrus",
+            "en" : "models_en_ewt",
+            "fr" : "models_fr_gsd",
+            "sv" : "models_sv_talbanken",
+            "de" : "models_de_gsd",
+            "es" : "models_es_ancora",
             }
+
     # Use the parser's virtual env
     python_bin = parserpath + "venv-parser-neural/bin/python3"
     script_file = parserpath + "full_pipeline_stream.py"

@@ -32,13 +32,16 @@ def main():
             nargs = "*", help="The ids of the input files to be processed. These are produced by the 'prepare' action of this program")
     parser.add_argument('--parserpath', 
             metavar = 'path',
-            help="absolute path to the folder containing the parser")
+            help="Absolute path to the folder containing the parser")
+#    parser.add_argument('--filetype', 
+#            metavar = 'file ending',
+#            help="Restrict the input files to a certain file type only (eg. tmx / txt)")
     parser.add_argument('--cleanup', 
             metavar = '',
             nargs = "?",
             const = True,
             default = False,
-            help="Weather or not to clean the /tmp/texthammerparsing/ folder")
+            help="Whether or not to clean the /tmp/texthammerparsing/ folder")
 
     #Check the rc file for defaults
     args = checkDefaults(parser.parse_args())
@@ -56,15 +59,16 @@ def main():
             sys.exit(0)
         files = getFiles(args.input)
         for f in files:
+            success = False
             if ".tmx" in f:
                 success = prepareTmx(f)
-                if success:
-                    args.id.append(success)
-                else:
-                    print(colored("Preparation failed for " + f, "red"))
             else:
                 pass
                 #monolings?
+            if success:
+                args.id.append(success)
+            else:
+                print(colored("Preparation failed for " + f, "red"))
         if args.id:
             print("Prepared {} files to /tmp/texthammerparsing".format(len(args.id)))
 
