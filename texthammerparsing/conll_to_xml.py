@@ -95,21 +95,37 @@ class TextPair():
             del(metaline['pair_id'])
         metatag = etree.SubElement(self.root, "textdef", metaline)
 
-    def LoopThroughSentences(self):
-        paragraphs = TrimList(re.split("# " + getConf("paragraphsplit"), self.sl_text.conllinput))
-        paragraphs = [p for p in paragraphs if not re.search("^#", p)]
-        for idx, paragraph in enumerate(paragraphs):
-            #start a new paragraph and a new sentencce
-            linesofparagraph = paragraph.splitlines()
-            processed = True
-            if any(linesofparagraph):
-                #If not an empty paragraph
-                self.current_p = etree.SubElement(self.root, "p")
-                #import ipdb;ipdb.set_trace()
-                self.current_s = etree.SubElement(self.current_p, "s")
-                processed = self.ProcessWordsOfSegment(paragraph.splitlines(), self.sl_text)
+    def LoopThroughSentences(self, nopara):
+        """
+        Runs through each sentence and forms an xml representation of that
+
+        -nopara: if set, will not try to mark paragraphs
+
+        """
+        if nopara:
+            sentences = ""
+            raw = "\n".join([s for s in self.sl_text.conllinput.splitlines() if not re.search("^#", s)])
+            sentences = re.split("\n\n", raw)
+            for sentence in sentences:
+                self.current_s = etree.SubElement(self.root, "s")
+                processed = self.ProcessWordsOfSegment(sentence.splitlines(), self.sl_text)
             if not processed:
                 return False
+        else:
+            paragraphs = TrimList(re.split("# " + getConf("paragraphsplit"), self.sl_text.conllinput))
+            paragraphs = [p for p in paragraphs if not re.search("^#", p)]
+            for idx, paragraph in enumerate(paragraphs):
+                #start a new paragraph and a new sentencce
+                linesofparagraph = paragraph.splitlines()
+                processed = True
+                if any(linesofparagraph):
+                    #If not an empty paragraph
+                    self.current_p = etree.SubElement(self.root, "p")
+                    #import ipdb;ipdb.set_trace()
+                    self.current_s = etree.SubElement(self.current_p, "s")
+                    processed = self.ProcessWordsOfSegment(paragraph.splitlines(), self.sl_text)
+                if not processed:
+                    return False
         return True
 
     def LoopThroughSegments(self):

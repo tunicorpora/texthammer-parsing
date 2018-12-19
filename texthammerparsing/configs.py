@@ -14,7 +14,16 @@ def getConf(key):
         config = {
                     "segmentsplit" :  "segmentsplit",
                     "paragraphsplit" : "paragraphsplit",
-                    "sentencesplit" : "sentencesplit"
+                    "sentencesplit" : "sentencesplit",
+                    "models": {
+                            "fi" : "models_fi_tdt",
+                            "ru" : "models_ru_syntagrus",
+                            "en" : "models_en_ewt",
+                            "fr" : "models_fr_gsd",
+                            "sv" : "models_sv_talbanken",
+                            "de" : "models_de_gsd",
+                            "es" : "models_es_ancora",
+                            }
                 }
 
     return config[key]
@@ -44,10 +53,12 @@ def checkDefaults(args):
             break
     if config:
         for key, item in config.items():
-            if not getattr(args, key):
-                setattr(args, key, item)
-    print(args)
-
+            if key == "models":
+                pass
+                #print(item)
+            else:
+                if not getattr(args, key):
+                    setattr(args, key, item)
 
     return args
 

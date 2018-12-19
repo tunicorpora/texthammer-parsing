@@ -52,12 +52,12 @@ class Txtfile(Document):
                     the texts. The metadata should be provided as <textdef> tags
                     including, minimally, the attributes code and lang""")
 
-    def MarkParagraphs(self):
+    def MarkParagraphs(self, justfixing):
         """
         Mark the place of paragraphs by using a predefined pattern
         """ 
         pattern = "\n" + "###C:" + getConf("paragraphsplit") + "\n"
-        if not self.justfixing:
+        if not justfixing:
             ##NOTE: completely removing empty lines from the input (see the list comprehension inside join)
             self.output = pattern.join([thisline for thisline in self.lines if thisline])
         else:
@@ -149,12 +149,12 @@ class Txtfile(Document):
                 a soft-wrapped version.
                 """.format(self.filename,round(noterm_percentage,2)))
 
-    def FilterSentencesAndParagraphs(self):
+    def FilterSentencesAndParagraphs(self, justfixing):
         """
         Run filters in order to strip or sentences that are too long to parse
         """ 
         pattern = "\n" + "###C:" + getConf("paragraphsplit") + "\n"
-        if not self.justfixing:
+        if not justfixing:
             #Note: the sentences are filtered in order to detect sentences too long to parse
             #see longsentencelog.txt and FilterLongSentences.py
             self.output = FilterLongSentences.FilterByCharCount(self.output, self.filename, True, pattern)

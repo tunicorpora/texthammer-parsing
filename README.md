@@ -45,14 +45,18 @@ of each file specifying the metadata related to the documents. The format of the
 tag is as follows:
 
 ```
-
+<textdef code="FI_RF_consular_fi" title="Sopimus" subject="consular_real_estate" yearorig="2017" yeartr="2017" lang="fi" />
 ```
 
 When using tmx input, such tags should be specified for each language / version
 individually, for instance in the following way:
 
 ```
+<textdef code="FI_RF_consular_fi" title="Sopimus" subject="consular_real_estate" yearorig="2017" yeartr="2017" lang="fi" />
+<textdef code="FI_RF_consular_ru" title="Соглашение" subject="consular_real_estate" yearorig="2017" yeartr="2017" lang="ru" />
 ```
+
+Each version / language must have a unique `code` attribute.
 
 #### Parsing tmx
 
@@ -63,7 +67,7 @@ folder of the turku neural parser.
 
 Example:
 
-```bash
+```
 
 texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/
 
@@ -74,7 +78,7 @@ is a unique id the program will generate for each tmx file. You can change this
 behaviour and put all the output files to your desired location by using the `--output` option,
 e.g. as follows:
 
-```bash
+```
 
 texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/ --output ~/texthammer_xml
 
@@ -84,7 +88,7 @@ Be default, the script cleans up the temporary files related to preparing the te
 etc. If you wish to  keep thees files,  add the `--keepfiles` option to the command, e.g.
 
 
-```bash
+```
 
 texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neural-parser-pipeline/ --output ~/texthammer_xml --keepfiles
 
@@ -102,11 +106,11 @@ be a `yaml` file located at `~/.config/` and named `texthammerparsing.yaml`, i.e
 
 ```
 
-Note, that aything specified explicitly as command line options will override
+Note, that anything specified explicitly as command line options will override
 the default configuration. The configuration file can also be specified via
 the `--conf` option, e.g.
 
-```bash
+```
 
 texthammerparsing --input examples/tmx/ru_fi_short.tmx --conf myconf.yaml
 
@@ -114,8 +118,21 @@ texthammerparsing --input examples/tmx/ru_fi_short.tmx --conf myconf.yaml
 
 #### Parsing monolingual files
 
-TODO
+The program can also be used for parsing regular text files containing 
+material only in one language. For these kinds of files, 
+it should be noted, that the program tries to mark paragraphs so that
+it interprets each line to contain one paragraph.
 
+In order to run this script on monolingual files, no special action is needed,
+just run it as you would run it with tmx, e.g.:
+
+```
+texthammerparsing --input examples/fi/example.txt --parserpath ~/Turku-neural-parser-pipeline/
+```
+
+Note, that for monolingual files it is not obligatory to have `textdef` tags at
+the beginning of each file. If the program cannot find those tags, it will,
+however, prompt the user for the language of each document.
 
 ### Individual actions
 

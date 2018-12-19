@@ -37,6 +37,11 @@ def main():
     parser.add_argument('--conf', 
             metavar = 'file',
             help="a yaml configuration file")
+    parser.add_argument('--nopara', 
+            metavar = '',
+            nargs = "?",
+            const = True,
+            help="if set, the program will not try ti mark paragraphs for monolingual files")
 #    parser.add_argument('--filetype', 
 #            metavar = 'file ending',
 #            help="Restrict the input files to a certain file type only (eg. tmx / txt)")
@@ -53,7 +58,7 @@ def main():
     os.makedirs("/tmp/texthammerparsing/", exist_ok=True)
     logfile = "/tmp/texthammerparsing/log_"  + str(datetime.datetime.now()).replace(" ","_").replace(":","-")
     logging.basicConfig(filename=logfile, level=logging.INFO, format='%(asctime)s %(message)s')
-    print("Starting.\nRun texthammerparsing --help to get more instructions.")
+    print("Starting.\nVisit https://github.com/utacorpora/texthammer-parsing  or run texthammerparsing --help to get more instructions.")
     print("Writing Logfile at " + logfile)
 
     if args.action in ["run", "prepare"]:
@@ -67,7 +72,7 @@ def main():
             if ".tmx" in f:
                 success = prepareTmx(f)
             else:
-                success = prepareTxt(f)
+                success = prepareTxt(f, args.nopara)
             if success:
                 args.id.append(success)
             else:
@@ -91,7 +96,7 @@ def main():
             printHeading("Outputting xml")
             for this_id in args.id:
                 if os.path.isdir("/tmp/texthammerparsing/{}/parsed".format(this_id)):
-                    convertFiles(this_id, args.output)
+                    convertFiles(this_id, args.output, args.nopara)
 
     if not args.keepfiles:
         #Default: clean up the temporary files when finished

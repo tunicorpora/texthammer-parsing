@@ -3,6 +3,7 @@ import logging
 import glob
 import subprocess
 from texthammerparsing import Tmxfile, TextPair, Txtfile
+from texthammerparsing.configs import getConf
 
 def getPairIds():
     """
@@ -63,11 +64,12 @@ def prepareTmx(filename):
         if not thisfile.errors:
             return thisfile.pair_id
 
-def prepareTxt(filename):
+def prepareTxt(filename, nopara):
     """
     Prepares  txt files for parsing
 
-    - filename the name of the txt file
+    - nopara: if set, will not try to mark paragraphs
+    - filename: the name of the txt file
     - returns the id of the file
     """
 
@@ -76,8 +78,8 @@ def prepareTxt(filename):
         thisfile.ReadTextdefs()
         thisfile.CheckIfHardWrap()
         thisfile.CollectMetaDataAttributes()
-        thisfile.MarkParagraphs()
-        thisfile.FilterSentencesAndParagraphs()
+        thisfile.MarkParagraphs(nopara)
+        thisfile.FilterSentencesAndParagraphs(nopara)
         if not thisfile.ReportProblems():
             thisfile.WritePreparedFiles()
     except Exception as e:
@@ -106,15 +108,7 @@ def parseFiles(pair_id, parserpath):
         parserpath += r"/"
 
     #TODO: select which model if multiple available (rcfile?)
-    models = {
-            "fi" : "models_fi_tdt",
-            "ru" : "models_ru_syntagrus",
-            "en" : "models_en_ewt",
-            "fr" : "models_fr_gsd",
-            "sv" : "models_sv_talbanken",
-            "de" : "models_de_gsd",
-            "es" : "models_es_ancora",
-            }
+    models = getConf("models")
 
     # Use the parser's virtual env
     python_bin = parserpath + "venv-parser-neural/bin/python3"
@@ -149,7 +143,7 @@ def parseFiles(pair_id, parserpath):
                 f.write(output.decode("utf-8"))
 
 
-def convertFiles(pair_id, outputpath=""):
+def convertFiles(pair_id, outputpath="", nopara=None):
     """
     Converts the prepared and parsed files to texthammer's xml format
 
@@ -162,7 +156,7 @@ def convertFiles(pair_id, outputpath=""):
     if pair.tl_texts:
         pair.LoopThroughSegments()
     else:
-        pair.LoopThroughSentences()
+        pair.LoopThroughSentences(nopara)
     pair.WriteXml(outputpath)
 
 
