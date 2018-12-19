@@ -77,8 +77,9 @@ class TextPair():
         #(only if there is such a file, i.e. if this is a tmx we are parsing)
 
         metafile = "/tmp/texthammerparsing/{}/metadata.json".format(self.pair_id)
-        with open(metafile, "r") as f:
-            self.segment_meta = json.load(f)
+        if os.path.isfile(metafile):
+            with open(metafile, "r") as f:
+                self.segment_meta = json.load(f)
 
 
     def FormatMetaData(self, metaline):
