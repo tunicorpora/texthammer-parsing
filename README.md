@@ -96,7 +96,7 @@ texthammerparsing --input examples/tmx/ru_fi_short.tmx --parserpath ~/Turku-neur
 
 All this can also be specified in a separate configuration file. This should
 be a `yaml` file located at `~/.config/` and named `texthammerparsing.yaml`, i.e.
-`~/.config/texthammerparsing.yaml`. Below is short example configuration:
+`~/.config/texthammerparsing.yaml`. Below is a short example configuration:
 
 ```yaml
 
