@@ -30,7 +30,7 @@ First, make sure you have pip3 installed (`sudo apt install python3-pip`)
 and then install the project directly from github:
 
 ```
-pip3 install git+https://github.com/utacorpora/texthammer-parsing
+pip3 install git+https://github.com/tunicorpora/texthammer-parsing
 ```
 
 Usage
