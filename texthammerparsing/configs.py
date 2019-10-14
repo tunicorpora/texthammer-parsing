@@ -2,6 +2,7 @@ import sys
 import os.path
 import yaml
 
+
 #TODO: read rcfiles
 def getConf(key):
     """
@@ -9,26 +10,34 @@ def getConf(key):
 
     - key: the name of the key in the config dict
     """
-    rcfile = False
-    if not rcfile:
-        config = {
-                    "segmentsplit" :  "segmentsplit",
-                    "paragraphsplit" : "paragraphsplit",
-                    "sentencesplit" : "sentencesplit",
-                    "models": {
-                            "fi" : "models_fi_tdt",
-                            "ru" : "models_ru_syntagrus",
-                            "en" : "models_en_ewt",
-                            "fr" : "models_fr_gsd",
-                            "sv" : "models_sv_talbanken",
-                            "de" : "models_de_gsd",
-                            "es" : "models_es_ancora",
-                            }
-                }
+
+    config = {
+                "segmentsplit" :  "segmentsplit",
+                "paragraphsplit" : "paragraphsplit",
+                "sentencesplit" : "sentencesplit",
+                "models": {
+                        "fi" : "models_fi_tdt",
+                        "ru" : "models_ru_syntagrus",
+                        "en" : "models_en_ewt",
+                        "fr" : "models_fr_gsd",
+                        "sv" : "models_sv_talbanken",
+                        "de" : "models_de_gsd",
+                        "es" : "models_es_ancora",
+                        }
+            }
+
+    yamldata = checkDefaults(None, True)
+    if yamldata:
+        if "models" in yamldata:
+            for lang, model in yamldata["models"].items():
+                config["models"][lang] = "models_" + model
+        for thiskey in ["segmentsplit", "paragraphsplit","sentencesplit"]:
+            if thiskey in yamldata:
+                config[thiskey] = yamldata[thiskey]
 
     return config[key]
 
-def checkDefaults(args):
+def checkDefaults(args, getYaml=False):
     """
     Returns the value of an individual config parameter
 
@@ -38,8 +47,9 @@ def checkDefaults(args):
     config = {}
     fnames = [os.path.expanduser("~/.config/texthammerparsing.yaml"),
             os.path.expanduser("~/.config/texthammerparsing.yml")]
-    if args.conf:
-        fnames = [args.conf]
+    if hasattr(args, 'conf'):
+        if args.conf:
+            fnames = [args.conf]
     for fname in fnames:
         if os.path.isfile(fname):
             with open(fname, "r") as f:
@@ -52,11 +62,10 @@ def checkDefaults(args):
                     config.update(item)
             break
     if config:
+        if getYaml:
+            return config
         for key, item in config.items():
-            if key == "models":
-                pass
-                #print(item)
-            else:
+            if key not in ["models"]:
                 if not getattr(args, key):
                     setattr(args, key, item)
 

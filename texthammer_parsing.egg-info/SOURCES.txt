@@ -16,3 +16,5 @@ texthammerparsing/conll_to_xml.py
 texthammerparsing/python_tools.py
 texthammerparsing/texthammerparsing.py
 texthammerparsing/tmxtoparserinput.py
+texthammerparsing/txttoparserinput.py
+texthammerparsing/xml_to_korp.py

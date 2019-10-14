@@ -116,6 +116,24 @@ texthammerparsing --input examples/tmx/ru_fi_short.tmx --conf myconf.yaml
 
 ```
 
+#### Defining parser models
+
+In order to use a specific model for Turku neural parser, define it in
+`~/.config/texthammerparsing.yaml` in the following manner:
+
+```yaml
+
+- models:
+    fi: fi_tdt
+    ru: ru_syntagrus
+
+```
+
+NOTE that these models must be available to the parser. Follow the instructions
+at https://turkunlp.org/Turku-neural-parser-pipeline/install.html#download-the-models 
+to get the model you would like to have. For a full list of available models 
+see http://bionlp-www.utu.fi/dep-parser-models/
+
 #### Parsing monolingual files
 
 The program can also be used for parsing regular text files containing 
