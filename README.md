@@ -22,6 +22,12 @@ The Turku neural parser mentioned above is a pre-requisite and we refer to the
 excellent and easy-to-follow installation instructions at the project's
 website.
 
+A quick guide on how to install additional models for the parser:
+
+1. cd to the parser's installation directory 
+2. activate the virtual environment by running `source venv-parser-neural/bin/activate`
+3. download the model by running: `python3 fetch_models.py fi_ftb`
+
 ### Installing using pip
 
 The software has been built and tested on Ubuntu 18.04, but any linux platform
