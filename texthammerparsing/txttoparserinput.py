@@ -33,6 +33,7 @@ class Txtfile(Document):
             metalineidx = None
             for idx, line in enumerate(self.lines):
                 if "<textdef" in line:
+                    line = line.replace(' ',' ') # remove soft spaces
                     self.textdefs.append(etree.fromstring(line))
                     metalineidx = idx
                 line = line.strip()
