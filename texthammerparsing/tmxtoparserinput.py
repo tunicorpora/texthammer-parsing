@@ -38,9 +38,14 @@ class Document:
             try:
                 self.content = f.read()
             except UnicodeDecodeError:
-                problem = "Encoding porblem with file {}. Possible reason: utf-16 should be converted to utf-8.".format(sourcefile)
+                problem = "Encoding problem with file {}. Possible reason: utf-16 should be converted to utf-8.".format(sourcefile)
                 self.errors.append(problem)
+                self.content = ''
                 return False
+            except:
+                problem = "Unknown error reading the file {} ".format(sourcefile)
+                self.errors.append(problem)
+                self.content = ''
 
     def CollectMetaDataAttributes(self):
         """
