@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+  <header
+    creationtool="LF TMX maker"
+    creationtoolversion="2.23"
+    datatype="unknown"
+    segtype="sentence"
+    adminlang="en"
+    srclang="en"
+    o-tmf="TW4Win 2.0 Format"
+  >
+  </header>
+  <body>
+  
+<textdef code="orw_af_45" author="Orwell, George" title="Animal Farm" yearorig="1945" lang="en"/>
+<textdef code="orw_af_besp_89" author="Orwell, George" translator="Беспалова, Лариса" title="Скотный двор" yearorig="1945" yeartr="1989" lang="ru"/>
+<textdef code="orw_af_kib_89" author="Orwell, George" translator="Кибирский С." title="Ферма животных" yearorig="1945" yeartr="1989" lang="de"/>
+<textdef code="orw_af_pol_89" author="Orwell, George" translator="Полоцк, Илан" title="Скотский хутор" yearorig="1945" yeartr="1989" lang="sv"/>
+<textdef code="orw_af_task_88" author="Orwell, George" translator="Таск, Сергей" title="Скотский уголок" yearorig="1945" yeartr="1988" lang="fi"/>
+
+  
+  
+<tu creationdate="20200709T143604Z" creationid="LF TMX maker 2.23">
+<tuv xml:lang="en"><seg>Chapter I</seg></tuv>
+<tuv xml:lang="de"><seg>Глава I</seg></tuv>
+<tuv xml:lang="sv"><seg>Глава 1</seg></tuv>
+<tuv xml:lang="fi"><seg>Глава I</seg></tuv>
+<tuv xml:lang="ru"><seg>Глава 1</seg></tuv> </tu>
+
+
+</body>
+</tmx>

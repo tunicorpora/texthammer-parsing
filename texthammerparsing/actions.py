@@ -93,6 +93,15 @@ def prepareTxt(filename, nopara):
         if not thisfile.errors:
             return thisfile.pair_id
 
+def addCodes(filename, lang):
+    thisfile = Tmxfile(filename)
+    thisfile.GetXml()
+    thisfile.ReadTextdefs()
+    thisfile.CollectMetaDataAttributes()
+    thisfile.InitializeVersions()
+    thisfile.AddCodes(lang, filename)
+    print('hallojaa')
+
 def parseFiles(pair_id, parserpath):
     """
     Sends all the language files in the document identified by pair_id to the parser

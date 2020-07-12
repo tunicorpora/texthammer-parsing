@@ -207,6 +207,12 @@ texthammerparsing parse --parserpath ~/parsers/Turku-neural-parser
 - combines the parsed files into a single xml file
 - use the `--id` option to specify the ids of the prepared files (if left out, all the parsed files located at /tmp/texthammerparsing/ will be processed)
 
+#### addcodes
+
+- Adds code attributes to `tuv` tags of a tmx files for a specific language with several versions.
+- use the `--lang` option to specify the language for which the code attributes will be added
+- NOTE: assumes that the order of the versions is always the same
+
 ```
 #With the id specified (useful for debugging a single file)
 texthammerparsing get_xml --id 09348021349lk4j-234lk234934

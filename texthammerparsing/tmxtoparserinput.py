@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-#import sys
+import sys
 #import csv
 #import glob
 import os
@@ -144,6 +144,24 @@ class Tmxfile(Document):
                 except KeyError:
                     #Add even the values not specified (as empty)
                     self.versions[-1].metadata[attr] = ""
+
+    def AddCodes(self, lang, filename):
+        tuvpattern = "tuv[@xml:lang='{}' or  @xml:lang='{}']".format(lang, lang.upper())
+        langversions = []
+        for ver in self.versions:
+            if ver.lang == lang or ver.lang.upper() == lang:
+                langversions.append(ver.code)
+        tu_tags = self.root.xpath("//tu")
+        for tu_idx, tu in enumerate(tu_tags):
+            tuvs = tu.xpath(tuvpattern)
+            for tuv_idx, tuv in enumerate(tuvs):
+                tuv.attrib['code'] = langversions[tuv_idx]
+
+        xmlstring = etree.tounicode(self.root, pretty_print=True)
+        with open(filename.replace('.tmx','_with_codes.tmx'),'w') as f:
+            f.write(xmlstring)
+        print('Done. Wrote a new file: {}'.format(filename))
+
 
     def GetVersionContents(self):
         """

@@ -7,7 +7,7 @@ import glob
 import sys
 import shutil
 import progressbar
-from texthammerparsing import getFiles, prepareTmx, parseFiles, checkDefaults, getPairIds, convertFiles, prepareTxt
+from texthammerparsing import getFiles, prepareTmx, parseFiles, checkDefaults, getPairIds, convertFiles, prepareTxt, addCodes
 from texthammerparsing.python_tools import printHeading
 from termcolor import colored
 
@@ -19,11 +19,15 @@ def main():
             metavar = 'action',
             nargs = '?',
             default = 'run',
-            choices = ["run","prepare", "get_xml", "parse", "version"], help="The action to run")
+            choices = ["run","prepare", "get_xml", "parse", "version", "addcodes"], help="The action to run")
     parser.add_argument('--input',  '-i',
             metavar = 'inputfiles',
             nargs = "*",
             help="Path to the folder containing the input files")
+    parser.add_argument('--lang',  '-l',
+            metavar = 'language',
+            nargs = "?",
+            help="specify the language used in a utility operation (e.g. addcodes)")
     parser.add_argument('--output',  '-o',
             metavar = 'outputfolder',
             help="Path to the desired destination folder")
@@ -54,6 +58,15 @@ def main():
 
     #Check the rc file for defaults
     args = checkDefaults(parser.parse_args())
+
+    if args.action == 'addcodes':
+        if not args.lang:
+            print(colored("Please specify a language code","red"))
+            sys.exit(0)
+        files = getFiles(args.input)
+        for f in files:
+            addCodes(f, args.lang)
+        sys.exit(0)
 
     os.makedirs("/tmp/texthammerparsing/", exist_ok=True)
     logfile = "/tmp/texthammerparsing/log_"  + str(datetime.datetime.now()).replace(" ","_").replace(":","-")
