@@ -158,9 +158,10 @@ class Tmxfile(Document):
                 tuv.attrib['code'] = langversions[tuv_idx]
 
         xmlstring = etree.tounicode(self.root, pretty_print=True)
-        with open(filename.replace('.tmx','_with_codes.tmx'),'w') as f:
+        formatted_filename = filename.replace('.tmx','_with_codes.tmx')
+        with open(formatted_filename,'w') as f:
             f.write(xmlstring)
-        print('Done. Wrote a new file: {}'.format(filename))
+        print('Done. Wrote a new file: {}'.format(formatted_filename))
 
 
     def GetVersionContents(self):

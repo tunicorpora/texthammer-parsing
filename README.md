@@ -39,6 +39,9 @@ and then install the project directly from github:
 pip3 install git+https://github.com/tunicorpora/texthammer-parsing
 ```
 
+Updating to a new version: `pip3 install --upgrade git+https://github.com/tunicorpora/texthammer-parsing`
+
+
 Usage
 -----
 

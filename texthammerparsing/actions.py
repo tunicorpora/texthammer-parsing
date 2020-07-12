@@ -100,7 +100,6 @@ def addCodes(filename, lang):
     thisfile.CollectMetaDataAttributes()
     thisfile.InitializeVersions()
     thisfile.AddCodes(lang, filename)
-    print('hallojaa')
 
 def parseFiles(pair_id, parserpath):
     """
