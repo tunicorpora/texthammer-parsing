@@ -81,6 +81,7 @@ def checkDefaults(args, getYaml=False):
             return config
         for key, item in config.items():
             if key not in ["models"]:
+                print(args, key)
                 if not getattr(args, key):
                     setattr(args, key, item)
 
