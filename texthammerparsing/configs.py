@@ -43,7 +43,7 @@ def getConf(key):
             for lang, model in yamldata["models"].items():
                 config["models"][lang] = "models_" + model
         if "ports" in yamldata:
-            for lang, port in yamldata["models"].items():
+            for lang, port in yamldata["ports"].items():
                 config["ports"][lang] = port
         for thiskey in ["segmentsplit", "paragraphsplit", "sentencesplit"]:
             if thiskey in yamldata:

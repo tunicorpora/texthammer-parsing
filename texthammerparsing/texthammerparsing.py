@@ -29,10 +29,6 @@ def main():
                         metavar='language',
                         nargs="?",
                         help="specify the language used in a utility operation (e.g. addcodes)")
-    parser.add_argument('--port',  '-ports',
-                        metavar='ports',
-                        nargs="?",
-                        help="which parser port is listening for this language")
     parser.add_argument('--output',  '-o',
                         metavar='outputfolder',
                         help="Path to the desired destination folder")
