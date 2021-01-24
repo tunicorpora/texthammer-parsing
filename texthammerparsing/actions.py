@@ -150,11 +150,11 @@ def parseFiles(pair_id, parserpath):
 
             with open(f, 'rb') as payload:
                 headers = {'content-type': 'text/plain; charset = utf-8'}
-                output = requests.post('http://localhost:{}'.format(getPortForLanguage(lang)),
-                                       data=payload, verify=False, headers=headers)
+                response = requests.post('http://localhost:{}'.format(getPortForLanguage(lang)),
+                                         data=payload, verify=False, headers=headers)
 
             with open(parsed_dir + "/" + lang + "/" + code, "w") as f:
-                f.write(output.decode("utf-8"))
+                f.write(response.text.decode("utf-8"))
 
 
 def convertFiles(pair_id, outputpath="", nopara=None):
