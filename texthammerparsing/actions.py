@@ -154,7 +154,7 @@ def parseFiles(pair_id, parserpath):
                                          data=payload, verify=False, headers=headers)
 
             with open(parsed_dir + "/" + lang + "/" + code, "w") as f:
-                f.write(response.text.decode("utf-8"))
+                f.write(response.text)
 
 
 def convertFiles(pair_id, outputpath="", nopara=None):
