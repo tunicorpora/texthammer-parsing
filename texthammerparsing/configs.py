@@ -3,7 +3,7 @@ import os.path
 import yaml
 
 
-#TODO: read rcfiles
+# TODO: read rcfiles
 def getConf(key):
     """
     Returns the value of an individual config parameter
@@ -12,30 +12,43 @@ def getConf(key):
     """
 
     config = {
-                "segmentsplit" :  "segmentsplit",
-                "paragraphsplit" : "paragraphsplit",
-                "sentencesplit" : "sentencesplit",
-                "models": {
-                        "fi" : "models_fi_tdt",
-                        "ru" : "models_ru_syntagrus",
-                        "en" : "models_en_ewt",
-                        "fr" : "models_fr_gsd",
-                        "sv" : "models_sv_talbanken",
-                        "de" : "models_de_gsd",
-                        "es" : "models_es_ancora",
-                        }
-            }
+        "segmentsplit":  "segmentsplit",
+        "paragraphsplit": "paragraphsplit",
+        "sentencesplit": "sentencesplit",
+        "models": {
+            "fi": "models_fi_tdt",
+            "ru": "models_ru_syntagrus",
+            "en": "models_en_ewt",
+            "fr": "models_fr_gsd",
+            "sv": "models_sv_talbanken",
+            "de": "models_de_gsd",
+            "es": "models_es_ancora",
+            "pl": "models_pl_lfg",
+        },
+        "ports": {
+            "fi": "1501",
+            "ru": "1502",
+            "en": "1503",
+            "fr": "1504",
+            "sv": "1505",
+            "de": "1506",
+            "es": "1507",
+            "pl": "1508",
+
+        }
+    }
 
     yamldata = checkDefaults(None, True)
     if yamldata:
         if "models" in yamldata:
             for lang, model in yamldata["models"].items():
                 config["models"][lang] = "models_" + model
-        for thiskey in ["segmentsplit", "paragraphsplit","sentencesplit"]:
+        for thiskey in ["segmentsplit", "paragraphsplit", "sentencesplit"]:
             if thiskey in yamldata:
                 config[thiskey] = yamldata[thiskey]
 
     return config[key]
+
 
 def checkDefaults(args, getYaml=False):
     """
@@ -46,7 +59,7 @@ def checkDefaults(args, getYaml=False):
     """
     config = {}
     fnames = [os.path.expanduser("~/.config/texthammerparsing.yaml"),
-            os.path.expanduser("~/.config/texthammerparsing.yml")]
+              os.path.expanduser("~/.config/texthammerparsing.yml")]
     if hasattr(args, 'conf'):
         if args.conf:
             fnames = [args.conf]
@@ -71,7 +84,7 @@ def checkDefaults(args, getYaml=False):
 
     return args
 
-#def requireArg(arg):
+# def requireArg(arg):
 #    if not arg:
 #        print("The following option must be specified in order to continue with this action: " + )
 #        sys.exit(0)

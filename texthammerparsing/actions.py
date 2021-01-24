@@ -4,6 +4,8 @@ import glob
 import subprocess
 from texthammerparsing import Tmxfile, TextPair, Txtfile
 from texthammerparsing.configs import getConf
+import requests
+
 
 def getPairIds():
     """
@@ -11,12 +13,11 @@ def getPairIds():
 
     """
 
-    ids = [  ]
+    ids = []
     for fname in glob.glob("/tmp/texthammerparsing/*"):
         if os.path.isdir(fname):
             ids.append(os.path.basename(fname))
     return ids
-
 
 
 def getFiles(files):
@@ -28,13 +29,14 @@ def getFiles(files):
 
     ofiles = []
     if len(files) == 1 and os.path.isdir(files[0]):
-        dirname = files[0] if files[0][-1] == "/"  else files[0] + "/"
+        dirname = files[0] if files[0][-1] == "/" else files[0] + "/"
         for fname in glob.glob(dirname + "*.*"):
             ofiles.append(fname)
     else:
         ofiles = files
 
     return ofiles
+
 
 def prepareTmx(filename):
     """
@@ -55,14 +57,16 @@ def prepareTmx(filename):
             thisfile.WritePreparedFiles()
     except Exception as e:
         thisfile.ReportProblems(e)
-        print("Problems in preparing " + filename + ". Check out the log file at " + logging.getLoggerClass().root.handlers[0].baseFilename)
+        print("Problems in preparing " + filename + ". Check out the log file at " +
+              logging.getLoggerClass().root.handlers[0].baseFilename)
     finally:
         pass
-        #do some cleaning up...?
+        # do some cleaning up...?
 
     if thisfile:
         if not thisfile.errors:
             return thisfile.pair_id
+
 
 def prepareTxt(filename, nopara):
     """
@@ -84,14 +88,16 @@ def prepareTxt(filename, nopara):
             thisfile.WritePreparedFiles()
     except Exception as e:
         thisfile.ReportProblems(e)
-        print("Problems in preparing " + filename + ". Check out the log file at " + logging.getLoggerClass().root.handlers[0].baseFilename)
+        print("Problems in preparing " + filename + ". Check out the log file at " +
+              logging.getLoggerClass().root.handlers[0].baseFilename)
     finally:
         pass
-        #do some cleaning up...?
+        # do some cleaning up...?
 
     if thisfile:
         if not thisfile.errors:
             return thisfile.pair_id
+
 
 def addCodes(filename, lang):
     thisfile = Tmxfile(filename)
@@ -100,6 +106,12 @@ def addCodes(filename, lang):
     thisfile.CollectMetaDataAttributes()
     thisfile.InitializeVersions()
     thisfile.AddCodes(lang, filename)
+
+
+def getPortForLanguage(lang):
+    ports = getConf('ports')
+    return ports[lang]
+
 
 def parseFiles(pair_id, parserpath):
     """
@@ -111,11 +123,10 @@ def parseFiles(pair_id, parserpath):
 
     """
 
-
     if parserpath[-1] != r"/":
         parserpath += r"/"
 
-    #TODO: select which model if multiple available (rcfile?)
+    # TODO: select which model if multiple available (rcfile?)
     models = getConf("models")
 
     # Use the parser's virtual env
@@ -128,25 +139,20 @@ def parseFiles(pair_id, parserpath):
     prepared_dir = "/tmp/texthammerparsing/" + pair_id + "/prepared/"
 
     for lang in os.listdir(prepared_dir):
-        lang = lang.replace(r"/","")
-        langdir = parsed_dir + "/" + lang 
+        lang = lang.replace(r"/", "")
+        langdir = parsed_dir + "/" + lang
         os.makedirs(langdir, exist_ok=True)
-        logging.info("Starting to parse the files in the following language: " + lang)
+        logging.info(
+            "Starting to parse the files in the following language: " + lang)
         for f in glob.glob(prepared_dir + lang + "/*"):
             code = os.path.basename(f)
             logging.info("Starting to parse the following file: " + code)
-            p1 = subprocess.Popen(["cat", f], stdout=subprocess.PIPE)
-            with open(log_dir + code, "w") as outfile:
-                output = subprocess.check_output(
-                    [
-                        python_bin,
-                        script_file, 
-                        "--conf", parserpath + models[lang] + "/pipelines.yaml", 
-                        "--pipeline", "parse_plaintext"
-                    ], 
-                    stdin=p1.stdout, 
-                    cwd=parserpath,
-                    stderr=outfile)
+
+            with open(f, 'rb') as payload:
+                headers = {'content-type': 'text/plain; charset = utf-8'}
+                output = requests.post('http://localhost:' + getPortForLanguage(lang),
+                                       data=payload, verify=False, headers=headers)
+
             with open(parsed_dir + "/" + lang + "/" + code, "w") as f:
                 f.write(output.decode("utf-8"))
 
@@ -166,6 +172,3 @@ def convertFiles(pair_id, outputpath="", nopara=None):
     else:
         pair.LoopThroughSentences(nopara)
     pair.WriteXml(outputpath)
-
-
-
