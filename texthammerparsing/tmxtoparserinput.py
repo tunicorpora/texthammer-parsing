@@ -112,6 +112,7 @@ class Tmxfile(Document):
         """
         try:
             self.content = unescape(self.content.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
+            self.content = unescape(self.content.replace('encoding="UTF-8"',''),{"&apos;":"'","&quot;":"\""})
             self.content = Prettify(self.content.replace('encoding = "utf-8"','').strip())
             self.root = etree.fromstring(self.content.strip())
         except Exception as e:
