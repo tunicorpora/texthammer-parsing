@@ -147,6 +147,18 @@ after the process has finnished it is better to run
 sh stop_parsers.sh
 ```
 
+##### Preparing images for new languages
+
+Check out the docs at https://turkunlp.org/Turku-neural-parser-pipeline/docker.html
+
+Basically the worflow is as follows:
+
+```
+git clone https://github.com/TurkuNLP/Turku-neural-parser-pipeline.git
+cd Turku-neural-parser-pipeline
+docker build -t "my_french_parser" --build-arg models=fr_gsd --build-arg hardware=cpu -f Dockerfile-lang .
+```
+
 
 #### Parsing monolingual files
 
