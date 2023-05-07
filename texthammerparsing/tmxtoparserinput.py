@@ -1,17 +1,18 @@
 #! /usr/bin/env python
 import sys
-#import csv
+import csv
 #import glob
 import os
 import uuid
 from lxml import etree
 from xml.sax.saxutils import unescape
-#import re
+import re
 from  texthammerparsing.FilterLongSentences import FilterByCharCount
 import json
 from texthammerparsing.python_tools import Prettify, FixQuotes
 import logging
 import traceback
+import progressbar
 
 
 class Document:
@@ -111,9 +112,11 @@ class Tmxfile(Document):
         Reads the xml contents to an lxml etree object
         """
         try:
-            self.content = unescape(self.content.replace('encoding="utf-8"',''),{"&apos;":"'","&quot;":"\""})
-            self.content = unescape(self.content.replace('encoding="UTF-8"',''),{"&apos;":"'","&quot;":"\""})
-            self.content = Prettify(self.content.replace('encoding = "utf-8"','').strip())
+            self.content = self.content.replace('encoding="utf-8"','').replace('encoding="UTF-8"','').replace('encoding="UTF-8"','').replace('encoding = "utf-8"', '')
+            self.content = unescape(self.content, {"&apos;":"'","&quot;":"\""})
+            # manually escape ampersands with neg lookahead
+            self.content = re.sub('\&(?!\w{3,};)', '&amp;', self.content, flags=re.IGNORECASE)
+            self.content = Prettify(self.content.strip())
             self.root = etree.fromstring(self.content.strip())
         except Exception as e:
             self.errors.append("Problem in reading the xml of the file: {}".format(e))
@@ -172,28 +175,30 @@ class Tmxfile(Document):
         tu_tags = self.root.xpath("//tu")
         #Iterate over every single tu tag in the tmx
         #the tu tags represent segments
-        for tu_idx, tu in enumerate(tu_tags):
-            for version in self.versions:
-                tuvs = tu.xpath(version.tuvpattern)
-                segment_text = ""
-                if tuvs:
-                    #Just for debugging
-                    tuv = tuvs[0]
-                    #Check for additional metadata such as information about the current speaker
-                    version.segment_meta.append({"speaker":tuv.get("speaker")})
-                    if not tuv.getchildren():
-                        segment_text = tuv.text
+        with progressbar.ProgressBar(max_value=len(tu_tags)) as bar:
+            for tu_idx, tu in enumerate(tu_tags):
+                for version in self.versions:
+                    tuvs = tu.xpath(version.tuvpattern)
+                    segment_text = ""
+                    if tuvs:
+                        #Just for debugging
+                        tuv = tuvs[0]
+                        #Check for additional metadata such as information about the current speaker
+                        version.segment_meta.append({"speaker":tuv.get("speaker")})
+                        if not tuv.getchildren():
+                            segment_text = tuv.text
+                        else:
+                            #If this text uses seg tags
+                            for seg in tuv.getchildren():
+                                if seg.text:
+                                    if segment_text:
+                                        segment_text += " "
+                                    segment_text += seg.text
+                    if segment_text:
+                        version.AddRealSegment(segment_text)
                     else:
-                        #If this text uses seg tags
-                        for seg in tuv.getchildren():
-                            if seg.text:
-                                if segment_text:
-                                    segment_text += " "
-                                segment_text += seg.text
-                if segment_text:
-                    version.AddRealSegment(segment_text)
-                else:
-                    version.AddEmptySegment(tu_idx +1)
+                        version.AddEmptySegment(tu_idx +1)
+                bar.update(tu_idx)
 
     def WritePreparedFiles(self):
         """

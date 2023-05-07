@@ -54,6 +54,7 @@ def prepareTmx(filename):
         thisfile.InitializeVersions()
         thisfile.GetVersionContents()
         if not thisfile.ReportProblems():
+            print('ready')
             thisfile.WritePreparedFiles()
     except Exception as e:
         thisfile.ReportProblems(e)
