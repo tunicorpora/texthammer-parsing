@@ -60,7 +60,9 @@ def checkDefaults(args, getYaml=False):
 
     """
     config = {}
-    fnames = [os.path.expanduser("~/.config/texthammerparsing.yaml"),
+    fnames = [
+              '/opt/texthammerparsing.yaml',
+              os.path.expanduser("~/.config/texthammerparsing.yaml"),
               os.path.expanduser("~/.config/texthammerparsing.yml")]
     if hasattr(args, 'conf'):
         if args.conf:
